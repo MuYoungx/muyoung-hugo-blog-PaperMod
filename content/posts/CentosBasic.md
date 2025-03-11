@@ -1,5 +1,5 @@
 ---
-title: CentosBasic
+title: Centos基础语法
 published: 2025-02-28T14:56:11+08:00
 summary: "Centos基础语法"
 cover:
