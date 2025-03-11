@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>CentosBasic | 慕阳博客</title>
+<meta name="keywords" content="Linux, CentOS">
+<meta name="description" content="Centos基础语法">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/posts/centosbasic/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.6da9a63d25a9608bca2f7f907a030e887a7dd3c3f3918e4cc113129361414bda.css" integrity="sha256-bammPSWpYIvKL3&#43;QegMOiHp908PzkY5MwRMSk2FBS9o=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/static/logo.png">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/centosbasic/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="慕阳博客 (Alt + H)">
+                <img src="http://localhost:1313/static/logo.png" alt="" aria-label="logo"
+                    height="35">慕阳博客</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/categories/" title="分类">
+                    <span>分类</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="标签">
+                    <span>标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/archives/" title="归档">
+                    <span>归档</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/search/" title="搜索 (Alt &#43; /)" accesskey=/>
+                    <span>搜索</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      CentosBasic
+    </h1>
+    <div class="post-meta"><span title='2025-02-28 14:56:11 +0800 CST'>February 28, 2025</span>&nbsp;·&nbsp;5 min
+
+</div>
+  </header> 
+<figure class="entry-cover">
+        <img loading="eager" src="http://localhost:1313/%E6%96%87%E7%AB%A0%E5%B0%81%E9%9D%A2%E5%9B%BE%E3%80%82%E4%B9%9F%E6%94%AF%E6%8C%81HTTPS" alt="">
+        
+</figure>
+  <div class="post-content"><!-- raw HTML omitted -->
+<p>useradd -d指定目录</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>删除用户milan，但是要保留家目录，userdelmilan</p>
+<p>删除用户以及用户主目录，比如tom，userdel-r tom</p>
+<p>修改用户密码 passwd 用户名</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>创建一个组mojiao</p>
+<p>把zwj放入mojiao</p>
+<p>指令:usermod-g mojiao zwj</p>
+<!-- raw HTML omitted -->
+<p>每行的含义:用户名：口令：用户标识号：组标识号：注释性描述：主目录：登录shell</p>
+<!-- raw HTML omitted -->
+<p>每行的含义：登录名：加密口令：最后一次修改时间：最小时间间隔：最大时间间隔：警告时间：不活动时间：失效时间：标志</p>
+<!-- raw HTML omitted -->
+<p>每行含义：组名：口令：组标识号：组内用户列表</p>
+<!-- raw HTML omitted -->
+<p>cd ~或者cd回到自己的家目录</p>
+<p>cd..回到当前目录的上一级目录</p>
+<p>mkdir创建目录</p>
+<p>-p创建多级目录</p>
+<p>rmdir删除目录</p>
+<p>rmdir[选项]要删除的空目录</p>
+<p>rmdir删除的是空目录，如果目录下有内容时无法删除的</p>
+<p>如果删除非空目录使用rm-rf</p>
+<p>touch创建空文件</p>
+<p>touch 文件名</p>
+<!-- raw HTML omitted -->
+<p>-r递归复制整个文件夹</p>
+<!-- raw HTML omitted -->
+<p>mv源目录与新目录相同(重命名)</p>
+<p>mv/temp/movefile/targetFolder(移动文件)</p>
+<p>cat指令 查看文件内容但不能修改</p>
+<p>cat[选项]要查看的文件</p>
+<p>-n:显示行号</p>
+<p>cat只能浏览文件，而不能修复文件，为了浏览方便，一般会带上管道命令|more</p>
+<p>cat -n/etc/profile |more [进行]</p>
+<!-- raw HTML omitted -->
+<p>more要查看的文件</p>
+<p>空格键代表向下翻一页</p>
+<p>enter代表向下翻一行</p>
+<p>q代表立即离开more，不再显示该文件内容</p>
+<p>ctrl+f向下滚动一屏</p>
+<p>ctrl+b返回上一屏</p>
+<p>=输出当前行的行号</p>
+<p>:f输出文件名和当前行的行号</p>
+<p>less指令</p>
+<p>less指令用来分屏查看文件内容，它的功能与more指令类似，但是比more指令更加强大，支持各位显示终端。less指令在显示文件内容时，并不是一次将整个文件加载之后才显示，而是根据显示需要加载内容，对于显示大型文件具有较高的效率</p>
+<p>操作说明</p>
+<p>空白键 向下翻动一页</p>
+<p>pagedown 向下反动一页</p>
+<p>pageup 向上翻动一页</p>
+<p>/字串 向下搜寻【字串】的功能；n:向下查找；N：向上查找</p>
+<p>?字串 向上搜寻【字串】的功能；n：向上查找；N向下查找</p>
+<p>q 离开less这个程序</p>
+<p>echo指令</p>
+<p>echo输出内容到控制台</p>
+<p>echo [选项][输出内容]</p>
+<p>head指令</p>
+<p>head用于显示文件的开头部分内容，默认情况下显示文件的前十行内容</p>
+<p>head文件名 查看文件头10行内容</p>
+<p>head -n 5 文件名 查看文件头5行内容 5可以是任意行数</p>
+<p>tail指令</p>
+<p>tail用于输出文件中尾部的内容，默认情况下tail指令显示文件的前10行内容</p>
+<p>tail 文件名 查看文件尾10行内容</p>
+<p>tail -n 5 文件名 查看文件尾5行内容，5可以是任意行数</p>
+<p>tail -f 文件名 实时追踪该文档的所有更新</p>
+<blockquote>
+<p>指令</p>
+<p>追加</p></blockquote>
+<p>ls -l &gt;文件 列表的内容写入a.txt中(覆盖写)</p>
+<p>ls -al&raquo;文件列表的内容追加到文件aa.txt的末尾</p>
+<p>cat文件1&gt;文件2 将文件1的内容覆盖到文件2</p>
+<p>echo “内容”&raquo;文件</p>
+<p>ls -l /home&gt;/home/info.txt如果info.txt没有，则会创建</p>
+<p>ln 指令 软连接也称符号链接类似于windows的快捷方式</p>
+<p>ln -s[源文件或目录][软链接名] 给源文件创建一个软连接</p>
+<p>history指令</p>
+<p>查看已执行过历史命令，也可以执行历史指令</p>
+<p>date指令-显示当前日期</p>
+<p>date 显示当前时间</p>
+<p>date+%Y 显示当前年份</p>
+<p>date+%m 显示当前月份</p>
+<p>date+%d 显示当前是哪一天</p>
+<p>date &ldquo;+%Y-%m-%d%H:%M:%S&rdquo; 显示年月日时分秒</p>
+<p>设置日期 date -s字符串时间</p>
+<p>cal指令</p>
+<p>cal [选项]</p>
+<p>ls用法</p>
+<p>ls [选项] [文件]</p>
+<p>【 -f 】不排序目录内容；按它们在磁盘上存储的顺序列出。同时启 动“ -a ”选项</p>
+<p>【 -1 】每行显示一条记录，即单列展示数据</p>
+<p>【 -l 】长列表显示文件和目录，包括文件类型、大小、修改日期和时间、权限等信息</p>
+<p>【 -lh 】人性化显示文件大小</p>
+<p>【 -F 】 使用不同特殊字符归类不同的文件类型</p>
+<p>【 -ld 】长列表格式列出某个目录的信息</p>
+<p>【 -R 】递归地列出子目录的内容</p>
+<p>【 -ltr 】将长列表格式按文件或目录的修改时间 倒序地 列出文件和目录</p>
+<p>【 -ls 】将长列表格式按文件大小顺序列出文件和目录</p>
+<p>【 -a 】显示包括隐藏文件或目录在内的所有文件和目录，包括 “.“（当前目录），“…“（父目录</p>
+<p>【 -A 】显示包括隐藏文件或目录在内的所有文件和目录，但不列出 “.” (目前目录)及 “…” (父目录)</p>
+<p>【 -i 】显示文件或目录的 inode 编号，可能会用在系统维护操作时</p>
+<p>【 -n 】显示uid 和 gid ，代替显示所有者和用户组</p>
+<!-- raw HTML omitted -->
+<p>find[搜索范围] [选项]</p>
+<p>-name按照指定的文件名查找模式查找文件</p>
+<p>-user查找属于指定用户名所有文件</p>
+<p>-size按照指定的文件大小查找文件+n大于 -n小于 n等于不加n也是等于 单位有k,M,G</p>
+<!-- raw HTML omitted -->
+<p>由于locate指令基于数据库进行查询，所以第一次运行前，必须使用updatedb指令创建locate数据库</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>grep[选项]查找内容 源文件</p>
+<p>-n显示匹配行及行号。</p>
+<p>-i忽略字母大小写</p>
+<!-- raw HTML omitted -->
+<p>gzip文件压缩文件 只能将文件压缩为*.gz</p>
+<p>gunzip文件.gz解压缩文件命令</p>
+<!-- raw HTML omitted -->
+<p>zip [选项]XXX.zip 压缩内容</p>
+<p>unzip[选项]XXX.zip 解压缩文件</p>
+<p>zip常用选项</p>
+<p>-r:递归压缩，即压缩目录</p>
+<p>gunzip常用选项</p>
+<p>-d指定解压后文件的存放目录</p>
+<!-- raw HTML omitted -->
+<p>tar[选项]XXX.tar.gz 打包内容</p>
+<p>-c产生.tar打包文件</p>
+<p>-v显示详细信息</p>
+<p>-f指定压缩后的文件名</p>
+<p>-z打包同时压缩</p>
+<p>-x解压.tar文件</p>
+<p>-C解压到的目录</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>tar -zxvf /home/myhome.tar.gz -C /opt/tmp2
+</span></span></code></pre></div><!-- raw HTML omitted -->
+<p>查看文件的所有者</p>
+<p>ls -ahl</p>
+<p>修改文件所有者</p>
+<p>chown 用户名文件名</p>
+<p>-R递归修改</p>
+<!-- raw HTML omitted -->
+<p>基本指令</p>
+<p>groupadd 组名</p>
+<p>文件/目录所在组</p>
+<p>当某个用户创建了一个文件后，这个文件的所在组就是该用户所在的组</p>
+<p>查看文件或目录所在组</p>
+<p>ls -ahl 文件/目录名</p>
+<p>修改文件所在组</p>
+<p>chgrp 新组名 文件名</p>
+<p>-R 递归修改</p>
+<p>其他组</p>
+<p>除文件的所有者和所在组的用户外，系统的其他用户都是文件的其他组</p>
+<p>改变用户所在组</p>
+<p>在添加用户时，可以指定将该用户添加到那个组中，同样的用root的管理权限可以改变某个用户所在的组</p>
+<p>1.usermod -g 新组名 用户名</p>
+<p>2.usermod -d 目录名 用户名 改变该用户登录的初始目录 用户需要有到新目录的权限</p>
+<!-- raw HTML omitted -->
+<p>ls-l中显示的内容如下:</p>
+<p>-rw-r&ndash;r&ndash;.1 root root 0 6月 1 17:39 pig.txt</p>
+<p>0-9位说明</p>
+<p>1.第0位确定文件类型(d,-,l,c,b)</p>
+<p>l是链接，相当于windows的快捷方式</p>
+<p>d是目录，相当于windows的文件夹</p>
+<p>c是字符设备文件，鼠标，键盘</p>
+<p>b是块设备，比如硬盘</p>
+<p>2.第1-3位确定所有者(该文件的所有者)拥有该文件的权限&ndash;User</p>
+<p>3.第4-6位确定所属组(同用户组的)拥有该文件的权限，&ndash;Group</p>
+<p>4.第7-9位确定其他用户拥有该文件的权限&ndash;Other</p>
+<!-- raw HTML omitted -->
+<p>第一种方式：+、-、=变更权限</p>
+<p>u:所有者g:所有组 o:其他人 a:所有人(u、g、o的总和)</p>
+<p>1）chmodu=rwx,g=rx,o=x 文件/目录名</p>
+<p>2）chmodo+w 文件/目录名(给当前文件的其他用户单独添加写权限)</p>
+<p>3）chmoda-x 文件/目录名(给当前文件的所有用户删除执行权限)</p>
+<p>第二种方式：通过数字变更权限</p>
+<p>r=4，w=2，x=1rwx=4+2+1=7</p>
+<p>chmodu=rwx,g=rx,o=x 文件/目录名(相当于chmod 751 文件目录名)</p>
+<!-- raw HTML omitted -->
+<p>chown新所有者:新组 文件/目录 改变所有者和所在组</p>
+<p>-R如果是目录，则使其下所有子文件或目录递归生效</p>
+<!-- raw HTML omitted -->
+<p>crontab[选项]</p>
+<p>-e编辑crontab定时任务</p>
+<p>-l查询crontab任务</p>
+<p>-r删除当前用户所有的crontab</p>
+<p>参数细节说明</p>
+<p><img loading="lazy" src="https://img.muyoung.com/202502281453916.png"></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>如*/1****ls-l /etc/ &gt; /tmp/to.txt 意思说每小时的每分钟执行ls -l /etc/ &gt; /tmp/to.txt
+</span></span></code></pre></div><!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>ps -ef查看当前运行的所有进程</p>
+<p>ps -ef |grep atd 检查atd是否在运行</p>
+<p>at命令选项</p>
+<p><img loading="lazy" src="https://img.muyoung.com/202502281454727.png"></p>
+<p>Ctrl+D结束at命令的输入，输入两次才能退出</p>
+<!-- raw HTML omitted -->
+<p>虚拟机添加硬盘步骤2</p>
+<p>分区命令 fdisk/dev/sdb</p>
+<p>开始对/sdb分区</p>
+<p>m 显示命令列表</p>
+<p>p 显示磁盘分区同fdisk -l</p>
+<p>n 新增分区</p>
+<p>d 删除分区</p>
+<p>w 写入并退出</p>
+<p>说明：开始分区后输入n，新增分区，然后选择p，分区类型为主分区。两次回车默认剩余全部空间。最后输入w写入分区并退出，若不保存退出输入q</p>
+<p>虚拟机添加硬盘步骤3</p>
+<!-- raw HTML omitted -->
+<p>其中ext4是分区类型</p>
+<p>虚拟机添加硬盘步骤4</p>
+<p>挂载：将一个分区与一个目录联系起来</p>
+<p>mount 设备名称挂载目录</p>
+<p>例如：mount/dev/sdb1 /newdisk</p>
+<p>卸载 umount设备名称或者挂载目录</p>
+<p>例如：umount/dev/sdb1或者umount /newdisk</p>
+<p>虚拟机添加硬盘步骤5</p>
+<p>永久挂载：通过修改/etc/fstab实现挂载</p>
+<p>添加完成后执行mount -a 即刻生效</p>
+<p>磁盘整体使用情况查询</p>
+<p>df -h</p>
+<p>查询指定目录的磁盘使用情况</p>
+<p>du -h /目录</p>
+<p>查询指定目录的磁盘占用情况，默认为当前目录</p>
+<p>-s指定目录占用大小汇总</p>
+<p>-h 带计量单位</p>
+<p>-a 含文件</p>
+<p>&ndash;max-depth=1子目录深度</p>
+<p>-c列出明细的同时，增加汇总值</p>
+<p><img loading="lazy" src="https://img.muyoung.com/202502281454547.png"></p>
+<!-- raw HTML omitted -->
+<p><img loading="lazy" src="https://img.muyoung.com/202502281454265.png"></p>
+<ul>
+<li>查看linux的网络配置(ifconfig指令)</li>
+</ul>
+<p><img loading="lazy" src="https://img.muyoung.com/202502281455582.png"></p>
+<ul>
+<li>使用ping指令来判断网络连通性</li>
+</ul>
+<p><img loading="lazy" src="https://img.muyoung.com/202502281455213.png"></p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">[</span>root@localhost network-scripts<span style="color:#f92672">]</span><span style="color:#75715e"># cat ifcfg-ens33  </span>
+</span></span><span style="display:flex;"><span>TYPE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Ethernet&#34;</span> <span style="color:#75715e">#网卡类型（通常是Ethemet以太网）  </span>
+</span></span><span style="display:flex;"><span>PROXY_METHOD<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;none&#34;</span> <span style="color:#75715e">#代理方式：为关闭状态  </span>
+</span></span><span style="display:flex;"><span>BROWSER_ONLY<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;no&#34;</span> <span style="color:#75715e">#只是浏览器：否  </span>
+</span></span><span style="display:flex;"><span>BOOTPROTO<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;static&#34;</span> <span style="color:#75715e">#网卡的引导协议【static：静态IP dhcp：动态IP   none：不指定，不指定容易出现各种各样的网络受限】  </span>
+</span></span><span style="display:flex;"><span>DEFROUTE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;yes&#34;</span> <span style="color:#75715e">#默认路由  </span>
+</span></span><span style="display:flex;"><span>IPV4_FAILURE_FATAL<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;no&#34;</span> <span style="color:#75715e">#是否开启IPV4致命错误检测  </span>
+</span></span><span style="display:flex;"><span>IPV6INIT<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;yes&#34;</span> <span style="color:#75715e">#IPV6是否自动初始化：是（现在还未用到IPV6，不会有任何影响）  </span>
+</span></span><span style="display:flex;"><span>IPV6_AUTOCONF<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;yes&#34;</span> <span style="color:#75715e">#IPV6是否自动配置：是（现在还未用到IPV6，不会有任何影响）  </span>
+</span></span><span style="display:flex;"><span>IPV6_DEFROUTE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;yes&#34;</span> <span style="color:#75715e">#IPV6是否可以为默认路由：是（现在还未用到IPV6，不会有任何影响）  </span>
+</span></span><span style="display:flex;"><span>IPV6_FAILURE_FATAL<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;no&#34;</span> <span style="color:#75715e">#是否开启IPV6致命错误检测  </span>
+</span></span><span style="display:flex;"><span>IPV6_ADDR_GEN_MODE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;stable-privacy&#34;</span> <span style="color:#75715e">#IPV6地址生成模型  </span>
+</span></span><span style="display:flex;"><span>NAME<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ens33&#34;</span> <span style="color:#75715e">#网卡物理设备名称  </span>
+</span></span><span style="display:flex;"><span>UUID<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ab60d501-535b-49f5-a76b-3336a4120f64&#34;</span><span style="color:#75715e">#通用唯一识别码，每一个网卡都会有，不能重复，否则两台linux机器只有一台可上网  </span>
+</span></span><span style="display:flex;"><span>DEVICE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ens33&#34;</span> <span style="color:#75715e">#网卡设备名称，必须和‘NAME’值一样  </span>
+</span></span><span style="display:flex;"><span>ONBOOT<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;yes&#34;</span> <span style="color:#75715e">#是否开机启动，要想网卡开机就启动或通过 `systemctl restart network`控制网卡,必须设置为 `yes`  </span>
+</span></span><span style="display:flex;"><span>IPADDR<span style="color:#f92672">=</span>192.168.137.129 <span style="color:#75715e"># 本机IP  </span>
+</span></span><span style="display:flex;"><span>NETMASK<span style="color:#f92672">=</span>255.255.255.0 <span style="color:#75715e">#子网掩码  </span>
+</span></span><span style="display:flex;"><span>GATEWAY<span style="color:#f92672">=</span>192.168.137.2 <span style="color:#75715e">#默认网关  </span>
+</span></span><span style="display:flex;"><span>DNS1<span style="color:#f92672">=</span>8.8.8.8#  
+</span></span><span style="display:flex;"><span>DNS2<span style="color:#f92672">=</span>8.8.8.5#  
+</span></span><span style="display:flex;"><span>ZONE<span style="color:#f92672">=</span>public#  
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@localhost network-scripts<span style="color:#f92672">]</span><span style="color:#75715e"># service network restart #重启网卡  </span>
+</span></span><span style="display:flex;"><span>Restarting network <span style="color:#f92672">(</span>via systemctl<span style="color:#f92672">)</span>:                       <span style="color:#f92672">[</span> 确定 <span style="color:#f92672">]</span>  
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>root@localhost network-scripts<span style="color:#f92672">]</span><span style="color:#75715e">#</span>
+</span></span></code></pre></div><p>设置主机名和hosts映射</p>
+<p>设置主机名</p>
+<ul>
+<li>为了方便记忆，可以给linux系统设置主机名，也可以根据需要修改主机名</li>
+<li>指令hostname 查看主机名</li>
+<li>修改文件在 /etc/hostname指定</li>
+<li>修改后重启生效</li>
+</ul>
+<p>设置hosts映射</p>
+<p>作用:通过主机名找到(比如ping)某个linux系统</p>
+<ul>
+<li>Windows<br>
+在C:\Windows\System32\driver\etc\hosts文件指定即可<br>
+案例:192.168.200.130 admin-pc</li>
+<li>Linux<br>
+在/etc/hosts文件指定<br>
+案例:192.168.200.1 admin-pc</li>
+</ul>
+<p>主机名解析过程分析(Hosts、DNS)</p>
+<ul>
+<li>hosts是什么<br>
+一个文本文件，用来记录IP和HOSTNAME(主机名)的映射关系</li>
+<li>DNS</li>
+<li>DNS，就是Domain Name System的缩写，翻译过来就是域名系统</li>
+<li>是互联网上作为域名和IP地址相互映射的一个分布式数据库</li>
+</ul>
+<!-- raw HTML omitted -->
+<p>PS命令 显示系统执行的进程</p>
+<p>基本介绍</p>
+<p>ps命令是用来查看目前系统中，有哪些正在执行，以及它们执行的状况，可以不加任何参数</p>
+<p>ps-a 显示当前终端的所有进程信息</p>
+<p>ps-u 以用户的格式显示进程信息</p>
+<p>ps-x 显示后台进程运行的参数</p>
+<p>ps详解</p>
+<ul>
+<li>指令：ps -aux|grep sshd,比如我看看有没有sshd服务</li>
+<li>指令说明</li>
+<li>System V展示风格</li>
+<li>USER 用户名称</li>
+<li>PID 进程号</li>
+<li>%CPU进程占用CPU的百分比</li>
+<li>%MEM 进程占用物理内存的百分比</li>
+<li>VSZ 进程占用的虚拟内存大小(单位:KB)</li>
+<li>RSS 进程占用的物理内存大小(单位:KB)</li>
+<li>TT 终端名称，缩写</li>
+<li>STAT 进程状态，其中S-睡眠，s-表示该进程是会话的先导进程，N-表示进程拥有比普通优先级更低的优先级，R-正在运行，D-短期等待，Z-僵死进程，T-被跟踪或者被停止</li>
+<li>STARTED 进程的启动时间</li>
+<li>TIME CPU时间，即进程使用CPU的总时间</li>
+<li>COMMAND 启动进程所用的命令和参数，如果过长会被截断显示</li>
+</ul>
+<p><img loading="lazy" src="https://img.muyoung.com/202502281455363.png"></p>
+<!-- raw HTML omitted -->
+<ul>
+<li>kill [选项]进程号</li>
+<li>killall 进程名称</li>
+</ul>
+<p>-9：表示强迫进程立即停止</p>
+<p>终止多个gedit，演示 killall gedit</p>
+<p>查看进程树pstree</p>
+<p>pstree[选项]，可以更加直观的来看进程信息</p>
+<p>常用选项</p>
+<p>-p:显示进程的pid</p>
+<p>-u:显示进程的所属用户</p>
+<!-- raw HTML omitted -->
+<p>服务(service)本质就是进程，但是是运行在后台的，通常都会监听某个端口，等待其他程序的请求，比如(mysqld，sshd，防火墙等)，因此我们又称为守护进程，是linux中非常重要的知识点</p>
+<ul>
+<li>server管理指令</li>
+</ul>
+<ol>
+<li>service 服务名[start|stop|restart|reload|status]</li>
+<li>在Centos7.0后很多服务不再使用service，而是systemctl</li>
+<li>service指令管理的服务在/etc/init.d查看</li>
+</ol>
+<p><img loading="lazy" src="https://img.muyoung.com/202502281455987.png"></p>
+<ul>
+<li>服务的运行级别(runlevel)</li>
+<li>Linux系统有7种运行级别(runlevel)：常用的是3跟5</li>
+</ul>
+<p>运行级别0：系统停机状态，系统默认运行级别不能设为0，否则不能正常启动</p>
+<p>运行级别1：单用户工作状态，root权限，用于系统维护，禁止远程登录</p>
+<p>运行级别2：多用户状态(没有NFS)，不支持网络</p>
+<p>运行级别3：完全的多用户状态(有NFS),登录后进入控制台命令行模式</p>
+<p>运行级别4：系统未使用，保留</p>
+<p>运行级别5：X11控制台，登录后进入图形GUI模式</p>
+<p>运行级别6：系统正常关闭并重启，默认运行级别不能设为6，否则不能正常启动</p>
+<ul>
+<li>开机的流程说明:</li>
+</ul>
+<p><img loading="lazy" src="https://img.muyoung.com/202502281455446.png"></p>
+<p>l 设置运行级别</p>
+<p>systemctl get-default  #获取当前的运行级别</p>
+<p>systemctl set-default xxx #设置默认的运行级别为xxx</p>
+<p>目前一般使用级别3跟5</p>
+<p>multi-user.target:analogous to runlevel 3</p>
+<p>systemctl set-default multi-user.target</p>
+<p>graphical.target:analogous to runlevel 5</p>
+<p>init 0</p>
+<p>l systemctl管理指令</p>
+<p>○ systemctl设置服务的自启动状态</p>
+<p>1.systemctl list-unit-files [|grep服务名] 查看服务开机启动状态，grep可以进行过滤</p>
+<p>2.systemctl enable 服务名 （设置服务开机启动）</p>
+<p>3.systemctl disable 服务名 （关闭服务开机启动）</p>
+<p>4.systemctl is-enabled 服务名 （查询某个服务是否是自启动的）</p>
+<p>l firewall指令</p>
+<p>○ 打开端口：firewall-cmd &ndash;permanent &ndash;add-port=端口号/协议</p>
+<p>关闭端口：firewall-cmd &ndash;permanent &ndash;remove-port=端口号/协议</p>
+<p>重新载入：firewall-cmd &ndash;reload</p>
+<p>查询端口是否开放：firewall-cmd &ndash;query-port=端口/协议</p>
+<!-- raw HTML omitted -->
+<p>top与ps命令很相似，它们都用来显示正在执行的惊醒。top与ps最大的不同之处，在于top在执行一段时间可以更新正在运行的进程</p>
+<ul>
+<li>基本语法</li>
+</ul>
+<p>top[选项]</p>
+<ul>
+<li>选项说明</li>
+</ul>
+<p><img loading="lazy" src="https://img.muyoung.com/202502281455441.png"></p>
+<p><img loading="lazy" src="https://img.muyoung.com/202502281455210.png"></p>
+<ul>
+<li>交互操作说明：</li>
+</ul>
+<p><img loading="lazy" src="https://img.muyoung.com/202502281456346.png"></p>
+<p><img loading="lazy" src="https://img.muyoung.com/202502281456645.png"></p>
+<ul>
+<li>查看系统网络情况netstat</li>
+<li>基本语法</li>
+</ul>
+<p>netstat[选项]</p>
+<ul>
+<li>选项说明</li>
+</ul>
+<p>-an 按一定顺序排列输出</p>
+<p>-p 显示哪个进程在调用</p>
+<ul>
+<li>应用案例</li>
+</ul>
+<p>请查看服务名为sshd服务的信息</p>
+<ul>
+<li>检测主机链接命令ping</li>
+</ul>
+<p>ping是一种网络监测检测工具，它主要是用检测远程主机是否正常，或是两部主机间的网线或网卡故障</p>
+<!-- raw HTML omitted -->
+<p>查询已安装的rpm列表 rpm -qa|grep xx</p>
+<ul>
+<li>rpm包名基本格式</li>
+</ul>
+<p>一个rpm包名：firefox-60.2.2-1.el7.centos.x86_64</p>
+<p>表示centos7.x的64位系统</p>
+<p>如果是i686、i386表示32位系统、noarch表示通用</p>
+<ul>
+<li>rpm包的其他查询指令</li>
+</ul>
+<p>rpm -qa：查询所安装的所有rpm软件包</p>
+<p>rpm -qa|more</p>
+<p>rpm -qa| grep X[rpm -qa |grep firefox]</p>
+<p>rpm -q 软件包名：查询软件包是否安装</p>
+<p>案例：rpm -q |firefox</p>
+<p>rpm -qi软件包名：查询软件包信息</p>
+<p>案例：rpm -qi firefox</p>
+<p>rpm -ql 软件包名：查询软件包中的文件</p>
+<p>比如：rpm -ql firefox</p>
+<p>rpm -qf 文件全路径名 查询文件所属的软件包</p>
+<p>rpm -qf /etc/passwd</p>
+<p>rpm -qf /root/install.log</p>
+<!-- raw HTML omitted -->
+<ul>
+<li>参数说明</li>
+</ul>
+<p>i=install 安装</p>
+<p>v=verbose提示</p>
+<p>h=hash 进度条</p>
+<ul>
+<li>卸载rpm包</li>
+</ul>
+<p>rpm -e RPM包的名称</p>
+<p>如果其他软件包依赖于你要卸载的软件包，卸载时则会产生错误信息</p>
+<p>如 rpm-e foo</p>
+<p>removing these packages would breakdependencies:foo is needed by bar-1.0-1</p>
+<p>如果我们就是要删除foo这个软件包，可以增加参数&ndash;nodeps，就可以强制删除，但是一般不推荐这样做，因为依赖于该软件包的程序可能无法运行</p>
+<p>如 rpm-e &ndash;nodeps foo</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>yum list|grep xx软件列表</p>
+<p>安装指定的yum包</p>
+<p>yum install xxx下载安装</p>
+<!-- raw HTML omitted -->
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
+</span></span></code></pre></div><ol start="2">
+<li>下载新的 CentOS-Base.repo 到 /etc/yum.repos.d/</li>
+</ol>
+<p><strong>CentOS 6</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>wget -O /etc/yum.repos.d/CentOS-Base.repo <span style="color:#f92672">[</span>https://mirrors.aliyun.com/repo/Centos-6.repo<span style="color:#f92672">](</span>https://mirrors.aliyun.com/repo/Centos-6.repo<span style="color:#f92672">)</span>
+</span></span></code></pre></div><p>或者</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -o /etc/yum.repos.d/CentOS-Base.repo <span style="color:#f92672">[</span>https://mirrors.aliyun.com/repo/Centos-6.repo<span style="color:#f92672">](</span>https://mirrors.aliyun.com/repo/Centos-6.repo<span style="color:#f92672">)</span>
+</span></span></code></pre></div><p><strong>CentOS 7</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>wget -O /etc/yum.repos.d/CentOS-Base.repo <span style="color:#f92672">[</span>https://mirrors.aliyun.com/repo/Centos-7.repo<span style="color:#f92672">](</span>https://mirrors.aliyun.com/repo/Centos-7.repo<span style="color:#f92672">)</span>
+</span></span></code></pre></div><p>或者</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -o /etc/yum.repos.d/CentOS-Base.repo <span style="color:#f92672">[</span>https://mirrors.aliyun.com/repo/Centos-7.repo<span style="color:#f92672">](</span>https://mirrors.aliyun.com/repo/Centos-7.repo<span style="color:#f92672">)</span>
+</span></span></code></pre></div><p><strong>CentOS 8</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>wget -O /etc/yum.repos.d/CentOS-Base.repo <span style="color:#f92672">[</span>https://mirrors.aliyun.com/repo/Centos-8.repo<span style="color:#f92672">](</span>https://mirrors.aliyun.com/repo/Centos-8.repo<span style="color:#f92672">)</span>
+</span></span></code></pre></div><p>或者</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -o /etc/yum.repos.d/CentOS-Base.repo <span style="color:#f92672">[</span>https://mirrors.aliyun.com/repo/Centos-8.repo<span style="color:#f92672">](</span>https://mirrors.aliyun.com/repo/Centos-8.repo<span style="color:#f92672">)</span>
+</span></span></code></pre></div><ol start="3">
+<li>运行 yum makecache 生成缓存</li>
+<li>其他</li>
+</ol>
+<p>非阿里云ECS用户会出现 Couldn&rsquo;t resolve host &lsquo;<a href="http://mirrors.cloud.aliyuncs.com">mirrors.cloud.aliyuncs.com</a>&rsquo; 信息，不影响使用。用户也可自行修改相关配置: eg:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sed -i -e <span style="color:#e6db74">&#39;/mirrors.cloud.aliyuncs.com/d&#39;</span> -e <span style="color:#e6db74">&#39;/mirrors.aliyuncs.com/d&#39;</span> /etc/yum.repos.d/CentOS-Base.repo
+</span></span></code></pre></div><!-- raw HTML omitted -->
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
+</span></span></code></pre></div><p>获取对应版本的CentOS-Base.repo 到/etc/yum.repos.d/目录<a href="https://mirrors.cloud.tencent.com/help/centos.html#centos-baserepo-etcyumreposd"></a></p>
+<p>各版本源配置列表</p>
+<p>CentOS5</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>wget -O /etc/yum.repos.d/CentOS-Base.repo <span style="color:#f92672">[</span>http://mirrors.cloud.tencent.com/repo/centos5_base.repo<span style="color:#f92672">](</span>http://mirrors.cloud.tencent.com/repo/centos5_base.repo<span style="color:#f92672">)</span>
+</span></span></code></pre></div><p>CentOS6</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>wget -O /etc/yum.repos.d/CentOS-Base.repo <span style="color:#f92672">[</span>http://mirrors.cloud.tencent.com/repo/centos6_base.repo<span style="color:#f92672">](</span>http://mirrors.cloud.tencent.com/repo/centos6_base.repo<span style="color:#f92672">)</span>
+</span></span></code></pre></div><p>CentOS7</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>wget -O /etc/yum.repos.d/CentOS-Base.repo <span style="color:#f92672">[</span>http://mirrors.cloud.tencent.com/repo/centos7_base.repo<span style="color:#f92672">](</span>http://mirrors.cloud.tencent.com/repo/centos7_base.repo<span style="color:#f92672">)</span>
+</span></span></code></pre></div><p>CentOS8</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>wget -O /etc/yum.repos.d/CentOS-Base.repo <span style="color:#f92672">[</span>http://mirrors.cloud.tencent.com/repo/centos8_base.repo<span style="color:#f92672">](</span>http://mirrors.cloud.tencent.com/repo/centos8_base.repo<span style="color:#f92672">)</span>
+</span></span></code></pre></div><p>更新缓存</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>yum clean all
+</span></span><span style="display:flex;"><span>yum makecache
+</span></span></code></pre></div><!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>命令含义：
+&ndash;zone #作用域
+&ndash;add-port=80/tcp  #添加端口，格式为：端口/通讯协议
+&ndash;permanent  #永久生效，没有此参数重启后失效</p>
+<pre tabindex="0"><code>
+&lt;h2 id=&#34;tEfI5&#34;&gt;注册系统服务&lt;/h2&gt;
+&lt;font style=&#34;color:rgb(86, 86, 86);&#34;&gt;到&lt;/font&gt;_&lt;font style=&#34;color:rgb(86, 86, 86);&#34;&gt;/usr/lib/systemd/system&lt;/font&gt;_&lt;font style=&#34;color:rgb(86, 86, 86);&#34;&gt;目录下。&lt;/font&gt;  
+&lt;font style=&#34;color:rgb(86, 86, 86);&#34;&gt;单击新建，选择新建空白文件，文件名填 &lt;/font&gt;_&lt;font style=&#34;color:rgb(86, 86, 86);&#34;&gt;cloudreve.service&lt;/font&gt;_&lt;font style=&#34;color:rgb(86, 86, 86);&#34;&gt; 。&lt;/font&gt;  
+&lt;font style=&#34;color:rgb(86, 86, 86);&#34;&gt;将下文 &lt;/font&gt;_&lt;font style=&#34;color:rgb(86, 86, 86);&#34;&gt;PATH_TO_CLOUDREVE&lt;/font&gt;_&lt;font style=&#34;color:rgb(86, 86, 86);&#34;&gt; 更换为程序所在目录，复制到新建的文件中并&lt;/font&gt;**&lt;font style=&#34;color:rgb(86, 86, 86);&#34;&gt;保存&lt;/font&gt;**&lt;font style=&#34;color:rgb(86, 86, 86);&#34;&gt;。&lt;/font&gt;
+
+```basic
+[Unit]
+Description=Cloudreve
+Documentation=https://docs.cloudreve.org
+After=network.target
+Wants=network.target
+
+[Service]
+WorkingDirectory=/PATH_TO_CLOUDREVE
+ExecStart=/PATH_TO_CLOUDREVE/cloudreve
+Restart=on-abnormal
+RestartSec=5s
+KillMode=mixed
+
+StandardOutput=null
+StandardError=syslog
+
+[Install]
+WantedBy=multi-user.target
+</code></pre><p><!-- raw HTML omitted -->然后在服务器中先后执行下面的命令<!-- raw HTML omitted --></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-basic" data-lang="basic"><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span> 更新配置
+</span></span><span style="display:flex;"><span>systemctl daemon<span style="color:#f92672">-</span>reload
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span> 启动服务
+</span></span><span style="display:flex;"><span>systemctl start cloudreve
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">#</span> 设置开机启动
+</span></span><span style="display:flex;"><span>systemctl enable cloudreve
+</span></span></code></pre></div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/linux/">Linux</a></li>
+      <li><a href="http://localhost:1313/tags/centos/">CentOS</a></li>
+    </ul>
+
+<ul class="share-buttons">
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share CentosBasic on x"
+            href="https://x.com/intent/tweet/?text=CentosBasic&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2fcentosbasic%2f&amp;hashtags=Linux%2cCentOS">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M512 62.554 L 512 449.446 C 512 483.97 483.97 512 449.446 512 L 62.554 512 C 28.03 512 0 483.97 0 449.446 L 0 62.554 C 0 28.03 28.029 0 62.554 0 L 449.446 0 C 483.971 0 512 28.03 512 62.554 Z M 269.951 190.75 L 182.567 75.216 L 56 75.216 L 207.216 272.95 L 63.9 436.783 L 125.266 436.783 L 235.9 310.383 L 332.567 436.783 L 456 436.783 L 298.367 228.367 L 432.367 75.216 L 371.033 75.216 Z M 127.633 110 L 164.101 110 L 383.481 400.065 L 349.5 400.065 Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share CentosBasic on linkedin"
+            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2fcentosbasic%2f&amp;title=CentosBasic&amp;summary=CentosBasic&amp;source=http%3a%2f%2flocalhost%3a1313%2fposts%2fcentosbasic%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share CentosBasic on reddit"
+            href="https://reddit.com/submit?url=http%3a%2f%2flocalhost%3a1313%2fposts%2fcentosbasic%2f&title=CentosBasic">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share CentosBasic on facebook"
+            href="https://facebook.com/sharer/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2fposts%2fcentosbasic%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share CentosBasic on whatsapp"
+            href="https://api.whatsapp.com/send?text=CentosBasic%20-%20http%3a%2f%2flocalhost%3a1313%2fposts%2fcentosbasic%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share CentosBasic on telegram"
+            href="https://telegram.me/share/url?text=CentosBasic&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2fcentosbasic%2f">
+            <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share CentosBasic on ycombinator"
+            href="https://news.ycombinator.com/submitlink?t=CentosBasic&u=http%3a%2f%2flocalhost%3a1313%2fposts%2fcentosbasic%2f">
+            <svg version="1.1" xml:space="preserve" width="30px" height="30px" viewBox="0 0 512 512" fill="currentColor"
+                xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
+                <path
+                    d="M449.446 0C483.971 0 512 28.03 512 62.554L512 449.446C512 483.97 483.97 512 449.446 512L62.554 512C28.03 512 0 483.97 0 449.446L0 62.554C0 28.03 28.029 0 62.554 0L449.446 0ZM183.8767 87.9921H121.8427L230.6673 292.4508V424.0079H281.3328V292.4508L390.1575 87.9921H328.1233L256 238.2489z" />
+            </svg>
+        </a>
+    </li>
+</ul>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/">慕阳博客</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+baseURL: "https://blog.muyoung.com"
+title: "慕阳博客"
+LanguageCode: "zh-CN"
+theme: "PaperMod"
+
+# 启用首页个人简介展示
+params:
+  # 是否启用评论。你需要自己配置，或者直接引入Giscus等评论系统
+  comments: false
+  # 是否显示代码复制按钮
+  ShowCodeCopyButtons: true
+  # 是否显示面包屑导航
+  ShowBreadCrumbs: false
+  # 是否显示阅读时间  
+  ShowReadingTime: true
+  # 是否显示分享按钮
+  ShowShareButtons: true
+  # 分享按钮配置
+  # ShareButtons: ["linkedin", "twitter"]
+  # 是否禁用主题切换按钮
+  disableThemeToggle: false
+  assets:
+    favicon: "/static/logo.png" # 需要在static文件夹放置对应的图片
+    iconHeight: 35
+  # 首页信息配置
+  homeInfoParams:
+    Title: "欢迎！ 👋"
+    Content: >
+      我来自[中国大陆](https://www.gov.cn)，本站部署在[Cloudflare Pages](https://www.cloudflare-cn.com/developer-platform/products/pages/)，框架为[Hugo](https://gohugo.io/)，主题为[PaperMod](https://gh.onani.cn/adityatelange/hugo-PaperMod)。这是一个技术博客，分享各类IT技术教程、服务器搭建、网络优化、NAS应用、
+      云服务部署、开源工具探索及数字生活体验。专注于实用解决方案与前沿技术的尝试，
+      为技术爱好者提供简明易懂的学习资源与实践指南。
+
+  # 设置网站头像和首页头像
+  profileMode:
+    enabled: false # 设为 true 将完全替换 homeInfoParams
+
+  # 网站头像设置 (显示在导航栏)
+  label:
+    text: "慕阳博客"
+    icon: "/static/logo.png" # 这将显示在导航栏标题旁边。需要在static文件夹放置对应的图片
+    iconHeight: 35
+
+  # 社交图标 (显示在简介下方)
+  socialIcons:
+    - name: bilibili
+      url: "https://space.bilibili.com/35579058"
+    - name: github
+      url: "https://github.com/muyangx"
+    - name: telegram
+      url: ""
+    # 可以添加更多社交图标 https://github.com/adityatelange/hugo-PaperMod/wiki/Icons
+
+# 顶部导航栏的快捷链接
+menu:
+  main:
+    - identifier: categories
+      name: 分类
+      url: /categories/
+      weight: 10
+    - identifier: tags
+      name: 标签
+      url: /tags/
+      weight: 20
+    - identifier: archives
+      name: 归档
+      url: /archives/
+      weight: 30
+    - identifier: search
+      name: 搜索
+      url: /search/
+      weight: 40
+    # 可以添加更多导航链接。weight的值越高排序越靠后
+
+# 如果要启用搜索功能，需要添加这个
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON # 必须，用于搜索功能

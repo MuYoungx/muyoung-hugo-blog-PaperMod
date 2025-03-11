@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Pve on 慕阳博客</title>
+    <link>http://localhost:1313/tags/pve/</link>
+    <description>Recent content in Pve on 慕阳博客</description>
+    <generator>Hugo -- 0.145.0</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Tue, 04 Mar 2025 13:50:14 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/pve/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Pve开源虚拟化常见配置</title>
+      <link>http://localhost:1313/posts/pveconfig/</link>
+      <pubDate>Tue, 04 Mar 2025 13:50:14 +0800</pubDate>
+      <guid>http://localhost:1313/posts/pveconfig/</guid>
+      <description>Pve开源虚拟化常见配置</description>
+    </item>
+  </channel>
+</rss>
