@@ -3,7 +3,7 @@ title: Centos基础语法
 published: 2025-02-28T14:56:11+08:00
 summary: "Centos基础语法"
 cover:
-  image: "文章封面图。也支持HTTPS"
+  image: "https://img.muyoung.com/202502281457211.png"
 tags: [Linux, CentOS]
 categories: '经验分享'
 draft: false 
