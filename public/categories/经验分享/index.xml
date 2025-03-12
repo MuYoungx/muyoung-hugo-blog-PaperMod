@@ -6,8 +6,15 @@
     <description>Recent content in 经验分享 on 慕阳博客</description>
     <generator>Hugo -- 0.145.0</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 11 Mar 2025 23:55:20 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 12 Mar 2025 09:51:40 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/categories/%E7%BB%8F%E9%AA%8C%E5%88%86%E4%BA%AB/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>在Picgo上配置Cloudflare-R2图床</title>
+      <link>http://localhost:1313/posts/picgo-r2/</link>
+      <pubDate>Wed, 12 Mar 2025 09:51:40 +0800</pubDate>
+      <guid>http://localhost:1313/posts/picgo-r2/</guid>
+      <description>在Picgo上配置Cloudflare-R2图床</description>
+    </item>
     <item>
       <title>Hugo博客搭建教程以及配置调优</title>
       <link>http://localhost:1313/posts/hugo/</link>
