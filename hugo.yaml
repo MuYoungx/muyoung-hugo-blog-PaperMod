@@ -21,7 +21,7 @@ params:
   disableThemeToggle: false
    
   assets:
-    favicon: "favicon.ico" # 需要在static文件夹放置对应的图片
+    favicon: "favicon.png" # 需要在static文件夹放置对应的图片
     iconHeight: 35
   # 首页信息配置
   homeInfoParams:
