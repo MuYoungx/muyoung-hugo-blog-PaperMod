@@ -6,8 +6,89 @@
     <description>Recent content in Posts on 慕阳博客</description>
     <generator>Hugo -- 0.145.0</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 12 Mar 2025 09:51:40 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 12 Mar 2025 14:58:23 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>安装Docker以及其他容器</title>
+      <link>http://localhost:1313/posts/installdocker/</link>
+      <pubDate>Wed, 12 Mar 2025 14:58:23 +0800</pubDate>
+      <guid>http://localhost:1313/posts/installdocker/</guid>
+      <description>&lt;h2 id=&#34;一键安装脚本&#34;&gt;一键安装脚本&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;curl -fsSL https://get.docker.com -o get-docker.sh 
+sudo sh get-docker.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;redhat系安装docker&#34;&gt;Redhat系安装docker&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;安装依赖
+dnf -y install yum-utils device-mapper-persistent-datalvm2
+
+导入docker源
+wget -O /etc/yum.repos.d/docker-ce.repo https://download.docker.com/linux/centos/docker-ce.repo
+官方源
+
+yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+阿里源
+
+dnf makecache
+更新索引
+
+dnf install docker-ce docker-ce-cli containerd.io
+安装docker组件
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;debian系安装docker&#34;&gt;Debian系安装docker&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;安装依赖
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+
+导入gpg公钥
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+添加docker源 官方源
+echo \
+&amp;#34;deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \
+$(lsb_release -cs) stable&amp;#34; | sudo tee /etc/apt/sources.list.d/docker.list &amp;gt; /dev/null
+
+阿里源
+echo \
+&amp;#34;deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://mirrors.aliyun.com/docker-ce/linux/debian \
+$(lsb_release -cs) stable&amp;#34; | sudo tee /etc/apt/sources.list.d/docker.list &amp;gt; /dev/null
+
+更新索引
+sudo apt update
+
+安装docker组件
+sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;常规docker组件&#34;&gt;常规Docker组件&lt;/h2&gt;
+&lt;h3 id=&#34;portainer&#34;&gt;Portainer&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;拉取映像
+docker pull portainer/portainer
+
+创建并运行docker
+docker run -d -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /root/portainer:/data portainer/portainer
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    <item>
+      <title>lxc搭建zerotier转发nat内网</title>
+      <link>http://localhost:1313/posts/lxczerotiernat/</link>
+      <pubDate>Wed, 12 Mar 2025 14:46:06 +0800</pubDate>
+      <guid>http://localhost:1313/posts/lxczerotiernat/</guid>
+      <description>&lt;p&gt;宿主机 nano /etc/pve/lxc/lxc-id.conf
+文件最后添加&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;lxc.cgroup2.devices.allow: c 10:200 rwm 
+lxc.mount.entry: /dev/net/tun dev/net/tun none bind,create=file
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;安装zerotier&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;curl -s https://install.zerotier.com | sudo bash
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;加入&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;zerotier-cli join
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;设置转发&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;echo &amp;#34;net.ipv4.ip_forward = 1&amp;#34; &amp;gt;&amp;gt; /etc/sysctl.conf &amp;amp;&amp;amp; sysctl -p
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;配置nat&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;开机自动nat 持久化保存&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;apt install -y iptables-persistent &amp;amp;&amp;amp; bash -c iptables-save &amp;gt; /etc/iptables/rules.v4
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
     <item>
       <title>在Picgo上配置Cloudflare-R2图床</title>
       <link>http://localhost:1313/posts/picgo-r2/</link>
