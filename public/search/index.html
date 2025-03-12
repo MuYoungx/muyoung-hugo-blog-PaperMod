@@ -154,6 +154,26 @@
         <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
     </span>
 
+<footer>
+    <p id="site-age">加载中...</p>
+</footer>
+  <script>
+    function getSiteAge() {
+      const startDate = new Date('2024-03-29T00:00:00Z'); 
+      const now = new Date();
+      const diffTime = now - startDate;
+      const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diffTime % (1000 * 60)) / 1000);
+      document.getElementById('site-age').innerText = `这个网站服务器都坏了居然还正常运行了 ${days} 天 ${hours} 小时 ${minutes} 分钟 ${seconds} 秒`;
+    }
+    
+    window.onload = function() {
+      getSiteAge(); 
+      setInterval(getSiteAge, 1000); 
+    };
+  </script>
 <div class="admin">
     如需联系网站管理员请发送邮件到admin@muyoung.com
 </div>
