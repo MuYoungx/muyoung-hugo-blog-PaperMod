@@ -60,7 +60,7 @@ minio/minio server /data --console-address":9001"
 
 ## 访问9001端口测试
 
-![img](/upload/image.png)
+![img](https://img.muyoung.com/202503041231538.png)
 
 默认用户名密码为之前的docker参数 建议在docker参数定义时就定义要使用的管理员用户名密码
 
