@@ -133,7 +133,7 @@
     <h1 class="post-title entry-hint-parent">
       vSphere Hypervisor(ESXI)
     </h1>
-    <div class="post-meta"><span title='2025-02-27 17:37:05 +0800 CST'>February 27, 2025</span>&nbsp;·&nbsp;0 min
+    <div class="post-meta"><span title='2025-02-27 17:37:05 +0800 CST'>February 27, 2025</span>&nbsp;·&nbsp;1 min
 
 </div>
   </header> 
@@ -141,6 +141,48 @@
         <img loading="eager" src="https://img.muyoung.com/202502271737317.png" alt="">
         
 </figure>
+  <div class="post-content"><h2 id="vmware-ovf-tool导出虚拟机">VMware OVF Tool导出虚拟机<a hidden class="anchor" aria-hidden="true" href="#vmware-ovf-tool导出虚拟机">#</a></h2>
+<p>1安装VMware-ovftool-4.3.0-12320924-win.x86_64.msi</p>
+<p>2进入安装目录 C:\Program Files\VMware\VMware OVF Tool\ 输入cmd进入命令提示符</p>
+<p><img alt="image.png" loading="lazy" src="https://img.muyoung.com/20250312134601037.png"></p>
+<p>`</p>
+<pre tabindex="0"><code>ovftool vi://root:@192.168.1.10/RockyLinuxServer E:\ovf\RockyLinuxServer.ova
+
+ovftool vi://root:@192.168.1.10/WindowsServer2022 E:\ovf\WindowsServer2022.ova
+
+ovftool vi://root:@192.168.1.10/DSM920 E:\ovf\DSM920.ova
+</code></pre><p>`</p>
+<h2 id="esxi直通板载sata控制器">ESXI直通板载SATA控制器<a hidden class="anchor" aria-hidden="true" href="#esxi直通板载sata控制器">#</a></h2>
+<p><img alt="image.png" loading="lazy" src="https://img.muyoung.com/20250312134702011.png"></p>
+<p>1查看”设备ID“和“供应商ID”</p>
+<p>2SSH，不细表</p>
+<p>3打开直通映射文件：</p>
+<pre tabindex="0"><code>vi /etc/vmware/passthru.map
+</code></pre><ol start="4">
+<li>编辑如下内容：</li>
+</ol>
+<pre tabindex="0"><code>\# Union Point-H AHCI Controller
+
+\# &lt;供应商ID&gt; &lt;设备ID&gt; d3d0 default
+
+8086 a282 d3d0 default
+</code></pre><ol start="5">
+<li>
+<p>重启ESXi</p>
+</li>
+<li>
+<p>选中 Union Point-H AHCI Controller，点击“切换直通”，大功告成</p>
+</li>
+</ol>
+<h2 id="修改esxi的证书">修改ESXI的证书<a hidden class="anchor" aria-hidden="true" href="#修改esxi的证书">#</a></h2>
+<p>连接SSH 进入 /etc/vmware/ssl 目录，找到 rui.key,rui.crt (注意备份原证书)选中删除，将之前修改好的ssl证书复制到该目录</p>
+<p>如果不想重启esxi主机，可以在SSH下输入：</p>
+<pre tabindex="0"><code>/etc/init.d/hostd restart
+
+/etc/init.d/vpxa restart
+</code></pre>
+
+  </div>
 
   <footer class="post-footer">
     <ul class="post-tags">
