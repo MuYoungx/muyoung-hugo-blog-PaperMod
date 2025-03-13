@@ -138,7 +138,7 @@
 </div>
   </header> 
 <figure class="entry-cover">
-        <img loading="eager" src="https://img.muyoung.com/20250312095307639.png" alt="">
+        <img loading="eager" src="https://r.muyoung.com/blogimg/20250312095307639.png" alt="">
         
 </figure>
   <div class="post-content"><h2 id="什么叫图床">什么叫图床<a hidden class="anchor" aria-hidden="true" href="#什么叫图床">#</a></h2>
@@ -162,7 +162,7 @@
 <li>Daily Class A Transactions Caps：日常B类事务前100万次免费（A类事务包括下载、获取文件）</li>
 <li>Daily Class B Transactions Caps：日常A类事务前1000万次免费（B类事务包括创建存储桶、列举存储桶、列举文件版本、列举Keys）</li>
 </ul>
-<p><img loading="lazy" src="https://img.muyoung.com/20250312095541236.png"></p>
+<p><img loading="lazy" src="https://r.muyoung.com/blogimg/20250312095541236.png"></p>
 <h2 id="实现目的">实现目的<a hidden class="anchor" aria-hidden="true" href="#实现目的">#</a></h2>
 <p>1.自由在MD，网站中引用图片（picgo上传）
 2.防止恶意被刷流量（虽然CloudFlare只收取额外的储存费用，但被刷流量多了容易被封号）</p>
@@ -175,56 +175,56 @@
 <h3 id="注册账号">注册账号<a hidden class="anchor" aria-hidden="true" href="#注册账号">#</a></h3>
 <p>注册账号需要绑定一种支付方式（不扣费，只是用来选择支付方式），可以用信用卡，visa，paypal。</p>
 <p>注册地址：https://dash.cloudflare.com/sign-up，验证过邮箱后即可使用。</p>
-<p><img alt="img" loading="lazy" src="https://img.muyoung.com/20250312095823613.webp"></p>
+<p><img alt="img" loading="lazy" src="https://r.muyoung.com/blogimg/20250312095823613.webp"></p>
 <h3 id="开通-cloudflare-r2">开通 CloudFlare R2<a hidden class="anchor" aria-hidden="true" href="#开通-cloudflare-r2">#</a></h3>
 <p>点击右侧的R2对象储存。</p>
-<p><img alt="img" loading="lazy" src="https://img.muyoung.com/20250312100708757.webp"></p>
+<p><img alt="img" loading="lazy" src="https://r.muyoung.com/blogimg/20250312100708757.webp"></p>
 <p>在弹出的界面输入付款方式（信用卡，paypal都可以）</p>
-<p><img alt="img" loading="lazy" src="https://img.muyoung.com/20250312100834522.webp"></p>
+<p><img alt="img" loading="lazy" src="https://r.muyoung.com/blogimg/20250312100834522.webp"></p>
 <p>对于中小网站来说，一般超不了。
 确认后就可以开通R2对象储存了。</p>
 <h3 id="创建储存桶及桶设置">创建储存桶及桶设置<a hidden class="anchor" aria-hidden="true" href="#创建储存桶及桶设置">#</a></h3>
-<p><img alt="img" loading="lazy" src="https://img.muyoung.com/20250312100935006.webp"></p>
-<p><img alt="img" loading="lazy" src="https://img.muyoung.com/20250312101123620.webp"></p>
+<p><img alt="img" loading="lazy" src="https://r.muyoung.com/blogimg/20250312100935006.webp"></p>
+<p><img alt="img" loading="lazy" src="https://r.muyoung.com/blogimg/20250312101123620.webp"></p>
 <h3 id="自定义图床域名">自定义图床域名<a hidden class="anchor" aria-hidden="true" href="#自定义图床域名">#</a></h3>
 <p>进入桶设置界面</p>
-<p><img alt="img" loading="lazy" src="https://img.muyoung.com/20250312101353230.webp"></p>
+<p><img alt="img" loading="lazy" src="https://r.muyoung.com/blogimg/20250312101353230.webp"></p>
 <p>设定访问桶的域名，有两种方法，一种是有一个私有域名（<strong>需托管在Cloudflare上</strong>），另一个是用R2.dev子域名</p>
 <h4 id="私有域名二选一">私有域名（二选一）<a hidden class="anchor" aria-hidden="true" href="#私有域名二选一">#</a></h4>
-<p><img alt="img" loading="lazy" src="https://img.muyoung.com/20250312101130807.webp"></p>
+<p><img alt="img" loading="lazy" src="https://r.muyoung.com/blogimg/20250312101130807.webp"></p>
 <p>继续之后，点连接域，会自动生成dns记录。</p>
-<p><img alt="img" loading="lazy" src="https://img.muyoung.com/20250312101511888.webp"></p>
+<p><img alt="img" loading="lazy" src="https://r.muyoung.com/blogimg/20250312101511888.webp"></p>
 <p>之后就能浏览器 <code>https://&lt;自定义域名&gt;/&lt;文件名&gt;</code>访问存储桶里的文件了。</p>
 <p>PS：如果域名不托管在CloudFlare，可以单独托管二级\三级域名，只需要给二级域名添加一条NS记录指向原托管即可。</p>
 <h4 id="r2dev子域名二选一">R2.dev子域名（二选一）<a hidden class="anchor" aria-hidden="true" href="#r2dev子域名二选一">#</a></h4>
-<p><img alt="img" loading="lazy" src="https://img.muyoung.com/20250312102105922.webp"></p>
+<p><img alt="img" loading="lazy" src="https://r.muyoung.com/blogimg/20250312102105922.webp"></p>
 <p>点击允许访问，就可以用 <code>https://pub-853c2f66b8ef43ae98ecd186f4be34f8.r2.dev</code>访问桶</p>
 <h3 id="设定缓存规则">设定缓存规则<a hidden class="anchor" aria-hidden="true" href="#设定缓存规则">#</a></h3>
 <p>缓存规则一般设定两个：浏览器缓存和边缘缓存。
 浏览器缓存：访问后，所需文件储存在浏览器的本地目录，在一段时间内，再次访问优先访问本地文件
 边缘缓存：访问后，缓存在最近的CDN存一份，在一段时间内，优先访问CDN中的文件</p>
 <p>进入域名页面-&gt;规则-&gt;页面规则</p>
-<p><img alt="img" loading="lazy" src="https://img.muyoung.com/20250312102103401.webp"></p>
+<p><img alt="img" loading="lazy" src="https://r.muyoung.com/blogimg/20250312102103401.webp"></p>
 <p>创建页面规则</p>
-<p><img alt="img" loading="lazy" src="https://img.muyoung.com/20250312102101155.webp"></p>
+<p><img alt="img" loading="lazy" src="https://r.muyoung.com/blogimg/20250312102101155.webp"></p>
 <p>URL 填 img.a.com/*
 添加设置：缓存级别 – 缓存所有内容
 添加设置：浏览器缓存 TTL – 几个小时自己选（8小时）
 添加设置：边缘缓存 TTL – 一个月（图片内容只有存在或者删除两个状态，所以越长越好）
 保存。此时如果有人刷流量，理论上图片都是本地缓存或者CDN缓存给的，不会走到R2对象存储。</p>
-<p><img alt="img" loading="lazy" src="https://img.muyoung.com/20250312102059139.webp"></p>
+<p><img alt="img" loading="lazy" src="https://r.muyoung.com/blogimg/20250312102059139.webp"></p>
 <h3 id="防盗链设置">防盗链设置<a hidden class="anchor" aria-hidden="true" href="#防盗链设置">#</a></h3>
 <p>只能通过指定的网站来访问（防君子不防小人，可以伪造refer信息，照样刷流量）。
 但是还是有点作用，比如别人爬取文章盗用的时候，图片是无法访问的。</p>
 <p>安全性-&gt;WAF，创建规则</p>
-<p><img alt="img" loading="lazy" src="https://img.muyoung.com/20250312101529671.webp"></p>
-<p><img alt="img" loading="lazy" src="https://img.muyoung.com/20250312102047270.webp"></p>
-<p><img alt="img" loading="lazy" src="https://img.muyoung.com/20250312101547376.webp"></p>
+<p><img alt="img" loading="lazy" src="https://r.muyoung.com/blogimg/20250312101529671.webp"></p>
+<p><img alt="img" loading="lazy" src="https://r.muyoung.com/blogimg/20250312102047270.webp"></p>
+<p><img alt="img" loading="lazy" src="https://r.muyoung.com/blogimg/20250312101547376.webp"></p>
 <h3 id="设置-cors-策略可选">设置 CORS 策略（可选）<a hidden class="anchor" aria-hidden="true" href="#设置-cors-策略可选">#</a></h3>
 <p>一般不需要设置（出于安全考虑这里也不建议设置）。如果遇到 R2 作为博客图床，但是图片打不开的情况，F12 控制台发现遇到 CORS 问题，则需要配置。</p>
 <p>官方文档：<a href="https://developers.cloudflare.com/r2/buckets/cors/#add-cors-policies-from-the-dashboard">Configure CORS</a></p>
 <p>进入你想设置 CORS 的存储桶的设置，拉到下面：</p>
-<p><img alt="img" loading="lazy" src="https://img.muyoung.com/20250312101549190.webp"></p>
+<p><img alt="img" loading="lazy" src="https://r.muyoung.com/blogimg/20250312101549190.webp"></p>
 <p>配置为允许特定源
 比如要设置为允许两个域名：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>[
@@ -271,27 +271,27 @@
 </span></span></code></pre></div><h3 id="web-api设置">WEB API设置<a hidden class="anchor" aria-hidden="true" href="#web-api设置">#</a></h3>
 <p>有的api令牌就可以用软件（PICGO）自动上传图片了。</p>
 <p>创建令牌</p>
-<p><img alt="img" loading="lazy" src="https://img.muyoung.com/20250312102030653.webp"></p>
-<p><img alt="img" loading="lazy" src="https://img.muyoung.com/20250312102028068.webp"></p>
+<p><img alt="img" loading="lazy" src="https://r.muyoung.com/blogimg/20250312102030653.webp"></p>
+<p><img alt="img" loading="lazy" src="https://r.muyoung.com/blogimg/20250312102028068.webp"></p>
 <p>需要选择内容
 令牌名
 权限（对象读和写）
 指定储存桶
 TTL时间（永久）</p>
-<p><img alt="img" loading="lazy" src="https://img.muyoung.com/20250312101607270.webp"></p>
+<p><img alt="img" loading="lazy" src="https://r.muyoung.com/blogimg/20250312101607270.webp"></p>
 <p>记住生成的密钥，picgo软件里面设置需要。</p>
-<p><img alt="img" loading="lazy" src="https://img.muyoung.com/20250312101609388.webp"></p>
+<p><img alt="img" loading="lazy" src="https://r.muyoung.com/blogimg/20250312101609388.webp"></p>
 <h2 id="picgo设置">picgo设置<a hidden class="anchor" aria-hidden="true" href="#picgo设置">#</a></h2>
 <p>在插件设置中，添加常用插件。
 S3插件：用来登录S3的图床
 compress-next:用来压缩图片至webp。
 watermark：给图片打水印
 autoback：用来备份图床</p>
-<p><img alt="img" loading="lazy" src="https://img.muyoung.com/20250312101610766.webp"></p>
-<p><img alt="img" loading="lazy" src="https://img.muyoung.com/20250312102017236.webp"></p>
+<p><img alt="img" loading="lazy" src="https://r.muyoung.com/blogimg/20250312101610766.webp"></p>
+<p><img alt="img" loading="lazy" src="https://r.muyoung.com/blogimg/20250312102017236.webp"></p>
 <p>安装好后，里面就新增了amazon S3的图床设置。</p>
-<p><img alt="img" loading="lazy" src="https://img.muyoung.com/20250312101615188.webp"></p>
-<p><img alt="img" loading="lazy" src="https://img.muyoung.com/20250312102012703.webp"></p>
+<p><img alt="img" loading="lazy" src="https://r.muyoung.com/blogimg/20250312101615188.webp"></p>
+<p><img alt="img" loading="lazy" src="https://r.muyoung.com/blogimg/20250312102012703.webp"></p>
 <p>这里有几项配置需要尤其注意。</p>
 <blockquote>
 <ul>
@@ -309,8 +309,8 @@ autoback：用来备份图床</p>
 <p>完成上述配置后，我们就可以在「上传区」直接拖入文件进行图片上传了，如上传后显示无误则为配置成功，生成的链接会自动在系统剪贴板中，直接在需要的地方粘贴即可。</p>
 <p>PS：
 1.picgo还可以自定义连接格式（Picgo→自定义链接格式）<code>![$fileName]($url)</code>,之后上传链接界面选custom即可</p>
-<p><img alt="img" loading="lazy" src="https://img.muyoung.com/20250312102008331.webp"></p>
-<p><img alt="img" loading="lazy" src="https://img.muyoung.com/20250312101929589.webp"></p>
+<p><img alt="img" loading="lazy" src="https://r.muyoung.com/blogimg/20250312102008331.webp"></p>
+<p><img alt="img" loading="lazy" src="https://r.muyoung.com/blogimg/20250312101929589.webp"></p>
 <p>2.安装picgo的vscode插件-markdown transfer img，可以批量替换md中图片至云端。
 3.使用piclist来平替picgo，piclist功能更多</p>
 
@@ -434,7 +434,7 @@ autoback：用来备份图床</p>
       const hours = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((diffTime % (1000 * 60)) / 1000);
-      document.getElementById('site-age').innerText = `这个网站服务器都坏了居然还正常运行了 ${days} 天 ${hours} 小时 ${minutes} 分钟 ${seconds} 秒`;
+      document.getElementById('site-age').innerText = `网站正常运行了 ${days} 天 ${hours} 小时 ${minutes} 分钟 ${seconds} 秒`;
     }
     
     window.onload = function() {
@@ -442,8 +442,12 @@ autoback：用来备份图床</p>
       setInterval(getSiteAge, 1000); 
     };
   </script>
+  <div class="cloud-vps">
+    本站由Cloudflare<img src="cf-logo.ico" alt="cf-logo"/>提供防御/CDN加速服务
+
+  </div>
 <div class="admin">
-    如需联系网站管理员请发送邮件到admin@muyoung.com
+    如需联系网站管理员请发送邮件到webmaster@muyoung.com
 </div>
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

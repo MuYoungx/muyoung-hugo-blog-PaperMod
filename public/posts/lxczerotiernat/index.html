@@ -152,7 +152,7 @@ apt install -y iptables-persistent &amp;&amp; bash -c iptables-save &gt; /etc/ip
 </div>
   </header> 
 <figure class="entry-cover">
-        <img loading="eager" src="https://img.muyoung.com/202503041350331.png" alt="">
+        <img loading="eager" src="https://r.muyoung.com/blogimg/202503041350331.png" alt="">
         
 </figure>
   <div class="post-content"><p>宿主机 nano /etc/pve/lxc/lxc-id.conf
@@ -290,7 +290,7 @@ lxc.mount.entry: /dev/net/tun dev/net/tun none bind,create=file
       const hours = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((diffTime % (1000 * 60)) / 1000);
-      document.getElementById('site-age').innerText = `这个网站服务器都坏了居然还正常运行了 ${days} 天 ${hours} 小时 ${minutes} 分钟 ${seconds} 秒`;
+      document.getElementById('site-age').innerText = `网站正常运行了 ${days} 天 ${hours} 小时 ${minutes} 分钟 ${seconds} 秒`;
     }
     
     window.onload = function() {
@@ -298,8 +298,12 @@ lxc.mount.entry: /dev/net/tun dev/net/tun none bind,create=file
       setInterval(getSiteAge, 1000); 
     };
   </script>
+  <div class="cloud-vps">
+    本站由Cloudflare<img src="cf-logo.ico" alt="cf-logo"/>提供防御/CDN加速服务
+
+  </div>
 <div class="admin">
-    如需联系网站管理员请发送邮件到admin@muyoung.com
+    如需联系网站管理员请发送邮件到webmaster@muyoung.com
 </div>
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

@@ -138,11 +138,11 @@
 </div>
   </header> 
 <figure class="entry-cover">
-        <img loading="eager" src="https://img.muyoung.com/202502280936178.png" alt="">
+        <img loading="eager" src="https://r.muyoung.com/blogimg/202502280936178.png" alt="">
         
 </figure>
   <div class="post-content"><p>存放于/root目录下</p>
-<p><img alt="img" loading="lazy" src="https://img.muyoung.com/202502271732370.png"></p>
+<p><img alt="img" loading="lazy" src="https://r.muyoung.com/blogimg/202502271732370.png"></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>sleep <span style="color:#ae81ff">30</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># 备份原始文件</span>
@@ -283,7 +283,7 @@
       const hours = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((diffTime % (1000 * 60)) / 1000);
-      document.getElementById('site-age').innerText = `这个网站服务器都坏了居然还正常运行了 ${days} 天 ${hours} 小时 ${minutes} 分钟 ${seconds} 秒`;
+      document.getElementById('site-age').innerText = `网站正常运行了 ${days} 天 ${hours} 小时 ${minutes} 分钟 ${seconds} 秒`;
     }
     
     window.onload = function() {
@@ -291,8 +291,12 @@
       setInterval(getSiteAge, 1000); 
     };
   </script>
+  <div class="cloud-vps">
+    本站由Cloudflare<img src="cf-logo.ico" alt="cf-logo"/>提供防御/CDN加速服务
+
+  </div>
 <div class="admin">
-    如需联系网站管理员请发送邮件到admin@muyoung.com
+    如需联系网站管理员请发送邮件到webmaster@muyoung.com
 </div>
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">

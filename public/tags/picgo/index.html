@@ -135,7 +135,7 @@
 
 <article class="post-entry tag-entry"> 
 <figure class="entry-cover">
-        <img loading="lazy" src="https://img.muyoung.com/20250312095307639.png" alt="">
+        <img loading="lazy" src="https://r.muyoung.com/blogimg/20250312095307639.png" alt="">
 </figure>
   <header class="entry-header">
     <h2 class="entry-hint-parent">在Picgo上配置Cloudflare-R2图床
@@ -170,7 +170,7 @@
       const hours = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((diffTime % (1000 * 60)) / 1000);
-      document.getElementById('site-age').innerText = `这个网站服务器都坏了居然还正常运行了 ${days} 天 ${hours} 小时 ${minutes} 分钟 ${seconds} 秒`;
+      document.getElementById('site-age').innerText = `网站正常运行了 ${days} 天 ${hours} 小时 ${minutes} 分钟 ${seconds} 秒`;
     }
     
     window.onload = function() {
@@ -178,8 +178,12 @@
       setInterval(getSiteAge, 1000); 
     };
   </script>
+  <div class="cloud-vps">
+    本站由Cloudflare<img src="cf-logo.ico" alt="cf-logo"/>提供防御/CDN加速服务
+
+  </div>
 <div class="admin">
-    如需联系网站管理员请发送邮件到admin@muyoung.com
+    如需联系网站管理员请发送邮件到webmaster@muyoung.com
 </div>
 </footer>
 <a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
