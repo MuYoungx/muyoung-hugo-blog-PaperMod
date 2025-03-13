@@ -3,7 +3,7 @@ title: 在Picgo上配置Cloudflare-R2图床
 published: 2025-03-12T09:51:40+08:00
 summary: "在Picgo上配置Cloudflare-R2图床"
 cover:
-  image: "https://img.muyoung.com/20250312095307639.png"
+  image: "https://r.muyoung.com/blogimg/20250312095307639.png"
 tags: [Picgo,R2,Cloudflare]
 categories: '经验分享'
 draft: false 
@@ -34,7 +34,7 @@ CLoudFlare R2 免费用户有10GB/月的存储额度（30天内每天储存峰�
 - Daily Class A Transactions Caps：日常B类事务前100万次免费（A类事务包括下载、获取文件）
 - Daily Class B Transactions Caps：日常A类事务前1000万次免费（B类事务包括创建存储桶、列举存储桶、列举文件版本、列举Keys）
 
-![](https://img.muyoung.com/20250312095541236.png)
+![](https://r.muyoung.com/blogimg/20250312095541236.png)
 
 ## 实现目的
 
@@ -53,42 +53,42 @@ CLoudFlare R2 免费用户有10GB/月的存储额度（30天内每天储存峰�
 
 注册地址：https://dash.cloudflare.com/sign-up，验证过邮箱后即可使用。
 
-![img](https://img.muyoung.com/20250312095823613.webp)
+![img](https://r.muyoung.com/blogimg/20250312095823613.webp)
 
 ### 开通 CloudFlare R2
 
 点击右侧的R2对象储存。
 
-![img](https://img.muyoung.com/20250312100708757.webp)
+![img](https://r.muyoung.com/blogimg/20250312100708757.webp)
 
 在弹出的界面输入付款方式（信用卡，paypal都可以）
 
-![img](https://img.muyoung.com/20250312100834522.webp)
+![img](https://r.muyoung.com/blogimg/20250312100834522.webp)
 
 对于中小网站来说，一般超不了。
 确认后就可以开通R2对象储存了。
 
 ### 创建储存桶及桶设置
 
-![img](https://img.muyoung.com/20250312100935006.webp)
+![img](https://r.muyoung.com/blogimg/20250312100935006.webp)
 
-![img](https://img.muyoung.com/20250312101123620.webp)
+![img](https://r.muyoung.com/blogimg/20250312101123620.webp)
 
 ### 自定义图床域名
 
 进入桶设置界面
 
-![img](https://img.muyoung.com/20250312101353230.webp)
+![img](https://r.muyoung.com/blogimg/20250312101353230.webp)
 
 设定访问桶的域名，有两种方法，一种是有一个私有域名（**需托管在Cloudflare上**），另一个是用R2.dev子域名
 
 #### 私有域名（二选一）
 
-![img](https://img.muyoung.com/20250312101130807.webp)
+![img](https://r.muyoung.com/blogimg/20250312101130807.webp)
 
 继续之后，点连接域，会自动生成dns记录。
 
-![img](https://img.muyoung.com/20250312101511888.webp)
+![img](https://r.muyoung.com/blogimg/20250312101511888.webp)
 
 之后就能浏览器 `https://<自定义域名>/<文件名>`访问存储桶里的文件了。
 
@@ -96,7 +96,7 @@ PS：如果域名不托管在CloudFlare，可以单独托管二级\三级域名�
 
 #### R2.dev子域名（二选一）
 
-![img](https://img.muyoung.com/20250312102105922.webp)
+![img](https://r.muyoung.com/blogimg/20250312102105922.webp)
 
 点击允许访问，就可以用 `https://pub-853c2f66b8ef43ae98ecd186f4be34f8.r2.dev`访问桶
 
@@ -108,11 +108,11 @@ PS：如果域名不托管在CloudFlare，可以单独托管二级\三级域名�
 
 进入域名页面->规则->页面规则
 
-![img](https://img.muyoung.com/20250312102103401.webp)
+![img](https://r.muyoung.com/blogimg/20250312102103401.webp)
 
 创建页面规则
 
-![img](https://img.muyoung.com/20250312102101155.webp)
+![img](https://r.muyoung.com/blogimg/20250312102101155.webp)
 
 URL 填 img.a.com/*
 添加设置：缓存级别 – 缓存所有内容
@@ -120,7 +120,7 @@ URL 填 img.a.com/*
 添加设置：边缘缓存 TTL – 一个月（图片内容只有存在或者删除两个状态，所以越长越好）
 保存。此时如果有人刷流量，理论上图片都是本地缓存或者CDN缓存给的，不会走到R2对象存储。
 
-![img](https://img.muyoung.com/20250312102059139.webp)
+![img](https://r.muyoung.com/blogimg/20250312102059139.webp)
 
 ### 防盗链设置
 
@@ -129,11 +129,11 @@ URL 填 img.a.com/*
 
 安全性->WAF，创建规则
 
-![img](https://img.muyoung.com/20250312101529671.webp)
+![img](https://r.muyoung.com/blogimg/20250312101529671.webp)
 
-![img](https://img.muyoung.com/20250312102047270.webp)
+![img](https://r.muyoung.com/blogimg/20250312102047270.webp)
 
-![img](https://img.muyoung.com/20250312101547376.webp)
+![img](https://r.muyoung.com/blogimg/20250312101547376.webp)
 
 ### 设置 CORS 策略（可选）
 
@@ -143,7 +143,7 @@ URL 填 img.a.com/*
 
 进入你想设置 CORS 的存储桶的设置，拉到下面：
 
-![img](https://img.muyoung.com/20250312101549190.webp)
+![img](https://r.muyoung.com/blogimg/20250312101549190.webp)
 
 配置为允许特定源
 比如要设置为允许两个域名：
@@ -206,9 +206,9 @@ URL 填 img.a.com/*
 
 创建令牌
 
-![img](https://img.muyoung.com/20250312102030653.webp)
+![img](https://r.muyoung.com/blogimg/20250312102030653.webp)
 
-![img](https://img.muyoung.com/20250312102028068.webp)
+![img](https://r.muyoung.com/blogimg/20250312102028068.webp)
 
 需要选择内容
 令牌名
@@ -216,11 +216,11 @@ URL 填 img.a.com/*
 指定储存桶
 TTL时间（永久）
 
-![img](https://img.muyoung.com/20250312101607270.webp)
+![img](https://r.muyoung.com/blogimg/20250312101607270.webp)
 
 记住生成的密钥，picgo软件里面设置需要。
 
-![img](https://img.muyoung.com/20250312101609388.webp)
+![img](https://r.muyoung.com/blogimg/20250312101609388.webp)
 
 ## picgo设置
 
@@ -230,15 +230,15 @@ compress-next:用来压缩图片至webp。
 watermark：给图片打水印
 autoback：用来备份图床
 
-![img](https://img.muyoung.com/20250312101610766.webp)
+![img](https://r.muyoung.com/blogimg/20250312101610766.webp)
 
-![img](https://img.muyoung.com/20250312102017236.webp)
+![img](https://r.muyoung.com/blogimg/20250312102017236.webp)
 
 安装好后，里面就新增了amazon S3的图床设置。
 
-![img](https://img.muyoung.com/20250312101615188.webp)
+![img](https://r.muyoung.com/blogimg/20250312101615188.webp)
 
-![img](https://img.muyoung.com/20250312102012703.webp)
+![img](https://r.muyoung.com/blogimg/20250312102012703.webp)
 
 这里有几项配置需要尤其注意。
 
@@ -258,9 +258,9 @@ autoback：用来备份图床
 PS：
 1.picgo还可以自定义连接格式（Picgo→自定义链接格式）`![$fileName]($url)`,之后上传链接界面选custom即可
 
-![img](https://img.muyoung.com/20250312102008331.webp)
+![img](https://r.muyoung.com/blogimg/20250312102008331.webp)
 
-![img](https://img.muyoung.com/20250312101929589.webp)
+![img](https://r.muyoung.com/blogimg/20250312101929589.webp)
 
 2.安装picgo的vscode插件-markdown transfer img，可以批量替换md中图片至云端。
 3.使用piclist来平替picgo，piclist功能更多

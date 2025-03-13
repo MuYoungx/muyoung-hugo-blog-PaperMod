@@ -3,7 +3,7 @@ title: 收藏几个动态懒加载图片
 published: 2025-02-28T09:49:31+08:00
 summary: "收藏几个动态懒加载图片"
 cover:
-  image: "https://img.muyoung.com/202502280947818.gif"
+  image: "https://r.muyoung.com/blogimg/202502280947818.gif"
 tags: [懒加载,]
 categories: '经验分享'
 draft: false 
@@ -16,19 +16,17 @@ lang: ''
 
 加载图片
 
-![img](https://img.muyoung.com/202502280944101.gif)
+![img](https://r.muyoung.com/blogimg/202502280944101.gif)
 
-![img](https://img.muyoung.com/202502280946977.gif)
+![img](https://r.muyoung.com/blogimg/202502280946977.gif)
 
-![img](https://img.muyoung.com/202502280946802.gif)
+![img](https://r.muyoung.com/blogimg/202502280946802.gif)
 
-![img](https://img.muyoung.com/202502280946848.gif)
-
-
-
-![img](https://img.muyoung.com/202502280947746.gif)
+![img](https://r.muyoung.com/blogimg/202502280946848.gif)
 
 
+
+![img](https://r.muyoung.com/blogimg/202502280947746.gif)
 
 
 
@@ -46,16 +44,18 @@ lang: ''
 
 
 
-![img](https://img.muyoung.com/202502280947886.gif)
-
-![img](https://img.muyoung.com/202502280947818.gif)
-
-![img](https://img.muyoung.com/202502280947774.gif)
-
-![img](https://img.muyoung.com/202502280948966.gif)
-
-![img](https://img.muyoung.com/202502280948436.gif)
 
 
+![img](https://r.muyoung.com/blogimg/202502280947886.gif)
 
-![img](https://img.muyoung.com/202502280948576.gif)
+![img](https://r.muyoung.com/blogimg/202502280947818.gif)
+
+![img](https://r.muyoung.com/blogimg/202502280947774.gif)
+
+![img](https://r.muyoung.com/blogimg/202502280948966.gif)
+
+![img](https://r.muyoung.com/blogimg/202502280948436.gif)
+
+
+
+![img](https://r.muyoung.com/blogimg/202502280948576.gif)

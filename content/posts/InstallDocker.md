@@ -3,7 +3,7 @@ title: 安装Docker以及其他容器
 published: 2025-03-12T14:58:23+08:00
 summary: ""
 cover:
-  image: "https://img.muyoung.com/20250312145937578.png"
+  image: "https://r.muyoung.com/blogimg/20250312145937578.png"
 tags: [Docker]
 categories: '经验分享'
 draft: false 

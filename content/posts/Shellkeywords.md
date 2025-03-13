@@ -3,7 +3,7 @@ title: Shell关键字
 published: 2025-02-27T17:38:22+08:00
 summary: "Shell关键字"
 cover:
-  image: "https://img.muyoung.com/202502280936515.png"
+  image: "https://r.muyoung.com/blogimg/202502280936515.png"
 tags: [Shell]
 categories: '经验分享'
 draft: false 

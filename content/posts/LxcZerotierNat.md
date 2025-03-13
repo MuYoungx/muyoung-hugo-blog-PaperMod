@@ -3,7 +3,7 @@ title: lxc搭建zerotier转发nat内网
 published: 2025-03-12T14:46:06+08:00
 summary: ""
 cover:
-  image: "https://img.muyoung.com/202503041350331.png"
+  image: "https://r.muyoung.com/blogimg/202503041350331.png"
 tags: [lxc, zerotier,nat]
 categories: '经验分享'
 draft: false 

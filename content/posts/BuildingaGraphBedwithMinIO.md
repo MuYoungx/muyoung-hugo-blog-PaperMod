@@ -3,7 +3,7 @@ title: 使用MinIO搭建图床
 published: 2025-03-04T12:31:57+08:00
 summary: "使用MinIO搭建图床"
 cover:
-  image: "https://img.muyoung.com/202503041232888.png"
+  image: "https://r.muyoung.com/blogimg/202503041232888.png"
 tags: [minio,图床,反向代理,Nginx]
 categories: '经验分享'
 draft: false 
@@ -38,7 +38,7 @@ sudo apt update
 sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 ```
 
-![img](https://img.muyoung.com/202503041209211.png)
+![img](https://r.muyoung.com/blogimg/202503041209211.png)
 
 # 使用Docker安装MinIO
 
@@ -52,7 +52,7 @@ docker run -d--name minio
 minio/minio server /data --console-address":9001"
 ```
 
-![img](https://img.muyoung.com/202503041213465.png)
+![img](https://r.muyoung.com/blogimg/202503041213465.png)
 
 # 放行防火墙端口
 
@@ -60,7 +60,7 @@ minio/minio server /data --console-address":9001"
 
 ## 访问9001端口测试
 
-![img](https://img.muyoung.com/202503041231538.png)
+![img](https://r.muyoung.com/blogimg/202503041231538.png)
 
 默认用户名密码为之前的docker参数 建议在docker参数定义时就定义要使用的管理员用户名密码
 
@@ -134,7 +134,7 @@ location / {
 
 ## 创建bucket并设置公共权限
 
-![img](https://img.muyoung.com/202503041227934.png)
+![img](https://r.muyoung.com/blogimg/202503041227934.png)
 
 上传一张图片到bucket进行访问测试
 
