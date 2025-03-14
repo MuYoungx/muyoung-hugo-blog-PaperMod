@@ -5,7 +5,7 @@ summary: ""
 cover:
   image: "https://r.muyoung.com/blogimg/202503041350331.png"
 tags: [lxc, zerotier,nat]
-categories: '经验分享'
+categories: 'PVE'
 draft: false 
 lang: ''
 ---

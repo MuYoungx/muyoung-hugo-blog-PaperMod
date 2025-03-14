@@ -4,8 +4,8 @@ published: 2025-03-12T14:58:23+08:00
 summary: ""
 cover:
   image: "https://r.muyoung.com/blogimg/20250312145937578.png"
-tags: [Docker]
-categories: '经验分享'
+tags: [docker]
+categories: 'Docker'
 draft: false 
 lang: ''
 ---

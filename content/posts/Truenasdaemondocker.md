@@ -1,11 +1,11 @@
 ---
 title: TrueNAS24.10docker开机自动替换源
 published: 2025-02-27T17:34:36+08:00
-summary: "TrueNAS24.10docker开机自动替换源"
+summary: ""
 cover:
   image: "https://r.muyoung.com/blogimg/202502280936178.png"
-tags: [Truenas, Docker]
-categories: '经验分享'
+tags: [truenas, docker]
+categories: 'TrueNAS'
 draft: false 
 lang: ''
 ---

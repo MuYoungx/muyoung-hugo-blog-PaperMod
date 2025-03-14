@@ -1,7 +1,7 @@
 ---
 title: Nginx常用模板
 published: 2025-03-14T09:39:18+08:00
-summary: "文章简介"
+summary: ""
 cover:
   image: "https://r.muyoung.com/blogimg/20250314094011598.png"
 tags: [nginx]

@@ -1,11 +1,11 @@
 ---
 title: Pve开源虚拟化常见配置
 published: 2025-03-04T13:50:14+08:00
-summary: "Pve开源虚拟化常见配置"
+summary: ""
 cover:
   image: "https://r.muyoung.com/blogimg/202503041350331.png"
 tags: [pve,硬件直通,swap]
-categories: '经验分享'
+categories: '[PVE]'
 draft: false 
 lang: ''
 ---

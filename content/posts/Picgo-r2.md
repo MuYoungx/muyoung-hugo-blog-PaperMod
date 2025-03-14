@@ -1,10 +1,10 @@
 ---
 title: 在Picgo上配置Cloudflare-R2图床
 published: 2025-03-12T09:51:40+08:00
-summary: "在Picgo上配置Cloudflare-R2图床"
+summary: ""
 cover:
   image: "https://r.muyoung.com/blogimg/20250312095307639.png"
-tags: [Picgo,R2,Cloudflare]
+tags: [picgo,r2,cloudflare]
 categories: '经验分享'
 draft: false 
 lang: ''

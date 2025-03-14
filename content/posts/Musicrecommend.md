@@ -1,10 +1,10 @@
 ---
 title: 音乐推荐
 published: 2025-03-11T22:47:30+08:00
-summary: "音乐推荐"
+summary: ""
 cover:
   image: "https://r.muyoung.com/blogimg/202502271602277.png"
-tags: [Music]
+tags: [music]
 categories: '心情说说'
 draft: false 
 lang: ''

@@ -1,10 +1,10 @@
 ---
 title: 使用MinIO搭建图床
 published: 2025-03-04T12:31:57+08:00
-summary: "使用MinIO搭建图床"
+summary: ""
 cover:
   image: "https://r.muyoung.com/blogimg/202503041232888.png"
-tags: [minio,图床,反向代理,Nginx]
+tags: [minio,图床,反向代理,nginx]
 categories: '经验分享'
 draft: false 
 lang: ''

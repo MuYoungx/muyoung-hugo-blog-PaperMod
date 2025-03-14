@@ -1,10 +1,10 @@
 ---
 title: vSphere Hypervisor(ESXI)
 published: 2025-02-27T17:37:05+08:00
-summary: "vSphere Hypervisor(ESXI)"
+summary: ""
 cover:
   image: "https://r.muyoung.com/blogimg/202502271737317.png"
-tags: [Vmware, 证书, 硬件直通,Esxi]
+tags: [vmware, 证书, 硬件直通,esxi]
 categories: '经验分享'
 draft: false 
 lang: ''
