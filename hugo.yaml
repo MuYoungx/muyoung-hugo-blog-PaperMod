@@ -14,7 +14,7 @@ params:
   # 是否显示阅读时间  
   ShowReadingTime: true
   # 是否显示分享按钮
-  ShowShareButtons: true
+  ShowShareButtons: false
   # 分享按钮配置
   # ShareButtons: ["linkedin", "twitter"]
   # 是否禁用主题切换按钮
