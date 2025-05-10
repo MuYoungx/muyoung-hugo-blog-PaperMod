@@ -25,7 +25,7 @@ jobs:
 
     - name: Debug SSH connection
       run: |
-        ssh -T -o StrictHostKeyChecking=no user@your_server_ip
+        ssh -T -o StrictHostKeyChecking=no root@47.108.236.168
       env:
         SSH_PRIVATE_KEY: ${{ secrets.ALIYUNECS }}
 
