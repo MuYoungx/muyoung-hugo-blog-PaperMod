@@ -16,12 +16,18 @@ jobs:
     - name: Set up SSH key
       run: |
         mkdir -p ~/.ssh
-        echo "$ALIYUNECS" | tr -d '\r' > ~/.ssh/id_rsa
+        echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan -H 47.108.236.168 >> ~/.ssh/known_hosts
         chmod 644 ~/.ssh/known_hosts
       env:
-        ALIYUNECS: ${{ secrets.ALIYUNECS }}
+        SSH_PRIVATE_KEY: ${{ secrets.ALIYUNECS }}
+
+    - name: Debug SSH connection
+      run: |
+        ssh -T -o StrictHostKeyChecking=no user@your_server_ip
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.ALIYUNECS }}
 
     - name: Copy files to server
       run: |
