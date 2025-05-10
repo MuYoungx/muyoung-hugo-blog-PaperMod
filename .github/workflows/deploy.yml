@@ -22,7 +22,12 @@ jobs:
         chmod 644 ~/.ssh/known_hosts
       env:
         SSH_PRIVATE_KEY: ${{ secrets.ALIYUNECS }}
-
+        
+    - name: Install rsync
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y rsync
+        
     - name: Debug SSH connection
       run: |
         ssh -T -o StrictHostKeyChecking=no root@47.108.236.168
