@@ -15,14 +15,6 @@ jobs:
         with:
           submodules: true # 启用 Git 子模块
 
-      - name: 更新 Git Submodules 并切换到指定 Tag
-        run: |
-          git submodule update --init --recursive --remote
-          cd themes/hugo-PaperMod
-          git fetch --tags
-          git checkout tags/v7.0
-          cd ../..
-
       - name: 安装 Hugo
         uses: peaceiris/actions-hugo@v2
         with:
