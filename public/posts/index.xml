@@ -6,8 +6,445 @@
     <description>Recent content in Posts on 慕阳博客</description>
     <generator>Hugo -- 0.145.0</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Wed, 12 Mar 2025 14:58:23 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 14 Mar 2025 10:19:00 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>TrueNAS SCALE 套娃安装PVE虚拟机，并挂载NFS</title>
+      <link>http://localhost:1313/posts/pveintruenas/</link>
+      <pubDate>Fri, 14 Mar 2025 10:19:00 +0800</pubDate>
+      <guid>http://localhost:1313/posts/pveintruenas/</guid>
+      <description>&lt;h1 id=&#34;序&#34;&gt;序&lt;/h1&gt;
+&lt;p&gt;很多人看到这个标题可能就觉得没必要，或者部署很理解，实际上我其实一开始是玩一玩，试一下SCALE支不支持嵌套虚拟，我试过了是支持的。因为SCALE的虚拟机并不是非常好用，只能以zvol的方式当做硬盘，而且没有模板之类的东西，所以对于做实验什么的不是很方便，所以我才套娃一个PVE。&lt;/p&gt;
+&lt;p&gt;实际上用下来感觉还可以，做一些实验用的虚拟机没有什么问题。而且还可以挂载scale 的NFS，使用scale的快照之类的。&lt;/p&gt;
+&lt;h1 id=&#34;安装&#34;&gt;安装&lt;/h1&gt;
+&lt;p&gt;首先去下载镜像，可以去&lt;a href=&#34;https://www.proxmox.com/en/downloads&#34;&gt;官网&lt;/a&gt;下载，该教程使用的版本为7.2-1&lt;/p&gt;
+&lt;p&gt;然后像安装普通的镜像一样安装&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314103120382.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314103124162.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;我这里直接给了24核心，这里根据自己的需求设置&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314103125381.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;大小自己随意设置，后面我们可以挂载NFS的&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314103134173.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这里选择桥接网卡&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314103138143.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这里找到我们的ISO镜像&lt;/p&gt;
+&lt;p&gt;下面全部默认保存即可&lt;/p&gt;
+&lt;p&gt;开机，点击展示&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314103139936.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;直接回车&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314103146717.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;一路下一步，设置好密码&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314103151762.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这里的主机名要带&lt;code&gt;.local&lt;/code&gt;，最后点击install等待安装&lt;/p&gt;
+&lt;p&gt;安装好之后我们直接点PowerOff&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314103156991.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314103200510.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;点击设备把CD删除，然后再开机&lt;/p&gt;
+&lt;p&gt;然后看vnc显示的地址，浏览器打开，输入账户密码即可登录&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314103202032.png&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;挂载nfs&#34;&gt;挂载NFS&lt;/h1&gt;
+&lt;p&gt;先创建一个数据集，点击共享，添加NFS&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314103204378.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;设置数据集权限&#34;&gt;设置数据集权限&lt;/h2&gt;
+&lt;p&gt;因为PVE的nfs不支持填写账号密码，所以我们需要设置一下权限&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314103214047.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314103209915.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;确保这里是NFSV4&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314103207329.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://www.truenasscale.com/usr/uploads/2022/05/2235625831.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314103219064.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;需要添加一条everyone的权限&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314103221157.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;点击nfs&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314103222951.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;内容有很多种，可以自己创建多个nfs都挂载&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Proxmox VE 中使用 Cloud 系统镜像快速创建虚拟机</title>
+      <link>http://localhost:1313/posts/pvecloudinit/</link>
+      <pubDate>Fri, 14 Mar 2025 10:13:42 +0800</pubDate>
+      <guid>http://localhost:1313/posts/pvecloudinit/</guid>
+      <description>&lt;h1 id=&#34;序&#34;&gt;序&lt;/h1&gt;
+&lt;p&gt;之前我出了一个套娃的教程，我说用PVE是为了可以快速的创建Linux虚拟机，这期就讲一下如何创建。&lt;/p&gt;
+&lt;h1 id=&#34;获取-cloud-images&#34;&gt;获取 Cloud Images&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;CentOS: &lt;a href=&#34;https://cloud.centos.org/centos/&#34;&gt;https://cloud.centos.org/centos/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Ubuntu: &lt;a href=&#34;https://cloud-images.ubuntu.com/releases/&#34;&gt;https://cloud-images.ubuntu.com/releases/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Debian: &lt;a href=&#34;https://cloud.debian.org/images/cloud/&#34;&gt;https://cloud.debian.org/images/cloud/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Fedora: &lt;a href=&#34;https://alt.fedoraproject.org/cloud/&#34;&gt;https://alt.fedoraproject.org/cloud/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;RedHat: &lt;a href=&#34;https://access.redhat.com/downloads/&#34;&gt;https://access.redhat.com/downloads/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;openSUSE: &lt;a href=&#34;http://download.opensuse.org/repositories/Cloud:/Images:/&#34;&gt;http://download.opensuse.org/repositories/Cloud:/Images:/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;下载qcow2的镜像&lt;/p&gt;
+&lt;p&gt;下载你需要的系统对应的 Cloud Images 镜像（Proxmox VE 支持两种 Cloud Images 类型，分别为 &lt;code&gt;nocloud v1&lt;/code&gt; 和 &lt;code&gt;configdrive v2&lt;/code&gt;），这里以 Debian 11 为例。可以直接使用 &lt;code&gt;wget&lt;/code&gt; 在 PVE 里下载&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;wget https://cloud.debian.org/images/cloud/bullseye/latest/debian-11-nocloud-amd64.qcow2
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;安装&#34;&gt;安装&lt;/h1&gt;
+&lt;p&gt;创建一个虚拟机，注意 SCSI 控制器必须是 &lt;code&gt;VirtIO SCSI&lt;/code&gt;，无需创建硬盘，如果创建了自行分离删除
+&lt;img alt=&#34;h7t3.png&#34; loading=&#34;lazy&#34; src=&#34;https://www.truenasscale.com/usr/uploads/2022/05/1960894046.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;htCD.png&#34; loading=&#34;lazy&#34; src=&#34;https://www.truenasscale.com/usr/uploads/2022/05/564683641.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;hEWm.png&#34; loading=&#34;lazy&#34; src=&#34;https://www.truenasscale.com/usr/uploads/2022/05/3638516927.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;在创建的虚拟机硬件设置里添加 CloudInit 设备&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;hLwA.md.png&#34; loading=&#34;lazy&#34; src=&#34;https://www.truenasscale.com/usr/uploads/2022/05/3367534873.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;使用 SSH 或者 Xftp 工具将镜像文件上传到 PVE 服务器（&lt;code&gt;wget&lt;/code&gt; 下载的跳过此步），使用下面的命令将磁盘镜像导入到虚拟机，成功后 PVE 面板的 VM 硬件里会出现未使用的磁盘。&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# 100 为虚拟机ID
+qm importdisk 100 debian-11-nocloud-amd64.qcow2 local-lvm
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://www.truenasscale.com/usr/uploads/2022/05/508923776.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;双击这个未使用磁盘启用它，总线/设置选择 &lt;code&gt;SCSI&lt;/code&gt;，然后在 选项-引导顺序 中，将此磁盘设置为第一项&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Docker Compose 从入门到实践</title>
+      <link>http://localhost:1313/posts/dockercompose/</link>
+      <pubDate>Fri, 14 Mar 2025 10:07:40 +0800</pubDate>
+      <guid>http://localhost:1313/posts/dockercompose/</guid>
+      <description>&lt;h1 id=&#34;介绍&#34;&gt;介绍&lt;/h1&gt;
+&lt;p&gt;Docker Compose 是一个用于定义和运行多容器 Docker 应用的工具。通过使用一个 YAML 文件，您可以配置应用程序需要的所有服务。然后，只需一个命令，就可以创建并启动所有服务。&lt;/p&gt;
+&lt;p&gt;TrueNAS SCALE 24.10 开始使用docker和docker compose部署应用，所以写这一篇简单的介绍一下如何编写docker compose文件（即TrueNAS SCALE 的自定义应用）&lt;/p&gt;
+&lt;h1 id=&#34;编写docker-composeyaml-文件&#34;&gt;编写&lt;code&gt;docker-compose.yaml&lt;/code&gt; 文件&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;docker-compose.yaml&lt;/code&gt; 文件使用 YAML 格式定义服务、网络和卷。以下是文件的基本结构：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;services&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;service_name&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;image&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;image_name:tag&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;build&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;ports&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;host_port:container_port&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;volumes&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;host_path:container_path&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;environment&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;ENV_VAR=value&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;depends_on&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;other_service&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;有过docker-compose经验的同学可能已经发现了不对劲的地方，为什么第一行少了&lt;code&gt;version:&#39;3&#39;&lt;/code&gt;，因为新版已经去掉了这个版本信息，直接写service就行&lt;/p&gt;
+&lt;h2 id=&#34;示例部署一个简单的-web-应用&#34;&gt;示例：部署一个简单的 Web 应用&lt;/h2&gt;
+&lt;p&gt;我们以nginx举例&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;services&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;web&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;image&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;nginx:latest&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;ports&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;8080:80&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;volumes&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;/mnt/SSD/apps/nginx:/usr/share/nginx/html&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;解释：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;services&lt;/strong&gt;：定义服务列表，这里定义了一个名为&lt;code&gt;web&lt;/code&gt; 的服务。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;image&lt;/strong&gt;：指定使用的镜像，这里使用官方的 Nginx 镜像。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ports&lt;/strong&gt;：将主机的 8080 端口映射到容器的 80 端口。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;volumes&lt;/strong&gt;：将本地的&lt;code&gt;/mnt/SSD/app/nginx&lt;/code&gt; 目录挂载到容器内的&lt;code&gt;/usr/share/nginx/html&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;注意：主机端口不要与其他应用冲突，&lt;code&gt;/mnt/SSD/app/nginx&lt;/code&gt; 这个路径需要提前创建，你可以创建数据集或者直接命令行里创建目录，数据集的路径按下图示例：&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://www.truenasscale.com/usr/uploads/2024/10/3231654518.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;在图片显示的路径前面要加上&lt;code&gt;/mnt&lt;/code&gt;，也就是&lt;code&gt;/mnt/SSD/apps/nginx&lt;/code&gt; 这样&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>自建邮局太麻烦？来用网易免费企业邮！绑定你的域名收发自如！</title>
+      <link>http://localhost:1313/posts/163-free-domain-email/</link>
+      <pubDate>Fri, 14 Mar 2025 09:44:45 +0800</pubDate>
+      <guid>http://localhost:1313/posts/163-free-domain-email/</guid>
+      <description>&lt;h1 id=&#34;引言&#34;&gt;引言&lt;/h1&gt;
+&lt;p&gt;最早我开始知道域名邮箱是因为偶然在一位我朋友的开发群内看到他的微软账户绑定的邮箱是admin@他网站的域名.com。&lt;/p&gt;
+&lt;p&gt;我当时就很好奇，就去问他你这个邮箱是自建的吗？&lt;/p&gt;
+&lt;p&gt;因为我当时也知道可以通过购买VPS然后配上一些开源邮局框架来自建邮箱，但是这需要金钱和时间成本，而且我认为不大稳定，所以一直就没有试过，而且我觉得我当时的muyoung@foxmail.com这个邮箱虽然是托管在QQ的，但是也够用了。&lt;/p&gt;
+&lt;p&gt;然后他说他用的是Cloudflare的邮件转发服务，我就心想这cf还能干这个，一番操作以下发现还真能。&lt;/p&gt;
+&lt;p&gt;在cf的域名配置中有一个电子邮件转发，可以将发给你域名的邮件转发到你自己用的邮箱，比如发给demo@muyoung.com的邮件会被cf转发给我的私用邮箱muyoung@foxmail.com。&lt;/p&gt;
+&lt;p&gt;但是因为是转发，那么如果你想要以demo@muyoung.com这个身份发邮件就需要费一番周折了。我用的foxmail.com被腾讯收购了，现在作为QQ邮箱的服务提供，而QQ邮箱要绑定域名需要购买万恶的VIP，于是就只能通过Outlook、Gmail等支持免费绑定域名作为别名的邮箱来发邮件&lt;/p&gt;
+&lt;p&gt;但这也太割裂了吧，我在QQ邮箱上收到，然后还要去Outlook或者Gmail上面回复？于是我后面也还是继续使用我的私用邮箱，不去折腾什么域名邮箱了，毕竟方便比什么都重要&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;但是话又说回来，最近发现了这个网易免费企业邮，可以免费绑定你的域名用作域名邮箱，并且直接将MX解析解析到网易，既能收，也能发。而且这个项目也不是刚出的，貌似在2015就已经有了，所以也不用担心灵车，至少比你自建的稳定😋&lt;/p&gt;
+&lt;h1 id=&#34;正式开始&#34;&gt;正式开始&lt;/h1&gt;
+&lt;h2 id=&#34;创建账号并配置管理员&#34;&gt;创建账号并配置管理员&lt;/h2&gt;
+&lt;p&gt;首先前往 &lt;a href=&#34;https://ym.163.com/&#34;&gt;网易免费企业邮箱&lt;/a&gt; 创建一个账号。直接用手机号注册&lt;/p&gt;
+&lt;p&gt;注意，注册完毕后登录账户名和登录密码会通过&lt;strong&gt;短信&lt;/strong&gt;发给你，然后前往 &lt;a href=&#34;https://mail.qiye.163.com/&#34;&gt;https://mail.qiye.163.com/&lt;/a&gt; 进行登录&lt;/p&gt;
+&lt;p&gt;如果你不喜欢系统随机生成的密码，可以先点击忘记密码，然后填写账户名，验证绑定的手机号后即可重置密码&lt;/p&gt;
+&lt;p&gt;登陆进去后大概是这样&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;img&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314095322943.webp&#34;&gt;&lt;/p&gt;
+&lt;p&gt;如果你不喜欢你的账户名，比如我最开始的就是postmaster@muyoung.freeqiye.com，这个postmaster其实是可以更改的&lt;/p&gt;
+&lt;p&gt;在组织机构管理中点击账号管理，选择新建账号&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;image-20250314094845463&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314095328858.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;然后写一个你想要的别名。绑定手机填你的，因为第一次登录需要验证码验证，如果填错了直接删除即可&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;image-20250314094947188&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314095543249.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;然后我们需要给这个新账号提权，如果你想用webmaster登录后台的话&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;img&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314095332712.webp&#34;&gt;&lt;/p&gt;
+&lt;p&gt;接着右上角退出登录，然后使用新创建的管理员账户登录&lt;/p&gt;
+&lt;h2 id=&#34;绑定你的域名&#34;&gt;绑定你的域名&lt;/h2&gt;
+&lt;p&gt;前往组织机构管理 - 域名管理 - 添加域名&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;image-20250314095033346&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314095333485.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;根据提示在你的域名提供商（比如Cloudflare）配置TXT记录和MX记录即可&lt;/p&gt;
+&lt;p&gt;之后可以在之前的账号管理切换成自己的域名后缀&lt;/p&gt;
+&lt;h2 id=&#34;登录你的邮箱&#34;&gt;登录你的邮箱&lt;a href=&#34;https://www.onani.cn/posts/163-free-domain-email/#%E7%99%BB%E5%BD%95%E4%BD%A0%E7%9A%84%E9%82%AE%E7%AE%B1&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;前往 &lt;a href=&#34;https://dashi.163.com/&#34;&gt;网易邮箱大师-高效强大的全平台邮箱客户端&lt;/a&gt; 下载对应的版本&lt;/p&gt;
+&lt;p&gt;使用你的邮箱 + 密码进行登录即可。如果需要手机验证验证即可。最好下载一个手机端的网易邮箱大师，在手机端登录后任何其他平台登录都会需要手机端授权，更安全&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Nginx常用模板</title>
+      <link>http://localhost:1313/posts/nginxdemo/</link>
+      <pubDate>Fri, 14 Mar 2025 09:39:18 +0800</pubDate>
+      <guid>http://localhost:1313/posts/nginxdemo/</guid>
+      <description>&lt;h2 id=&#34;官方模板&#34;&gt;官方模板&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-#&#34; data-lang=&#34;#&#34;&gt;user nginx;              # Nginx进程运行用户
+worker_processes auto;   # Nginx工作进程数，通常设置为CPU核数
+error_log /var/log/nginx/error.log warn;    # 错误日志路径和日志级别
+pid /run/nginx.pid;      # 进程PID保存路径
+
+# 定义事件模块
+events {
+worker_connections 1024;    # 每个工作进程最大并发连接数
+use epoll;                  # 使用epoll网络模型，提高性能
+multi_accept on;            # 开启支持多个连接同时建立
+}
+
+# 定义HTTP服务器模块
+http {
+# 缓存文件目录
+client_body_temp_path /var/cache/nginx/client_temp;
+proxy_temp_path /var/cache/nginx/proxy_temp;
+fastcgi_temp_path /var/cache/nginx/fastcgi_temp;
+
+# 定义日志格式，main是默认的日志格式
+log_format main &amp;#39;$remote_addr - $remote_user [$time_local] &amp;#34;$request&amp;#34; &amp;#39;
+&amp;#39;$status $body_bytes_sent &amp;#34;$http_referer&amp;#34; &amp;#39;
+&amp;#39;&amp;#34;$http_user_agent&amp;#34; &amp;#34;$http_x_forwarded_for&amp;#34;&amp;#39;;
+
+# 默认访问日志保存路径和格式
+access_log /var/log/nginx/access.log main;
+
+# 定义MIME类型
+include /etc/nginx/mime.types;
+default_type application/octet-stream;
+
+# 代理参数
+proxy_connect_timeout 6s;       # 连接超时时间
+proxy_send_timeout 10s;         # 发送超时时间
+proxy_read_timeout 10s;         # 接收超时时间
+proxy_buffer_size 16k;          # 缓冲区大小
+proxy_buffers 4 32k;            # 缓冲区个数和大小
+proxy_busy_buffers_size 64k;    # 忙碌缓冲区大小
+proxy_temp_file_write_size 64k; # 代理临时文件写入大小
+
+# 启用压缩，可以提高网站访问速度
+gzip on;
+gzip_min_length 1k;                    # 最小压缩文件大小
+gzip_types text/plain text/css application/json application/javascript application/xml;
+
+# 定义HTTP服务器
+server {
+listen 80;              # 监听端口
+
+server_name example.com;    # 域名
+
+# 重定向到HTTPS，强制使用HTTPS访问
+if ($scheme != &amp;#34;https&amp;#34;) {
+  return 301 https://$server_name$request_uri;
+  }
+
+  # HTTPS服务器配置
+  ssl_certificate      /etc/nginx/ssl/server.crt;    # SSL证书路径
+  ssl_certificate_key  /etc/nginx/ssl/server.key;    # SSL私钥路径
+
+  # SSL会话缓存参数
+  ssl_session_cache shared:SSL:10m;
+  ssl_session_timeout 10m;
+  ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+  ssl_prefer_server_ciphers on;
+  ssl_ciphers ECDH+AESGCM:ECDH+AES256:ECDH+AES128:DH+3DES:!ADH:!AECDH:!MD5;
+
+  # 配置代理路径
+  location / {
+  proxy_pass http://localhost:8080;        # 转发请求的目标地址
+  proxy_set_header Host $host;             # 设置请求头中的Host字段
+  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    # 设置HTTP头中的X-Forwarded-For字段，表示客户端真实IP，多个IP用逗号隔开
+      proxy_set_header X-Real-IP $remote_addr; # 设置请求头中的X-Real-IP字段，表示客户端真实IP
+      }
+
+      # 配置静态文件访问路径
+      location /static/ {
+      alias /path/to/static/files/;   # 静态文件的目录
+      expires 7d;                     # 静态文件缓存时间
+      add_header Pragma public;       # 添加HTTP响应头
+      add_header Cache-Control &amp;#34;public, must-revalidate, proxy-revalidate&amp;#34;;
+      }
+
+      # 配置错误页面
+      error_page 404 /404.html;           # 404错误页
+      location = /404.html {
+      internal;                       # 不接受外部访问
+      root /usr/share/nginx/html;     # 404错误页文件所在目录
+      }
+
+      # 配置重定向
+      location /old/ {
+      rewrite ^/old/([^/]+) /new/$1 permanent;   # 将/old/xxx路径重定向为/new/xxx，返回301状态码
+      }
+      }
+
+      # 其他服务配置
+      # server {
+      #     ...
+      # }
+
+      # 配置TCP负载均衡
+      upstream backends {
+      server backend1.example.com:8080 weight=5;  # 后端服务器地址和权重
+      server backend2.example.com:8080;
+      server backend3.example.com:8080 backup;   # 备用服务器
+      keepalive 16;                               # 连接池大小
+      }
+
+      server {
+      listen 80;
+      server_name example.com;
+
+      location / {
+      proxy_pass http://backends;             # 负载均衡转发请求的目标地址
+      proxy_set_header Host $host;            # 设置请求头中的Host字段
+      proxy_set_header X-Real-IP $remote_addr; # 设置请求头中的X-Real-IP字段，表示客户端真实IP
+      }
+      }
+      }
+&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# For more information on configuration, see:
+#   * Official English Documentation: http://nginx.org/en/docs/
+#   * Official Russian Documentation: http://nginx.org/ru/docs/
+
+user root;
+worker_processes 2;
+#error_log /var/log/nginx/error.log;
+
+# Load dynamic modules. See /usr/share/doc/nginx/README.dynamic.
+#include /usr/share/nginx/modules/*.conf;
+
+events {
+  worker_connections 1024;
+}
+
+http {
+  log_format  main  &amp;#39;$remote_addr - $remote_user [$time_local] &amp;#34;$request&amp;#34; &amp;#39;
+    &amp;#39;$status $body_bytes_sent &amp;#34;$http_referer&amp;#34; &amp;#39;
+    &amp;#39;&amp;#34;$http_user_agent&amp;#34; &amp;#34;$http_x_forwarded_for&amp;#34;&amp;#39;
+    access_log  /var/log/nginx/access.log  main;
+
+  sendfile            on;
+  tcp_nopush          on;
+  tcp_nodelay         on;
+  keepalive_timeout   65;
+  types_hash_max_size 2048;
+
+  include             /etc/nginx/mime.types;
+  default_type        application/octet-stream;
+
+  # Load modular configuration files from the /etc/nginx/conf.d directory.
+  # See http://nginx.org/en/docs/ngx_core_module.html#include
+  # for more information.
+  include /etc/nginx/conf.d/*.conf;
+
+    server {
+    listen       80 default_server;
+    listen       [::]:80 default_server;
+    server_name  _;
+    rewrite ^(.*)$   https://$host$1 permanent;
+    root         /usr/share/nginx/html;
+
+
+    # Load configuration files for the default server block.
+    include /etc/nginx/default.d/*.conf;
+
+    location / {
+}
+
+    error_page 404 /404.html;
+    location = /40x.html {
+}
+
+    error_page 500 502 503 504 /50x.html;
+    location = /50x.html {
+}
+}
+    #主页
+    server {
+    listen  443 ssl;
+    listen [::]:443 default_server;
+    #server_name muyangx.top;
+    root /myservices/web/bangong;
+    ssl_certificate &amp;#34;/myservices/cert/muyangx.topcert.pem&amp;#34;;  
+    ssl_certificate_key &amp;#34;/myservices/cert/muyangx.topkey.pem&amp;#34;;  
+    index index.html;
+    ssl_session_cache shared:SSL:1m;
+    ssl_session_timeout  10m;
+    ssl_ciphers PROFILE=SYSTEM;
+    ssl_prefer_server_ciphers on;
+    location / {
+
+}
+}
+    #docker面板
+    server {
+    listen  443 ssl;
+    server_name docker.muyangx.top;
+    ssl_certificate &amp;#34;/myservices/cert/*.muyangx.topcert.pem&amp;#34;;  
+    ssl_certificate_key &amp;#34;/myservices/cert/*.muyangx.topkey.pem&amp;#34;;  
+    ssl_session_cache shared:SSL:1m;
+    ssl_session_timeout  10m;
+    ssl_ciphers PROFILE=SYSTEM;
+    ssl_prefer_server_ciphers on;
+
+    location / {
+    proxy_pass http://127.0.0.1:9000;
+}
+}
+
+
+    #Settings for a TLS enabled server.
+
+    #  server {
+    #     listen       443 ssl http2 default_server;
+    #     listen       [::]:443 ssl http2 default_server;
+    #     server_name  _;
+    #     root         /usr/share/nginx/html;
+
+    #     ssl_certificate &amp;#34;/etc/pki/nginx/server.crt&amp;#34;;
+    #     ssl_certificate_key &amp;#34;/etc/pki/nginx/private/server.key&amp;#34;;
+    #     ssl_session_cache shared:SSL:1m;
+    #     ssl_session_timeout  10m;
+    #     ssl_ciphers PROFILE=SYSTEM;
+    #     ssl_prefer_server_ciphers on;
+
+    #     # Load configuration files for the default server block.
+    #     include /etc/nginx/default.d/*.conf;
+
+    #     location / {
+    #     }
+
+    #     error_page 404 /404.html;
+    #         location = /40x.html {
+    #     }
+
+    #     error_page 500 502 503 504 /50x.html;
+    #         location = /50x.html {
+    #     }  
+
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;nginx强制https&#34;&gt;nginx强制https&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1、使用nginx的rewrite方法
+
+server {
+            listen 80;
+            server_name  xxx.com;
+            rewrite ^(.*)$   https://$host$1 permanent;
+}
+2、使用nginx的301状态码
+
+server {
+            listen 80;
+            listen 443;
+            server_name xxx.com;
+            ssl   on;
+            ssl_certificate    /data/www-key/xxx.pem;
+            ssl_certificate_key    /data/www-key/xxx.key;
+            if ($scheme = http) {
+            return 301 https://$server_name$request_uri;
+            }
+
+}
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
     <item>
       <title>安装Docker以及其他容器</title>
       <link>http://localhost:1313/posts/installdocker/</link>
@@ -94,70 +531,555 @@ lxc.mount.entry: /dev/net/tun dev/net/tun none bind,create=file
       <link>http://localhost:1313/posts/picgo-r2/</link>
       <pubDate>Wed, 12 Mar 2025 09:51:40 +0800</pubDate>
       <guid>http://localhost:1313/posts/picgo-r2/</guid>
-      <description>在Picgo上配置Cloudflare-R2图床</description>
+      <description>&lt;h2 id=&#34;什么叫图床&#34;&gt;什么叫图床&lt;/h2&gt;
+&lt;p&gt;图床就是将图片上传到相关服务商或者个人服务器，通过上传文件的网络地址进行远程访问。可以方便快速的将图片插入到文章中，方便后续图片二次使用、迁移、分享。&lt;/p&gt;
+&lt;h2 id=&#34;常用图床的几种方式&#34;&gt;常用图床的几种方式&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;VPS自建：通过购买服务器搭建图床程序，比如easyimage，lsky-pro等。
+优点：方便，快捷，空间大
+缺点：速度取决于vps的线路，迁移服务时大量数据需要迁移。&lt;/li&gt;
+&lt;li&gt;云端oss储存+cdn
+优点：稳定，速度快
+缺点：付费（腾讯cos/阿里oss+cdn(cdn需备案)）。免费的额度有限（Backblaze B2 + Cloudflare）。&lt;/li&gt;
+&lt;li&gt;Github + JsDelivr(cdn)
+优点：github绝对稳定，jsdelivr充当github的cdn加速
+缺点：虽然有加速，速度也算不上快，属中等。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;本篇介绍CLoudFlare R2+Picgo 方案&lt;/p&gt;
+&lt;p&gt;CLoudFlare R2 免费用户有10GB/月的存储额度（30天内每天储存峰值的平均值），对于小网站基本足够，超额的存储是$0.015/GB/月，&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;标准储存：日常存储容量前10GB/月免费（30天内每天储存峰值的平均值）&lt;/li&gt;
+&lt;li&gt;Daily Class A Transactions Caps：日常B类事务前100万次免费（A类事务包括下载、获取文件）&lt;/li&gt;
+&lt;li&gt;Daily Class B Transactions Caps：日常A类事务前1000万次免费（B类事务包括创建存储桶、列举存储桶、列举文件版本、列举Keys）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250312095541236.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;实现目的&#34;&gt;实现目的&lt;/h2&gt;
+&lt;p&gt;1.自由在MD，网站中引用图片（picgo上传）
+2.防止恶意被刷流量（虽然CloudFlare只收取额外的储存费用，但被刷流量多了容易被封号）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;自定义域名代替原域名（出现问题直接断开和原域名之间的跳转）&lt;/li&gt;
+&lt;li&gt;设定缓存规则（有人盗刷也是刷缓存）&lt;/li&gt;
+&lt;li&gt;防盗链（只在规定的网站使用）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;cloudflare-r2&#34;&gt;CloudFlare R2&lt;/h2&gt;
+&lt;h3 id=&#34;注册账号&#34;&gt;注册账号&lt;/h3&gt;
+&lt;p&gt;注册账号需要绑定一种支付方式（不扣费，只是用来选择支付方式），可以用信用卡，visa，paypal。&lt;/p&gt;
+&lt;p&gt;注册地址：https://dash.cloudflare.com/sign-up，验证过邮箱后即可使用。&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;img&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250312095823613.webp&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;开通-cloudflare-r2&#34;&gt;开通 CloudFlare R2&lt;/h3&gt;
+&lt;p&gt;点击右侧的R2对象储存。&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;img&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250312100708757.webp&#34;&gt;&lt;/p&gt;
+&lt;p&gt;在弹出的界面输入付款方式（信用卡，paypal都可以）&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;img&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250312100834522.webp&#34;&gt;&lt;/p&gt;
+&lt;p&gt;对于中小网站来说，一般超不了。
+确认后就可以开通R2对象储存了。&lt;/p&gt;
+&lt;h3 id=&#34;创建储存桶及桶设置&#34;&gt;创建储存桶及桶设置&lt;/h3&gt;
+&lt;p&gt;&lt;img alt=&#34;img&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250312100935006.webp&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;img&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250312101123620.webp&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;自定义图床域名&#34;&gt;自定义图床域名&lt;/h3&gt;
+&lt;p&gt;进入桶设置界面&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;img&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250312101353230.webp&#34;&gt;&lt;/p&gt;
+&lt;p&gt;设定访问桶的域名，有两种方法，一种是有一个私有域名（&lt;strong&gt;需托管在Cloudflare上&lt;/strong&gt;），另一个是用R2.dev子域名&lt;/p&gt;
+&lt;h4 id=&#34;私有域名二选一&#34;&gt;私有域名（二选一）&lt;/h4&gt;
+&lt;p&gt;&lt;img alt=&#34;img&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250312101130807.webp&#34;&gt;&lt;/p&gt;
+&lt;p&gt;继续之后，点连接域，会自动生成dns记录。&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;img&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250312101511888.webp&#34;&gt;&lt;/p&gt;
+&lt;p&gt;之后就能浏览器 &lt;code&gt;https://&amp;lt;自定义域名&amp;gt;/&amp;lt;文件名&amp;gt;&lt;/code&gt;访问存储桶里的文件了。&lt;/p&gt;
+&lt;p&gt;PS：如果域名不托管在CloudFlare，可以单独托管二级\三级域名，只需要给二级域名添加一条NS记录指向原托管即可。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Hugo博客搭建教程以及配置调优</title>
       <link>http://localhost:1313/posts/hugo/</link>
       <pubDate>Tue, 11 Mar 2025 23:55:20 +0800</pubDate>
       <guid>http://localhost:1313/posts/hugo/</guid>
-      <description>Hugo博客搭建教程以及配置调优</description>
+      <description>&lt;h1 id=&#34;正式开始&#34;&gt;正式开始&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;请全程在Windows上操作&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;我们首先需要安装Scoop，这是一个适用于Windows的包管理器，个人认为非常好用&lt;/p&gt;
+&lt;p&gt;Scoop默认会安装到C盘，如果你想要换盘请按需更改&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$env:SCOOP=&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;D:\Scoop&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;$env:SCOOP_GLOBAL=&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;D:\ScoopApps&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[&lt;span style=&#34;color:#66d9ef&#34;&gt;Environment&lt;/span&gt;]::SetEnvironmentVariable(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;SCOOP&amp;#39;&lt;/span&gt;, $env:SCOOP, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;User&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[&lt;span style=&#34;color:#66d9ef&#34;&gt;Environment&lt;/span&gt;]::SetEnvironmentVariable(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;SCOOP_GLOBAL&amp;#39;&lt;/span&gt;, $env:SCOOP_GLOBAL, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;Machine&amp;#39;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;安装Scoop：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;Invoke-RestMethod -Uri https&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;:&lt;/span&gt;//get.scoop.sh | Invoke-Expression
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果你以管理员的身份会安装失败，请切换为普通用户。若想强制以管理员身份安装Scoop请使用&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/ScoopInstaller/Install#for-admin&#34;&gt;github原帖&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;出于安全考虑，默认情况下已禁用管理员控制台下的安装。如果您知道自己在做什么并希望以管理员身份安装Scoop，请下载安装程序并在提升的控制台中手动执行它，使用 &lt;code&gt;-RunAsAdmin&lt;/code&gt; 参数。以下是示例：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;irm get.scoop.sh -outfile &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;install.ps1&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;.\install.ps1 -RunAsAdmin [-OtherParameters ...]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 如果你想要一行解决：&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;iex &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;amp; {&lt;/span&gt;$(irm get.scoop.sh)&lt;span style=&#34;color:#e6db74&#34;&gt;} -RunAsAdmin&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;安装Hugo框架：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;scoop install hugo
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后选择一个你喜欢的文件夹创建你的站点。 &lt;code&gt;myblog&lt;/code&gt; 即你的站点文件夹名称&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;hugo new site myblog
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;cd myblog
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;安装PaperMod主题：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;git clone https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;站点根目录会有一个 &lt;code&gt;hugo.toml&lt;/code&gt;。我推荐使用YAML。将文件重命名为 &lt;code&gt;hugo.yaml&lt;/code&gt;。粘贴并更改以下内容&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;baseURL&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://站点url&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;title&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;网站标题&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;LanguageCode&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;zh-CN&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;theme&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;PaperMod&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 启用首页个人简介展示&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;params&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;# 是否启用评论。你需要自己配置，或者直接引入Giscus等评论系统&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;comments&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;# 是否显示代码复制按钮&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;ShowCodeCopyButtons&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;# 是否显示面包屑导航&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;ShowBreadCrumbs&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;# 是否显示阅读时间  &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;ShowReadingTime&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;# 是否显示分享按钮&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;ShowShareButtons&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;# 分享按钮配置&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;# ShareButtons: [&amp;#34;linkedin&amp;#34;, &amp;#34;twitter&amp;#34;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;# 是否禁用主题切换按钮&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;disableThemeToggle&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;assets&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;favicon&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/你的/网站图标.jpg&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# 需要在static文件夹放置对应的图片&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;iconHeight&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;35&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;# 首页信息配置&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;homeInfoParams&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;Title&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;首页展示的标题&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;Content&lt;/span&gt;: &amp;gt;&lt;span style=&#34;color:#e6db74&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;      首页展示的文本&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;# 设置网站头像和首页头像&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;profileMode&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;enabled&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# 设为 true 将完全替换 homeInfoParams&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;# 网站头像设置 (显示在导航栏)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;label&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;text&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;左上角显示的文本&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;icon&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/你的/左上角显示的图片.jpg&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# 这将显示在导航栏标题旁边。需要在static文件夹放置对应的图片&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;iconHeight&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;35&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;# 社交图标 (显示在简介下方)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;socialIcons&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    - &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;bilibili&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;url&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    - &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;github&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;url&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    - &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;telegram&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;url&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# 可以添加更多社交图标 https://github.com/adityatelange/hugo-PaperMod/wiki/Icons&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 顶部导航栏的快捷链接&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;menu&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;main&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    - &lt;span style=&#34;color:#f92672&#34;&gt;identifier&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;categories&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;分类&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;url&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;/categories/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;weight&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;10&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    - &lt;span style=&#34;color:#f92672&#34;&gt;identifier&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;tags&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;标签&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;url&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;/tags/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;weight&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;20&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    - &lt;span style=&#34;color:#f92672&#34;&gt;identifier&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;archives&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;归档&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;url&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;/archives/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;weight&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;30&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    - &lt;span style=&#34;color:#f92672&#34;&gt;identifier&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;search&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;name&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;搜索&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;url&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;/search/&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;weight&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;40&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# 可以添加更多导航链接。weight的值越高排序越靠后&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 如果要启用搜索功能，需要添加这个&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;outputs&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;home&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    - &lt;span style=&#34;color:#ae81ff&#34;&gt;HTML&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    - &lt;span style=&#34;color:#ae81ff&#34;&gt;RSS&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    - &lt;span style=&#34;color:#ae81ff&#34;&gt;JSON&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;# 必须，用于搜索功能&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后我们需要分别配置分类、标签、归档和搜索页&lt;/p&gt;</description>
     </item>
     <item>
       <title>音乐推荐</title>
       <link>http://localhost:1313/posts/musicrecommend/</link>
       <pubDate>Tue, 11 Mar 2025 22:47:30 +0800</pubDate>
       <guid>http://localhost:1313/posts/musicrecommend/</guid>
-      <description>音乐推荐</description>
+      <description>&lt;h1 id=&#34;更新时间2025-02-28&#34;&gt;更新时间：2025-02-28&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;音乐名称&lt;/strong&gt;：&lt;strong&gt;Troublemaker&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;歌手&lt;/strong&gt;：&lt;strong&gt;Akon&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;专辑&lt;/strong&gt;：&lt;strong&gt;Troublemaker&lt;/strong&gt;&lt;/p&gt;
+&lt;h1 id=&#34;更新时间2025-02-27&#34;&gt;更新时间：2025-02-27&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;音乐名称&lt;/strong&gt;：&lt;strong&gt;Whiskey and Morphine&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;歌手&lt;/strong&gt;：&lt;strong&gt;Alexander Jean&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;专辑&lt;/strong&gt;：&lt;strong&gt;Head High&lt;/strong&gt;&lt;/p&gt;
+&lt;h1 id=&#34;更新时间2025-02-27-1&#34;&gt;更新时间：2025-02-27&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;音乐名称&lt;/strong&gt;：&lt;strong&gt;PARANOIA&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;歌手&lt;/strong&gt;：&lt;strong&gt;HEARTSTEEL / BAEKHYUN / tobi lou / ØZI / League of Legends / Cal Scruby&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;专辑&lt;/strong&gt;：&lt;strong&gt;PARANOIA&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>Pve开源虚拟化常见配置</title>
       <link>http://localhost:1313/posts/pveconfig/</link>
       <pubDate>Tue, 04 Mar 2025 13:50:14 +0800</pubDate>
       <guid>http://localhost:1313/posts/pveconfig/</guid>
-      <description>Pve开源虚拟化常见配置</description>
+      <description>&lt;h2 id=&#34;删除local-lvm&#34;&gt;删除local-lvm&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;lvremove pve/data
+
+lvextend -l +100%FREE -r pve/root
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;挂载swap文件&#34;&gt;挂载swap文件&lt;/h2&gt;
+&lt;p&gt;删除pve自带swap分区&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;swapoff -a
+
+lvremove /dev/pve/swap
+
+lvresize -l +100%FREE /dev/pve/root
+以文件形式
+
+#创建一个16G的swap，bs * count =16G
+
+dd if=/dev/zero of=/swapfile bs=1G count=16
+
+#配置安全的权限
+
+chmod 0600 /swapfile
+
+#格式化成swap
+
+mkswap /swapfile
+
+#挂载swap
+
+swapon /swapfile
+
+#验证
+
+free -h
+
+nano /etc/fstab      开机自动挂载
+
+/swapfile  swap      swap    defaults   0       0
+
+调整swap阈值
+
+vi /etc/sysctl.conf 
+
+sysctl -p
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;硬件直通&#34;&gt;硬件直通&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Intel CPU
+
+对于Intel CPU，添加 intel_iommu=on，操作如下：
+
+1、Shell 里面输入命令：nano /etc/default/grub
+
+root@pve:~# nano /etc/default/grub
+
+2、在里面找到：GRUB_CMDLINE_LINUX_DEFAULT=&amp;#34;quiet&amp;#34;
+
+然后修改为
+
+GRUB_CMDLINE_LINUX_DEFAULT=&amp;#34;quiet intel_iommu=on&amp;#34;
+
+编辑完成后，使用快捷键 Ctrl + O 回车保存文件，Ctrl + X 退出编辑器。
+
+3、使用命令 update-grub 保存更改并更新grub
+
+root@pve:~# update-grub
+
+4、更新完成后，使用命令 reboot 重启PVE系统
+
+root@pve:~# reboot
+
+从命令行运行 dmesg | grep -e DMAR -e IOMMU 如果没有输出，则说明有问题。
+
+如果有,可基本确认这个过程顺利完成! 接下来就可以为虚拟机正常的添加硬件直通了。
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;-&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-&lt;/p&gt;</description>
     </item>
     <item>
       <title>使用MinIO搭建图床</title>
       <link>http://localhost:1313/posts/buildingagraphbedwithminio/</link>
       <pubDate>Tue, 04 Mar 2025 12:31:57 +0800</pubDate>
       <guid>http://localhost:1313/posts/buildingagraphbedwithminio/</guid>
-      <description>使用MinIO搭建图床</description>
+      <description>&lt;h1 id=&#34;安装docker&#34;&gt;安装Docker&lt;/h1&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-auto&#34; data-lang=&#34;auto&#34;&gt;#更新系统索引以及安装必备组件
+sudo apt-get update
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+添加docker源GPG
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+#添加docker源
+#官方源
+echo \
+&amp;#34;deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \
+$(lsb_release -cs) stable&amp;#34; | sudo tee /etc/apt/sources.list.d/docker.list &amp;gt; /dev/null
+
+#阿里源
+echo \
+&amp;#34;deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://mirrors.aliyun.com/docker-ce/linux/debian \
+$(lsb_release -cs) stable&amp;#34; | sudo tee /etc/apt/sources.list.d/docker.list &amp;gt; /dev/null
+#更新源索引以及安装docker
+sudo apt update
+sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;img&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/202503041209211.png&#34;&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>Centos基础语法</title>
       <link>http://localhost:1313/posts/centosbasic/</link>
       <pubDate>Fri, 28 Feb 2025 14:56:11 +0800</pubDate>
       <guid>http://localhost:1313/posts/centosbasic/</guid>
-      <description>Centos基础语法</description>
+      <description>&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;useradd -d指定目录&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;删除用户milan，但是要保留家目录，userdelmilan&lt;/p&gt;
+&lt;p&gt;删除用户以及用户主目录，比如tom，userdel-r tom&lt;/p&gt;
+&lt;p&gt;修改用户密码 passwd 用户名&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;创建一个组mojiao&lt;/p&gt;
+&lt;p&gt;把zwj放入mojiao&lt;/p&gt;
+&lt;p&gt;指令:usermod-g mojiao zwj&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;每行的含义:用户名：口令：用户标识号：组标识号：注释性描述：主目录：登录shell&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;每行的含义：登录名：加密口令：最后一次修改时间：最小时间间隔：最大时间间隔：警告时间：不活动时间：失效时间：标志&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;每行含义：组名：口令：组标识号：组内用户列表&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;cd ~或者cd回到自己的家目录&lt;/p&gt;
+&lt;p&gt;cd..回到当前目录的上一级目录&lt;/p&gt;
+&lt;p&gt;mkdir创建目录&lt;/p&gt;
+&lt;p&gt;-p创建多级目录&lt;/p&gt;
+&lt;p&gt;rmdir删除目录&lt;/p&gt;
+&lt;p&gt;rmdir[选项]要删除的空目录&lt;/p&gt;
+&lt;p&gt;rmdir删除的是空目录，如果目录下有内容时无法删除的&lt;/p&gt;
+&lt;p&gt;如果删除非空目录使用rm-rf&lt;/p&gt;</description>
     </item>
     <item>
       <title>收藏几个动态懒加载图片</title>
       <link>http://localhost:1313/posts/loadinggif/</link>
       <pubDate>Fri, 28 Feb 2025 09:49:31 +0800</pubDate>
       <guid>http://localhost:1313/posts/loadinggif/</guid>
-      <description>收藏几个动态懒加载图片</description>
+      <description>&lt;h1 id=&#34;前言&#34;&gt;&lt;strong&gt;前言&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;一直想把网站的懒加载图片换掉，因为主题默认的是个骷髅图片，自己不喜欢。但是我又不知道去哪儿找，网上找的一些不是图片模糊就是样式不喜欢。这里要感谢&lt;a href=&#34;https://kunkunyu.com/&#34;&gt;&lt;strong&gt;@困困鱼&lt;/strong&gt;&lt;/a&gt;提供的图片，样式都很不错，专门收藏下来。&lt;/p&gt;
+&lt;p&gt;加载图片&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;img&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/202502280944101.gif&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;img&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/202502280946977.gif&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;img&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/202502280946802.gif&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;img&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/202502280946848.gif&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;img&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/202502280947746.gif&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;img&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/202502280947886.gif&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;img&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/202502280947818.gif&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;img&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/202502280947774.gif&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;img&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/202502280948966.gif&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;img&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/202502280948436.gif&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;img&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/202502280948576.gif&#34;&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>Shell关键字</title>
       <link>http://localhost:1313/posts/shellkeywords/</link>
       <pubDate>Thu, 27 Feb 2025 17:38:22 +0800</pubDate>
       <guid>http://localhost:1313/posts/shellkeywords/</guid>
-      <description>Shell关键字</description>
+      <description>&lt;p&gt;Shell 脚本中关键字很多，常见的包括：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;语句/命令&lt;/th&gt;
+          &lt;th&gt;描述&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;if&lt;/td&gt;
+          &lt;td&gt;条件语句，用于根据条件执行不同的命令。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;else&lt;/td&gt;
+          &lt;td&gt;条件语句的补充，当if语句中的条件不满足时执行。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;elif&lt;/td&gt;
+          &lt;td&gt;条件语句的补充，用于添加多个条件判断。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;then&lt;/td&gt;
+          &lt;td&gt;条件语句的结束符号，表示条件判断结束。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;for&lt;/td&gt;
+          &lt;td&gt;循环语句，用于对一组数据进行迭代操作。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;while&lt;/td&gt;
+          &lt;td&gt;循环语句，根据条件执行循环体内的命令。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;until&lt;/td&gt;
+          &lt;td&gt;循环语句，根据条件不满足时执行循环体内的命令。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;case&lt;/td&gt;
+          &lt;td&gt;条件语句，用于根据不同的值执行不同的命令。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;in&lt;/td&gt;
+          &lt;td&gt;用于在case语句中指定多个值。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;do&lt;/td&gt;
+          &lt;td&gt;循环语句的开始符号，表示循环体的开始。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;done&lt;/td&gt;
+          &lt;td&gt;循环语句的结束符号，表示循环体的结束。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;function&lt;/td&gt;
+          &lt;td&gt;定义函数，用于封装一段代码并在脚本中多次调用。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;select&lt;/td&gt;
+          &lt;td&gt;菜单语句，用于生成一个菜单供用户选择。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;time&lt;/td&gt;
+          &lt;td&gt;用于计算命令执行的时间。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;exit&lt;/td&gt;
+          &lt;td&gt;用于退出脚本或函数。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;export&lt;/td&gt;
+          &lt;td&gt;用于将环境变量导出到子进程中。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;readonly&lt;/td&gt;
+          &lt;td&gt;用于将变量设置为只读，不能被修改。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;unset&lt;/td&gt;
+          &lt;td&gt;用于删除变量或函数。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;source&lt;/td&gt;
+          &lt;td&gt;用于在当前Shell中执行脚本文件，类似于./命令。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;return&lt;/td&gt;
+          &lt;td&gt;用于从函数中返回一个值。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;trap&lt;/td&gt;
+          &lt;td&gt;用于捕获信号或错误，并在捕获到时执行相应的命令。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;wait&lt;/td&gt;
+          &lt;td&gt;用于等待后台运行的进程结束。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;exec&lt;/td&gt;
+          &lt;td&gt;用于替换当前Shell进程为指定的命令。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;alias&lt;/td&gt;
+          &lt;td&gt;用于创建命令别名。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;set&lt;/td&gt;
+          &lt;td&gt;用于设置Shell选项和环境变量。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;unset&lt;/td&gt;
+          &lt;td&gt;用于删除Shell选项和环境变量。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;shift&lt;/td&gt;
+          &lt;td&gt;用于在命令行参数中向左移动一个位置。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;test&lt;/td&gt;
+          &lt;td&gt;用于条件测试，类似于if语句中的条件判断。&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</description>
     </item>
     <item>
       <title>vSphere Hypervisor(ESXI)</title>
       <link>http://localhost:1313/posts/esxi/</link>
       <pubDate>Thu, 27 Feb 2025 17:37:05 +0800</pubDate>
       <guid>http://localhost:1313/posts/esxi/</guid>
-      <description>vSphere Hypervisor(ESXI)</description>
+      <description>&lt;h2 id=&#34;vmware-ovf-tool导出虚拟机&#34;&gt;VMware OVF Tool导出虚拟机&lt;/h2&gt;
+&lt;p&gt;1安装VMware-ovftool-4.3.0-12320924-win.x86_64.msi&lt;/p&gt;
+&lt;p&gt;2进入安装目录 C:\Program Files\VMware\VMware OVF Tool\ 输入cmd进入命令提示符&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;image.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250312134601037.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;`&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;ovftool vi://root:@192.168.1.10/RockyLinuxServer E:\ovf\RockyLinuxServer.ova
+
+ovftool vi://root:@192.168.1.10/WindowsServer2022 E:\ovf\WindowsServer2022.ova
+
+ovftool vi://root:@192.168.1.10/DSM920 E:\ovf\DSM920.ova
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;`&lt;/p&gt;
+&lt;h2 id=&#34;esxi直通板载sata控制器&#34;&gt;ESXI直通板载SATA控制器&lt;/h2&gt;
+&lt;p&gt;&lt;img alt=&#34;image.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250312134702011.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;1查看”设备ID“和“供应商ID”&lt;/p&gt;
+&lt;p&gt;2SSH，不细表&lt;/p&gt;
+&lt;p&gt;3打开直通映射文件：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;vi /etc/vmware/passthru.map
+&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;编辑如下内容：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;\# Union Point-H AHCI Controller
+
+\# &amp;lt;供应商ID&amp;gt; &amp;lt;设备ID&amp;gt; d3d0 default
+
+8086 a282 d3d0 default
+&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;
+&lt;p&gt;重启ESXi&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;选中 Union Point-H AHCI Controller，点击“切换直通”，大功告成&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;修改esxi的证书&#34;&gt;修改ESXI的证书&lt;/h2&gt;
+&lt;p&gt;连接SSH 进入 /etc/vmware/ssl 目录，找到 rui.key,rui.crt (注意备份原证书)选中删除，将之前修改好的ssl证书复制到该目录&lt;/p&gt;
+&lt;p&gt;如果不想重启esxi主机，可以在SSH下输入：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;/etc/init.d/hostd restart
+
+/etc/init.d/vpxa restart
+&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
     <item>
       <title>TrueNAS24.10docker开机自动替换源</title>
       <link>http://localhost:1313/posts/truenasdaemondocker/</link>
       <pubDate>Thu, 27 Feb 2025 17:34:36 +0800</pubDate>
       <guid>http://localhost:1313/posts/truenasdaemondocker/</guid>
-      <description>TrueNAS24.10docker开机自动替换源</description>
+      <description>&lt;p&gt;存放于/root目录下&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;img&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/202502271732370.png&#34;&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/bash
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;sleep &lt;span style=&#34;color:#ae81ff&#34;&gt;30&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 备份原始文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo cp /etc/docker/daemon.json /etc/docker/daemon.json.bak
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 使用 jq 添加新的键值对并写入临时文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo jq &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;. + { &amp;#34;registry-mirrors&amp;#34;: [&amp;#34;https://docker.1panel.live&amp;#34;] }&amp;#39;&lt;/span&gt; /etc/docker/daemon.json | sudo tee /etc/docker/daemon.json.tmp &amp;gt; /dev/null
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 检查 jq 是否成功&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt; $? -eq &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt;; &lt;span style=&#34;color:#66d9ef&#34;&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;# 替换原始文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    sudo mv /etc/docker/daemon.json.tmp /etc/docker/daemon.json
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;成功更新 daemon.json 文件。&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    echo &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;更新 daemon.json 文件失败，恢复备份。&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    sudo mv /etc/docker/daemon.json.bak /etc/docker/daemon.json
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;fi&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# 重启 Docker 服务&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo systemctl restart docker
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
     </item>
   </channel>
 </rss>

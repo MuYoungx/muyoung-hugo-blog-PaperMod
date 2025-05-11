@@ -1,9 +1,10 @@
 {{- if not (.Param "hideFooter") }}
 <footer class="footer">
 
-<!-- <div class="copyright">
-            备案号：<a href="https://beian.miit.gov.cn/"></a>
-</div> -->
+备案号：<a href="https://beian.miit.gov.cn/">蜀ICP备2024095579号</a>
+    <div class="cloud-vps">
+        <a href="https://www.aliyun.com/minisite/goods?userCode=7jr2v3cd" class="inline-content">本站由<img height="20px" src="https://img.alicdn.com/tfs/TB1_ZXuNcfpK1RjSZFOXXa6nFXa-32-32.ico" alt="cloud-logo"/>阿里云提供云服务支持</a>
+      </div>
 <div class="SiteTime">
     <p id="site-age">加载中...</p>
 </div>
@@ -24,13 +25,12 @@
       setInterval(getSiteAge, 1000); // 每秒钟更新一次
     };
   </script>
-    <div class="cloud-vps">
-        <a href="https://www.cloudflare.com" class="inline-content" >本站由Cloudflare <img width="32px" height="32px" src="https://r.muyoung.com/cf-logo.ico" alt="cf-logo"/> 提供防御/CDN加速服务</a>
-      </div>
+
      
 <div class="admin">
-    联系管理员请发送邮件到webmaster@muyoung.com
+    联系管理员请发送邮件到admin@muyoung.com
 </div>
+
 {{- if not site.Params.footer.hideCopyright }}
 {{- if site.Copyright }}
 <span>{{ site.Copyright | markdownify }}</span>
@@ -50,6 +50,7 @@ Powered by
 <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
 <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
 </span>
+
 </footer>
 {{- end }}
 

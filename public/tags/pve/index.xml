@@ -6,14 +6,167 @@
     <description>Recent content in Pve on 慕阳博客</description>
     <generator>Hugo -- 0.145.0</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Tue, 04 Mar 2025 13:50:14 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 14 Mar 2025 10:19:00 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/pve/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>TrueNAS SCALE 套娃安装PVE虚拟机，并挂载NFS</title>
+      <link>http://localhost:1313/posts/pveintruenas/</link>
+      <pubDate>Fri, 14 Mar 2025 10:19:00 +0800</pubDate>
+      <guid>http://localhost:1313/posts/pveintruenas/</guid>
+      <description>&lt;h1 id=&#34;序&#34;&gt;序&lt;/h1&gt;
+&lt;p&gt;很多人看到这个标题可能就觉得没必要，或者部署很理解，实际上我其实一开始是玩一玩，试一下SCALE支不支持嵌套虚拟，我试过了是支持的。因为SCALE的虚拟机并不是非常好用，只能以zvol的方式当做硬盘，而且没有模板之类的东西，所以对于做实验什么的不是很方便，所以我才套娃一个PVE。&lt;/p&gt;
+&lt;p&gt;实际上用下来感觉还可以，做一些实验用的虚拟机没有什么问题。而且还可以挂载scale 的NFS，使用scale的快照之类的。&lt;/p&gt;
+&lt;h1 id=&#34;安装&#34;&gt;安装&lt;/h1&gt;
+&lt;p&gt;首先去下载镜像，可以去&lt;a href=&#34;https://www.proxmox.com/en/downloads&#34;&gt;官网&lt;/a&gt;下载，该教程使用的版本为7.2-1&lt;/p&gt;
+&lt;p&gt;然后像安装普通的镜像一样安装&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314103120382.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314103124162.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;我这里直接给了24核心，这里根据自己的需求设置&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314103125381.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;大小自己随意设置，后面我们可以挂载NFS的&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314103134173.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这里选择桥接网卡&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314103138143.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这里找到我们的ISO镜像&lt;/p&gt;
+&lt;p&gt;下面全部默认保存即可&lt;/p&gt;
+&lt;p&gt;开机，点击展示&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314103139936.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;直接回车&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314103146717.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;一路下一步，设置好密码&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314103151762.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;这里的主机名要带&lt;code&gt;.local&lt;/code&gt;，最后点击install等待安装&lt;/p&gt;
+&lt;p&gt;安装好之后我们直接点PowerOff&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314103156991.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314103200510.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;点击设备把CD删除，然后再开机&lt;/p&gt;
+&lt;p&gt;然后看vnc显示的地址，浏览器打开，输入账户密码即可登录&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314103202032.png&#34;&gt;&lt;/p&gt;
+&lt;h1 id=&#34;挂载nfs&#34;&gt;挂载NFS&lt;/h1&gt;
+&lt;p&gt;先创建一个数据集，点击共享，添加NFS&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314103204378.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;设置数据集权限&#34;&gt;设置数据集权限&lt;/h2&gt;
+&lt;p&gt;因为PVE的nfs不支持填写账号密码，所以我们需要设置一下权限&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314103214047.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314103209915.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;确保这里是NFSV4&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314103207329.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://www.truenasscale.com/usr/uploads/2022/05/2235625831.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314103219064.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;需要添加一条everyone的权限&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314103221157.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;点击nfs&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250314103222951.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;内容有很多种，可以自己创建多个nfs都挂载&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Proxmox VE 中使用 Cloud 系统镜像快速创建虚拟机</title>
+      <link>http://localhost:1313/posts/pvecloudinit/</link>
+      <pubDate>Fri, 14 Mar 2025 10:13:42 +0800</pubDate>
+      <guid>http://localhost:1313/posts/pvecloudinit/</guid>
+      <description>&lt;h1 id=&#34;序&#34;&gt;序&lt;/h1&gt;
+&lt;p&gt;之前我出了一个套娃的教程，我说用PVE是为了可以快速的创建Linux虚拟机，这期就讲一下如何创建。&lt;/p&gt;
+&lt;h1 id=&#34;获取-cloud-images&#34;&gt;获取 Cloud Images&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;CentOS: &lt;a href=&#34;https://cloud.centos.org/centos/&#34;&gt;https://cloud.centos.org/centos/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Ubuntu: &lt;a href=&#34;https://cloud-images.ubuntu.com/releases/&#34;&gt;https://cloud-images.ubuntu.com/releases/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Debian: &lt;a href=&#34;https://cloud.debian.org/images/cloud/&#34;&gt;https://cloud.debian.org/images/cloud/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Fedora: &lt;a href=&#34;https://alt.fedoraproject.org/cloud/&#34;&gt;https://alt.fedoraproject.org/cloud/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;RedHat: &lt;a href=&#34;https://access.redhat.com/downloads/&#34;&gt;https://access.redhat.com/downloads/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;openSUSE: &lt;a href=&#34;http://download.opensuse.org/repositories/Cloud:/Images:/&#34;&gt;http://download.opensuse.org/repositories/Cloud:/Images:/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;下载qcow2的镜像&lt;/p&gt;
+&lt;p&gt;下载你需要的系统对应的 Cloud Images 镜像（Proxmox VE 支持两种 Cloud Images 类型，分别为 &lt;code&gt;nocloud v1&lt;/code&gt; 和 &lt;code&gt;configdrive v2&lt;/code&gt;），这里以 Debian 11 为例。可以直接使用 &lt;code&gt;wget&lt;/code&gt; 在 PVE 里下载&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;wget https://cloud.debian.org/images/cloud/bullseye/latest/debian-11-nocloud-amd64.qcow2
+&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;安装&#34;&gt;安装&lt;/h1&gt;
+&lt;p&gt;创建一个虚拟机，注意 SCSI 控制器必须是 &lt;code&gt;VirtIO SCSI&lt;/code&gt;，无需创建硬盘，如果创建了自行分离删除
+&lt;img alt=&#34;h7t3.png&#34; loading=&#34;lazy&#34; src=&#34;https://www.truenasscale.com/usr/uploads/2022/05/1960894046.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;htCD.png&#34; loading=&#34;lazy&#34; src=&#34;https://www.truenasscale.com/usr/uploads/2022/05/564683641.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;hEWm.png&#34; loading=&#34;lazy&#34; src=&#34;https://www.truenasscale.com/usr/uploads/2022/05/3638516927.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;在创建的虚拟机硬件设置里添加 CloudInit 设备&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;hLwA.md.png&#34; loading=&#34;lazy&#34; src=&#34;https://www.truenasscale.com/usr/uploads/2022/05/3367534873.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;使用 SSH 或者 Xftp 工具将镜像文件上传到 PVE 服务器（&lt;code&gt;wget&lt;/code&gt; 下载的跳过此步），使用下面的命令将磁盘镜像导入到虚拟机，成功后 PVE 面板的 VM 硬件里会出现未使用的磁盘。&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# 100 为虚拟机ID
+qm importdisk 100 debian-11-nocloud-amd64.qcow2 local-lvm
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://www.truenasscale.com/usr/uploads/2022/05/508923776.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;双击这个未使用磁盘启用它，总线/设置选择 &lt;code&gt;SCSI&lt;/code&gt;，然后在 选项-引导顺序 中，将此磁盘设置为第一项&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Pve开源虚拟化常见配置</title>
       <link>http://localhost:1313/posts/pveconfig/</link>
       <pubDate>Tue, 04 Mar 2025 13:50:14 +0800</pubDate>
       <guid>http://localhost:1313/posts/pveconfig/</guid>
-      <description>Pve开源虚拟化常见配置</description>
+      <description>&lt;h2 id=&#34;删除local-lvm&#34;&gt;删除local-lvm&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;lvremove pve/data
+
+lvextend -l +100%FREE -r pve/root
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;挂载swap文件&#34;&gt;挂载swap文件&lt;/h2&gt;
+&lt;p&gt;删除pve自带swap分区&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;swapoff -a
+
+lvremove /dev/pve/swap
+
+lvresize -l +100%FREE /dev/pve/root
+以文件形式
+
+#创建一个16G的swap，bs * count =16G
+
+dd if=/dev/zero of=/swapfile bs=1G count=16
+
+#配置安全的权限
+
+chmod 0600 /swapfile
+
+#格式化成swap
+
+mkswap /swapfile
+
+#挂载swap
+
+swapon /swapfile
+
+#验证
+
+free -h
+
+nano /etc/fstab      开机自动挂载
+
+/swapfile  swap      swap    defaults   0       0
+
+调整swap阈值
+
+vi /etc/sysctl.conf 
+
+sysctl -p
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;硬件直通&#34;&gt;硬件直通&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Intel CPU
+
+对于Intel CPU，添加 intel_iommu=on，操作如下：
+
+1、Shell 里面输入命令：nano /etc/default/grub
+
+root@pve:~# nano /etc/default/grub
+
+2、在里面找到：GRUB_CMDLINE_LINUX_DEFAULT=&amp;#34;quiet&amp;#34;
+
+然后修改为
+
+GRUB_CMDLINE_LINUX_DEFAULT=&amp;#34;quiet intel_iommu=on&amp;#34;
+
+编辑完成后，使用快捷键 Ctrl + O 回车保存文件，Ctrl + X 退出编辑器。
+
+3、使用命令 update-grub 保存更改并更新grub
+
+root@pve:~# update-grub
+
+4、更新完成后，使用命令 reboot 重启PVE系统
+
+root@pve:~# reboot
+
+从命令行运行 dmesg | grep -e DMAR -e IOMMU 如果没有输出，则说明有问题。
+
+如果有,可基本确认这个过程顺利完成! 接下来就可以为虚拟机正常的添加硬件直通了。
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;-&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

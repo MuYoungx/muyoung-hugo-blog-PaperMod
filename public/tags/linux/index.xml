@@ -13,7 +13,33 @@
       <link>http://localhost:1313/posts/centosbasic/</link>
       <pubDate>Fri, 28 Feb 2025 14:56:11 +0800</pubDate>
       <guid>http://localhost:1313/posts/centosbasic/</guid>
-      <description>Centos基础语法</description>
+      <description>&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;useradd -d指定目录&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;删除用户milan，但是要保留家目录，userdelmilan&lt;/p&gt;
+&lt;p&gt;删除用户以及用户主目录，比如tom，userdel-r tom&lt;/p&gt;
+&lt;p&gt;修改用户密码 passwd 用户名&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;创建一个组mojiao&lt;/p&gt;
+&lt;p&gt;把zwj放入mojiao&lt;/p&gt;
+&lt;p&gt;指令:usermod-g mojiao zwj&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;每行的含义:用户名：口令：用户标识号：组标识号：注释性描述：主目录：登录shell&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;每行的含义：登录名：加密口令：最后一次修改时间：最小时间间隔：最大时间间隔：警告时间：不活动时间：失效时间：标志&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;每行含义：组名：口令：组标识号：组内用户列表&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;cd ~或者cd回到自己的家目录&lt;/p&gt;
+&lt;p&gt;cd..回到当前目录的上一级目录&lt;/p&gt;
+&lt;p&gt;mkdir创建目录&lt;/p&gt;
+&lt;p&gt;-p创建多级目录&lt;/p&gt;
+&lt;p&gt;rmdir删除目录&lt;/p&gt;
+&lt;p&gt;rmdir[选项]要删除的空目录&lt;/p&gt;
+&lt;p&gt;rmdir删除的是空目录，如果目录下有内容时无法删除的&lt;/p&gt;
+&lt;p&gt;如果删除非空目录使用rm-rf&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

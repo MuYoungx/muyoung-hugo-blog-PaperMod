@@ -147,7 +147,21 @@
     </h2>
   </header>
   <div class="entry-content">
-    <p>在Picgo上配置Cloudflare-R2图床</p>
+    <p>什么叫图床 图床就是将图片上传到相关服务商或者个人服务器，通过上传文件的网络地址进行远程访问。可以方便快速的将图片插入到文章中，方便后续图片二次使用、迁移、分享。
+常用图床的几种方式 VPS自建：通过购买服务器搭建图床程序，比如easyimage，lsky-pro等。 优点：方便，快捷，空间大 缺点：速度取决于vps的线路，迁移服务时大量数据需要迁移。 云端oss储存&#43;cdn 优点：稳定，速度快 缺点：付费（腾讯cos/阿里oss&#43;cdn(cdn需备案)）。免费的额度有限（Backblaze B2 &#43; Cloudflare）。 Github &#43; JsDelivr(cdn) 优点：github绝对稳定，jsdelivr充当github的cdn加速 缺点：虽然有加速，速度也算不上快，属中等。 本篇介绍CLoudFlare R2&#43;Picgo 方案
+CLoudFlare R2 免费用户有10GB/月的存储额度（30天内每天储存峰值的平均值），对于小网站基本足够，超额的存储是$0.015/GB/月，
+标准储存：日常存储容量前10GB/月免费（30天内每天储存峰值的平均值） Daily Class A Transactions Caps：日常B类事务前100万次免费（A类事务包括下载、获取文件） Daily Class B Transactions Caps：日常A类事务前1000万次免费（B类事务包括创建存储桶、列举存储桶、列举文件版本、列举Keys） 实现目的 1.自由在MD，网站中引用图片（picgo上传） 2.防止恶意被刷流量（虽然CloudFlare只收取额外的储存费用，但被刷流量多了容易被封号）
+自定义域名代替原域名（出现问题直接断开和原域名之间的跳转） 设定缓存规则（有人盗刷也是刷缓存） 防盗链（只在规定的网站使用） CloudFlare R2 注册账号 注册账号需要绑定一种支付方式（不扣费，只是用来选择支付方式），可以用信用卡，visa，paypal。
+注册地址：https://dash.cloudflare.com/sign-up，验证过邮箱后即可使用。
+开通 CloudFlare R2 点击右侧的R2对象储存。
+在弹出的界面输入付款方式（信用卡，paypal都可以）
+对于中小网站来说，一般超不了。 确认后就可以开通R2对象储存了。
+创建储存桶及桶设置 自定义图床域名 进入桶设置界面
+设定访问桶的域名，有两种方法，一种是有一个私有域名（需托管在Cloudflare上），另一个是用R2.dev子域名
+私有域名（二选一） 继续之后，点连接域，会自动生成dns记录。
+之后就能浏览器 https://&lt;自定义域名&gt;/&lt;文件名&gt;访问存储桶里的文件了。
+PS：如果域名不托管在CloudFlare，可以单独托管二级\三级域名，只需要给二级域名添加一条NS记录指向原托管即可。
+...</p>
   </div>
   <footer class="entry-footer"><span title='2025-03-12 09:51:40 +0800 CST'>March 12, 2025</span>&nbsp;·&nbsp;2 min</footer>
   <a class="entry-link" aria-label="post link to 在Picgo上配置Cloudflare-R2图床" href="http://localhost:1313/posts/picgo-r2/"></a>
@@ -180,7 +194,7 @@
     <div class="cloud-vps">
         <a href="https://www.cloudflare.com" class="inline-content" >本站由Cloudflare <img width="32px" height="32px" src="https://r.muyoung.com/cf-logo.ico" alt="cf-logo"/> 提供防御/CDN加速服务</a>
       </div>
-      <a href="https://ipw.cn/ipv6webcheck/?site=ipw.cn" title="本站支持IPv6访问" target='_blank'><img style='display:inline-block;vertical-align:middle' alt="本站支持IPv6访问" src="https://static.ipw.cn/icon/ipv6-s1.svg"></a>
+     
 <div class="admin">
     联系管理员请发送邮件到webmaster@muyoung.com
 </div>

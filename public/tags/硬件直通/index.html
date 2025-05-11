@@ -147,7 +147,9 @@
     </h2>
   </header>
   <div class="entry-content">
-    <p>Pve开源虚拟化常见配置</p>
+    <p>删除local-lvm lvremove pve/datalvextend -l &#43;100%FREE -r pve/root 挂载swap文件 删除pve自带swap分区
+swapoff -alvremove /dev/pve/swaplvresize -l &#43;100%FREE /dev/pve/root以文件形式#创建一个16G的swap，bs * count =16Gdd if=/dev/zero of=/swapfile bs=1G count=16#配置安全的权限chmod 0600 /swapfile#格式化成swapmkswap /swapfile#挂载swapswapon /swapfile#验证free -hnano /etc/fstab 开机自动挂载/swapfile swap swap defaults 0 0调整swap阈值vi /etc/sysctl.conf sysctl -p 硬件直通 Intel CPU对于Intel CPU，添加 intel_iommu=on，操作如下：1、Shell 里面输入命令：nano /etc/default/grubroot@pve:~# nano /etc/default/grub2、在里面找到：GRUB_CMDLINE_LINUX_DEFAULT=&#34;quiet&#34;然后修改为GRUB_CMDLINE_LINUX_DEFAULT=&#34;quiet intel_iommu=on&#34;编辑完成后，使用快捷键 Ctrl &#43; O 回车保存文件，Ctrl &#43; X 退出编辑器。3、使用命令 update-grub 保存更改并更新grubroot@pve:~# update-grub4、更新完成后，使用命令 reboot 重启PVE系统root@pve:~# reboot从命令行运行 dmesg | grep -e DMAR -e IOMMU 如果没有输出，则说明有问题。如果有,可基本确认这个过程顺利完成! 接下来就可以为虚拟机正常的添加硬件直通了。 -———————————————————————————————-
+...</p>
   </div>
   <footer class="entry-footer"><span title='2025-03-04 13:50:14 +0800 CST'>March 4, 2025</span>&nbsp;·&nbsp;1 min</footer>
   <a class="entry-link" aria-label="post link to Pve开源虚拟化常见配置" href="http://localhost:1313/posts/pveconfig/"></a>
@@ -162,7 +164,18 @@
     </h2>
   </header>
   <div class="entry-content">
-    <p>vSphere Hypervisor(ESXI)</p>
+    <p>VMware OVF Tool导出虚拟机 1安装VMware-ovftool-4.3.0-12320924-win.x86_64.msi
+2进入安装目录 C:\Program Files\VMware\VMware OVF Tool\ 输入cmd进入命令提示符
+`
+ovftool vi://root:@192.168.1.10/RockyLinuxServer E:\ovf\RockyLinuxServer.ovaovftool vi://root:@192.168.1.10/WindowsServer2022 E:\ovf\WindowsServer2022.ovaovftool vi://root:@192.168.1.10/DSM920 E:\ovf\DSM920.ova `
+ESXI直通板载SATA控制器 1查看”设备ID“和“供应商ID”
+2SSH，不细表
+3打开直通映射文件：
+vi /etc/vmware/passthru.map 编辑如下内容： \# Union Point-H AHCI Controller\# &lt;供应商ID&gt; &lt;设备ID&gt; d3d0 default8086 a282 d3d0 default 重启ESXi
+选中 Union Point-H AHCI Controller，点击“切换直通”，大功告成
+修改ESXI的证书 连接SSH 进入 /etc/vmware/ssl 目录，找到 rui.key,rui.crt (注意备份原证书)选中删除，将之前修改好的ssl证书复制到该目录
+如果不想重启esxi主机，可以在SSH下输入：
+/etc/init.d/hostd restart/etc/init.d/vpxa restart </p>
   </div>
   <footer class="entry-footer"><span title='2025-02-27 17:37:05 +0800 CST'>February 27, 2025</span>&nbsp;·&nbsp;1 min</footer>
   <a class="entry-link" aria-label="post link to vSphere Hypervisor(ESXI)" href="http://localhost:1313/posts/esxi/"></a>
@@ -195,7 +208,7 @@
     <div class="cloud-vps">
         <a href="https://www.cloudflare.com" class="inline-content" >本站由Cloudflare <img width="32px" height="32px" src="https://r.muyoung.com/cf-logo.ico" alt="cf-logo"/> 提供防御/CDN加速服务</a>
       </div>
-      <a href="https://ipw.cn/ipv6webcheck/?site=ipw.cn" title="本站支持IPv6访问" target='_blank'><img style='display:inline-block;vertical-align:middle' alt="本站支持IPv6访问" src="https://static.ipw.cn/icon/ipv6-s1.svg"></a>
+     
 <div class="admin">
     联系管理员请发送邮件到webmaster@muyoung.com
 </div>

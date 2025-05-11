@@ -68,6 +68,7 @@
 
   }
   .inline-content img {
+    display: inline;
     margin-left: 5px; /* 图像与文本之间的间距 */
     margin-right: 5px;
   }

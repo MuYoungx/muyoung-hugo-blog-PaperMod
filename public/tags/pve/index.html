@@ -140,6 +140,64 @@
 
 <article class="post-entry tag-entry"> 
 <figure class="entry-cover">
+        <img loading="lazy" src="https://r.muyoung.com/blogimg/202502280936178.png" alt="">
+</figure>
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">TrueNAS SCALE 套娃安装PVE虚拟机，并挂载NFS
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>序 很多人看到这个标题可能就觉得没必要，或者部署很理解，实际上我其实一开始是玩一玩，试一下SCALE支不支持嵌套虚拟，我试过了是支持的。因为SCALE的虚拟机并不是非常好用，只能以zvol的方式当做硬盘，而且没有模板之类的东西，所以对于做实验什么的不是很方便，所以我才套娃一个PVE。
+实际上用下来感觉还可以，做一些实验用的虚拟机没有什么问题。而且还可以挂载scale 的NFS，使用scale的快照之类的。
+安装 首先去下载镜像，可以去官网下载，该教程使用的版本为7.2-1
+然后像安装普通的镜像一样安装
+我这里直接给了24核心，这里根据自己的需求设置
+大小自己随意设置，后面我们可以挂载NFS的
+这里选择桥接网卡
+这里找到我们的ISO镜像
+下面全部默认保存即可
+开机，点击展示
+直接回车
+一路下一步，设置好密码
+这里的主机名要带.local，最后点击install等待安装
+安装好之后我们直接点PowerOff
+点击设备把CD删除，然后再开机
+然后看vnc显示的地址，浏览器打开，输入账户密码即可登录
+挂载NFS 先创建一个数据集，点击共享，添加NFS
+设置数据集权限 因为PVE的nfs不支持填写账号密码，所以我们需要设置一下权限
+确保这里是NFSV4
+需要添加一条everyone的权限
+点击nfs
+内容有很多种，可以自己创建多个nfs都挂载
+</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-03-14 10:19:00 +0800 CST'>March 14, 2025</span>&nbsp;·&nbsp;1 min</footer>
+  <a class="entry-link" aria-label="post link to TrueNAS SCALE 套娃安装PVE虚拟机，并挂载NFS" href="http://localhost:1313/posts/pveintruenas/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+<figure class="entry-cover">
+        <img loading="lazy" src="https://r.muyoung.com/blogimg/202503041350331.png" alt="">
+</figure>
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Proxmox VE 中使用 Cloud 系统镜像快速创建虚拟机
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>序 之前我出了一个套娃的教程，我说用PVE是为了可以快速的创建Linux虚拟机，这期就讲一下如何创建。
+获取 Cloud Images CentOS: https://cloud.centos.org/centos/ Ubuntu: https://cloud-images.ubuntu.com/releases/ Debian: https://cloud.debian.org/images/cloud/ Fedora: https://alt.fedoraproject.org/cloud/ RedHat: https://access.redhat.com/downloads/ openSUSE: http://download.opensuse.org/repositories/Cloud:/Images:/ 下载qcow2的镜像
+下载你需要的系统对应的 Cloud Images 镜像（Proxmox VE 支持两种 Cloud Images 类型，分别为 nocloud v1 和 configdrive v2），这里以 Debian 11 为例。可以直接使用 wget 在 PVE 里下载
+wget https://cloud.debian.org/images/cloud/bullseye/latest/debian-11-nocloud-amd64.qcow2 安装 创建一个虚拟机，注意 SCSI 控制器必须是 VirtIO SCSI，无需创建硬盘，如果创建了自行分离删除 在创建的虚拟机硬件设置里添加 CloudInit 设备
+使用 SSH 或者 Xftp 工具将镜像文件上传到 PVE 服务器（wget 下载的跳过此步），使用下面的命令将磁盘镜像导入到虚拟机，成功后 PVE 面板的 VM 硬件里会出现未使用的磁盘。
+# 100 为虚拟机IDqm importdisk 100 debian-11-nocloud-amd64.qcow2 local-lvm 双击这个未使用磁盘启用它，总线/设置选择 SCSI，然后在 选项-引导顺序 中，将此磁盘设置为第一项
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-03-14 10:13:42 +0800 CST'>March 14, 2025</span>&nbsp;·&nbsp;1 min</footer>
+  <a class="entry-link" aria-label="post link to Proxmox VE 中使用 Cloud 系统镜像快速创建虚拟机" href="http://localhost:1313/posts/pvecloudinit/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+<figure class="entry-cover">
         <img loading="lazy" src="https://r.muyoung.com/blogimg/202503041350331.png" alt="">
 </figure>
   <header class="entry-header">
@@ -147,7 +205,9 @@
     </h2>
   </header>
   <div class="entry-content">
-    <p>Pve开源虚拟化常见配置</p>
+    <p>删除local-lvm lvremove pve/datalvextend -l &#43;100%FREE -r pve/root 挂载swap文件 删除pve自带swap分区
+swapoff -alvremove /dev/pve/swaplvresize -l &#43;100%FREE /dev/pve/root以文件形式#创建一个16G的swap，bs * count =16Gdd if=/dev/zero of=/swapfile bs=1G count=16#配置安全的权限chmod 0600 /swapfile#格式化成swapmkswap /swapfile#挂载swapswapon /swapfile#验证free -hnano /etc/fstab 开机自动挂载/swapfile swap swap defaults 0 0调整swap阈值vi /etc/sysctl.conf sysctl -p 硬件直通 Intel CPU对于Intel CPU，添加 intel_iommu=on，操作如下：1、Shell 里面输入命令：nano /etc/default/grubroot@pve:~# nano /etc/default/grub2、在里面找到：GRUB_CMDLINE_LINUX_DEFAULT=&#34;quiet&#34;然后修改为GRUB_CMDLINE_LINUX_DEFAULT=&#34;quiet intel_iommu=on&#34;编辑完成后，使用快捷键 Ctrl &#43; O 回车保存文件，Ctrl &#43; X 退出编辑器。3、使用命令 update-grub 保存更改并更新grubroot@pve:~# update-grub4、更新完成后，使用命令 reboot 重启PVE系统root@pve:~# reboot从命令行运行 dmesg | grep -e DMAR -e IOMMU 如果没有输出，则说明有问题。如果有,可基本确认这个过程顺利完成! 接下来就可以为虚拟机正常的添加硬件直通了。 -———————————————————————————————-
+...</p>
   </div>
   <footer class="entry-footer"><span title='2025-03-04 13:50:14 +0800 CST'>March 4, 2025</span>&nbsp;·&nbsp;1 min</footer>
   <a class="entry-link" aria-label="post link to Pve开源虚拟化常见配置" href="http://localhost:1313/posts/pveconfig/"></a>
@@ -180,7 +240,7 @@
     <div class="cloud-vps">
         <a href="https://www.cloudflare.com" class="inline-content" >本站由Cloudflare <img width="32px" height="32px" src="https://r.muyoung.com/cf-logo.ico" alt="cf-logo"/> 提供防御/CDN加速服务</a>
       </div>
-      <a href="https://ipw.cn/ipv6webcheck/?site=ipw.cn" title="本站支持IPv6访问" target='_blank'><img style='display:inline-block;vertical-align:middle' alt="本站支持IPv6访问" src="https://static.ipw.cn/icon/ipv6-s1.svg"></a>
+     
 <div class="admin">
     联系管理员请发送邮件到webmaster@muyoung.com
 </div>
