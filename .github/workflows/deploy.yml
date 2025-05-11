@@ -1,39 +1,44 @@
-name: Deploy to Server
+name: Deploy My Blog to Alibaba Cloud Server 🚀
 
 on:
   push:
     branches:
-      - main  # 或者你希望监听的其他分支
+      - main
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: 检出代码
+        uses: actions/checkout@v3
+        with:
+          submodules: true # 启用 Git 子模块
 
-    - name: Set up SSH key
-      run: |
-        mkdir -p ~/.ssh
-        echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan -H 47.108.236.168 >> ~/.ssh/known_hosts
-        chmod 644 ~/.ssh/known_hosts
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.ALIYUNECS }}
-        
-    - name: Install rsync
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y rsync
-        
-    - name: Debug SSH connection
-      run: |
-        ssh -T -o StrictHostKeyChecking=no root@47.108.236.168
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.ALIYUNECS }}
+      - name: 更新 Git Submodules 并切换到指定 Tag
+        run: |
+          git submodule update --init --recursive --remote
+          cd themes/hugo-PaperMod
+          git fetch --tags
+          git checkout tags/v7.0
+          cd ../..
 
-    - name: Copy files to server
-      run: |
-        rsync -avz --delete public/ root@47.108.236.168:/www/wwwroot/blog.muyoung.com
+      - name: 安装 Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: "0.145.0" # 指定 Hugo 版本
+          extended: true # 开启 Hugo Extended 版（支持 SCSS/SASS）
+
+      - name: 生成静态文件
+        run: hugo --gc
+
+      - name: 通过 SSH 发送文件
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          # 指定上传 Hugo 生成的 public 文件夹中的所有内容
+          source: "public/*"
+          # 指定腾讯云服务器上目标目录
+          target: "/www/wwwroot/blog.muyoung.com"
