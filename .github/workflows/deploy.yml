@@ -34,6 +34,3 @@ jobs:
           source: "public/*"
           # 指定腾讯云服务器上目标目录
           target: "/www/wwwroot/blog.muyoung.com"
-          
-      - name: 删除用于发送的打包文件
-        run: rm public.zip
