@@ -6,25 +6,26 @@
         <a href="https://www.aliyun.com/minisite/goods?userCode=7jr2v3cd" class="inline-content">本站由<img height="20px" src="https://img.alicdn.com/tfs/TB1_ZXuNcfpK1RjSZFOXXa6nFXa-32-32.ico" alt="cloud-logo"/>阿里云提供云服务支持</a>
       </div>
 <div class="SiteTime">
-    <p id="site-age">加载中...</p>
+    <p id="site-age"></p>
 </div>
-  <script>
+<script>
     function getSiteAge() {
-      const startDate = new Date('2024-03-29T00:00:00Z'); // 建站日期
-      const now = new Date();
-      const diffTime = now - startDate;
-      const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((diffTime % (1000 * 60)) / 1000);
-      document.getElementById('site-age').innerText = `网站正常运行了 ${days} 天 ${hours} 小时 ${minutes} 分钟 ${seconds} 秒`;
+        const startDate = new Date('2024-03-29T00:00:00Z'); // 建站日期
+        const now = new Date();
+        const diffTime = now - startDate;
+        const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diffTime % (1000 * 60)) / 1000);
+        document.getElementById('site-age').innerText = `网站正常运行了 ${days} 天 ${hours} 小时 ${minutes} 分钟 ${seconds} 秒`;
     }
+
     // 页面加载时调用函数并设置定时器
     window.onload = function() {
-      getSiteAge(); // 初始调用
-      setInterval(getSiteAge, 1000); // 每秒钟更新一次
+        getSiteAge(); // 初始调用
+        setInterval(getSiteAge, 1000); // 每秒钟更新一次
     };
-  </script>
+</script>
 
      
 <div class="admin">
