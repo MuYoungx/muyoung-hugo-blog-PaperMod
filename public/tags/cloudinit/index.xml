@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Cloudinit on 慕阳博客</title>
     <link>http://localhost:1313/tags/cloudinit/</link>
     <description>Recent content in Cloudinit on 慕阳博客</description>
-    <generator>Hugo -- 0.145.0</generator>
+    <generator>Hugo</generator>
     <language>zh-CN</language>
     <lastBuildDate>Fri, 14 Mar 2025 10:13:42 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/cloudinit/index.xml" rel="self" type="application/rss+xml" />
@@ -13,32 +13,7 @@
       <link>http://localhost:1313/posts/pvecloudinit/</link>
       <pubDate>Fri, 14 Mar 2025 10:13:42 +0800</pubDate>
       <guid>http://localhost:1313/posts/pvecloudinit/</guid>
-      <description>&lt;h1 id=&#34;序&#34;&gt;序&lt;/h1&gt;
-&lt;p&gt;之前我出了一个套娃的教程，我说用PVE是为了可以快速的创建Linux虚拟机，这期就讲一下如何创建。&lt;/p&gt;
-&lt;h1 id=&#34;获取-cloud-images&#34;&gt;获取 Cloud Images&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;CentOS: &lt;a href=&#34;https://cloud.centos.org/centos/&#34;&gt;https://cloud.centos.org/centos/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Ubuntu: &lt;a href=&#34;https://cloud-images.ubuntu.com/releases/&#34;&gt;https://cloud-images.ubuntu.com/releases/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Debian: &lt;a href=&#34;https://cloud.debian.org/images/cloud/&#34;&gt;https://cloud.debian.org/images/cloud/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Fedora: &lt;a href=&#34;https://alt.fedoraproject.org/cloud/&#34;&gt;https://alt.fedoraproject.org/cloud/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;RedHat: &lt;a href=&#34;https://access.redhat.com/downloads/&#34;&gt;https://access.redhat.com/downloads/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;openSUSE: &lt;a href=&#34;http://download.opensuse.org/repositories/Cloud:/Images:/&#34;&gt;http://download.opensuse.org/repositories/Cloud:/Images:/&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;下载qcow2的镜像&lt;/p&gt;
-&lt;p&gt;下载你需要的系统对应的 Cloud Images 镜像（Proxmox VE 支持两种 Cloud Images 类型，分别为 &lt;code&gt;nocloud v1&lt;/code&gt; 和 &lt;code&gt;configdrive v2&lt;/code&gt;），这里以 Debian 11 为例。可以直接使用 &lt;code&gt;wget&lt;/code&gt; 在 PVE 里下载&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;wget https://cloud.debian.org/images/cloud/bullseye/latest/debian-11-nocloud-amd64.qcow2
-&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;安装&#34;&gt;安装&lt;/h1&gt;
-&lt;p&gt;创建一个虚拟机，注意 SCSI 控制器必须是 &lt;code&gt;VirtIO SCSI&lt;/code&gt;，无需创建硬盘，如果创建了自行分离删除
-&lt;img alt=&#34;h7t3.png&#34; loading=&#34;lazy&#34; src=&#34;https://www.truenasscale.com/usr/uploads/2022/05/1960894046.png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;htCD.png&#34; loading=&#34;lazy&#34; src=&#34;https://www.truenasscale.com/usr/uploads/2022/05/564683641.png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;hEWm.png&#34; loading=&#34;lazy&#34; src=&#34;https://www.truenasscale.com/usr/uploads/2022/05/3638516927.png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;在创建的虚拟机硬件设置里添加 CloudInit 设备&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;hLwA.md.png&#34; loading=&#34;lazy&#34; src=&#34;https://www.truenasscale.com/usr/uploads/2022/05/3367534873.png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;使用 SSH 或者 Xftp 工具将镜像文件上传到 PVE 服务器（&lt;code&gt;wget&lt;/code&gt; 下载的跳过此步），使用下面的命令将磁盘镜像导入到虚拟机，成功后 PVE 面板的 VM 硬件里会出现未使用的磁盘。&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# 100 为虚拟机ID
-qm importdisk 100 debian-11-nocloud-amd64.qcow2 local-lvm
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;图片.png&#34; loading=&#34;lazy&#34; src=&#34;https://www.truenasscale.com/usr/uploads/2022/05/508923776.png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;双击这个未使用磁盘启用它，总线/设置选择 &lt;code&gt;SCSI&lt;/code&gt;，然后在 选项-引导顺序 中，将此磁盘设置为第一项&lt;/p&gt;</description>
+      <description>&lt;h1 id=&#34;序&#34;&gt;序&lt;/h1&gt;&#xA;&lt;p&gt;之前我出了一个套娃的教程，我说用PVE是为了可以快速的创建Linux虚拟机，这期就讲一下如何创建。&lt;/p&gt;&#xA;&lt;h1 id=&#34;获取-cloud-images&#34;&gt;获取 Cloud Images&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;CentOS: &lt;a href=&#34;https://cloud.centos.org/centos/&#34;&gt;https://cloud.centos.org/centos/&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;Ubuntu: &lt;a href=&#34;https://cloud-images.ubuntu.com/releases/&#34;&gt;https://cloud-images.ubuntu.com/releases/&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;Debian: &lt;a href=&#34;https://cloud.debian.org/images/cloud/&#34;&gt;https://cloud.debian.org/images/cloud/&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;Fedora: &lt;a href=&#34;https://alt.fedoraproject.org/cloud/&#34;&gt;https://alt.fedoraproject.org/cloud/&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;RedHat: &lt;a href=&#34;https://access.redhat.com/downloads/&#34;&gt;https://access.redhat.com/downloads/&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;openSUSE: &lt;a href=&#34;http://download.opensuse.org/repositories/Cloud:/Images:/&#34;&gt;http://download.opensuse.org/repositories/Cloud:/Images:/&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;下载qcow2的镜像&lt;/p&gt;&#xA;&lt;p&gt;下载你需要的系统对应的 Cloud Images 镜像（Proxmox VE 支持两种 Cloud Images 类型，分别为 &lt;code&gt;nocloud v1&lt;/code&gt; 和 &lt;code&gt;configdrive v2&lt;/code&gt;），这里以 Debian 11 为例。可以直接使用 &lt;code&gt;wget&lt;/code&gt; 在 PVE 里下载&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;wget https://cloud.debian.org/images/cloud/bullseye/latest/debian-11-nocloud-amd64.qcow2&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;h1 id=&#34;安装&#34;&gt;安装&lt;/h1&gt;&#xA;&lt;p&gt;创建一个虚拟机，注意 SCSI 控制器必须是 &lt;code&gt;VirtIO SCSI&lt;/code&gt;，无需创建硬盘，如果创建了自行分离删除&#xA;&lt;img src=&#34;https://www.truenasscale.com/usr/uploads/2022/05/1960894046.png&#34; alt=&#34;h7t3.png&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://www.truenasscale.com/usr/uploads/2022/05/564683641.png&#34; alt=&#34;htCD.png&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://www.truenasscale.com/usr/uploads/2022/05/3638516927.png&#34; alt=&#34;hEWm.png&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;在创建的虚拟机硬件设置里添加 CloudInit 设备&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://www.truenasscale.com/usr/uploads/2022/05/3367534873.png&#34; alt=&#34;hLwA.md.png&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;使用 SSH 或者 Xftp 工具将镜像文件上传到 PVE 服务器（&lt;code&gt;wget&lt;/code&gt; 下载的跳过此步），使用下面的命令将磁盘镜像导入到虚拟机，成功后 PVE 面板的 VM 硬件里会出现未使用的磁盘。&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# 100 为虚拟机ID&#xD;&#xA;qm importdisk 100 debian-11-nocloud-amd64.qcow2 local-lvm&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://www.truenasscale.com/usr/uploads/2022/05/508923776.png&#34; alt=&#34;图片.png&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;双击这个未使用磁盘启用它，总线/设置选择 &lt;code&gt;SCSI&lt;/code&gt;，然后在 选项-引导顺序 中，将此磁盘设置为第一项&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

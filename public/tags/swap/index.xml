@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Swap on 慕阳博客</title>
     <link>http://localhost:1313/tags/swap/</link>
     <description>Recent content in Swap on 慕阳博客</description>
-    <generator>Hugo -- 0.145.0</generator>
+    <generator>Hugo</generator>
     <language>zh-CN</language>
     <lastBuildDate>Tue, 04 Mar 2025 13:50:14 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/swap/index.xml" rel="self" type="application/rss+xml" />
@@ -13,77 +13,7 @@
       <link>http://localhost:1313/posts/pveconfig/</link>
       <pubDate>Tue, 04 Mar 2025 13:50:14 +0800</pubDate>
       <guid>http://localhost:1313/posts/pveconfig/</guid>
-      <description>&lt;h2 id=&#34;删除local-lvm&#34;&gt;删除local-lvm&lt;/h2&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;lvremove pve/data
-
-lvextend -l +100%FREE -r pve/root
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;挂载swap文件&#34;&gt;挂载swap文件&lt;/h2&gt;
-&lt;p&gt;删除pve自带swap分区&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;swapoff -a
-
-lvremove /dev/pve/swap
-
-lvresize -l +100%FREE /dev/pve/root
-以文件形式
-
-#创建一个16G的swap，bs * count =16G
-
-dd if=/dev/zero of=/swapfile bs=1G count=16
-
-#配置安全的权限
-
-chmod 0600 /swapfile
-
-#格式化成swap
-
-mkswap /swapfile
-
-#挂载swap
-
-swapon /swapfile
-
-#验证
-
-free -h
-
-nano /etc/fstab      开机自动挂载
-
-/swapfile  swap      swap    defaults   0       0
-
-调整swap阈值
-
-vi /etc/sysctl.conf 
-
-sysctl -p
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;硬件直通&#34;&gt;硬件直通&lt;/h2&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Intel CPU
-
-对于Intel CPU，添加 intel_iommu=on，操作如下：
-
-1、Shell 里面输入命令：nano /etc/default/grub
-
-root@pve:~# nano /etc/default/grub
-
-2、在里面找到：GRUB_CMDLINE_LINUX_DEFAULT=&amp;#34;quiet&amp;#34;
-
-然后修改为
-
-GRUB_CMDLINE_LINUX_DEFAULT=&amp;#34;quiet intel_iommu=on&amp;#34;
-
-编辑完成后，使用快捷键 Ctrl + O 回车保存文件，Ctrl + X 退出编辑器。
-
-3、使用命令 update-grub 保存更改并更新grub
-
-root@pve:~# update-grub
-
-4、更新完成后，使用命令 reboot 重启PVE系统
-
-root@pve:~# reboot
-
-从命令行运行 dmesg | grep -e DMAR -e IOMMU 如果没有输出，则说明有问题。
-
-如果有,可基本确认这个过程顺利完成! 接下来就可以为虚拟机正常的添加硬件直通了。
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;-&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-&lt;/p&gt;</description>
+      <description>&lt;h2 id=&#34;删除local-lvm&#34;&gt;删除local-lvm&lt;/h2&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;lvremove pve/data&#xD;&#xA;&#xD;&#xA;lvextend -l +100%FREE -r pve/root&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;挂载swap文件&#34;&gt;挂载swap文件&lt;/h2&gt;&#xA;&lt;p&gt;删除pve自带swap分区&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;swapoff -a&#xD;&#xA;&#xD;&#xA;lvremove /dev/pve/swap&#xD;&#xA;&#xD;&#xA;lvresize -l +100%FREE /dev/pve/root&#xD;&#xA;以文件形式&#xD;&#xA;&#xD;&#xA;#创建一个16G的swap，bs * count =16G&#xD;&#xA;&#xD;&#xA;dd if=/dev/zero of=/swapfile bs=1G count=16&#xD;&#xA;&#xD;&#xA;#配置安全的权限&#xD;&#xA;&#xD;&#xA;chmod 0600 /swapfile&#xD;&#xA;&#xD;&#xA;#格式化成swap&#xD;&#xA;&#xD;&#xA;mkswap /swapfile&#xD;&#xA;&#xD;&#xA;#挂载swap&#xD;&#xA;&#xD;&#xA;swapon /swapfile&#xD;&#xA;&#xD;&#xA;#验证&#xD;&#xA;&#xD;&#xA;free -h&#xD;&#xA;&#xD;&#xA;nano /etc/fstab      开机自动挂载&#xD;&#xA;&#xD;&#xA;/swapfile  swap      swap    defaults   0       0&#xD;&#xA;&#xD;&#xA;调整swap阈值&#xD;&#xA;&#xD;&#xA;vi /etc/sysctl.conf &#xD;&#xA;&#xD;&#xA;sysctl -p&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;硬件直通&#34;&gt;硬件直通&lt;/h2&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Intel CPU&#xD;&#xA;&#xD;&#xA;对于Intel CPU，添加 intel_iommu=on，操作如下：&#xD;&#xA;&#xD;&#xA;1、Shell 里面输入命令：nano /etc/default/grub&#xD;&#xA;&#xD;&#xA;root@pve:~# nano /etc/default/grub&#xD;&#xA;&#xD;&#xA;2、在里面找到：GRUB_CMDLINE_LINUX_DEFAULT=&amp;#34;quiet&amp;#34;&#xD;&#xA;&#xD;&#xA;然后修改为&#xD;&#xA;&#xD;&#xA;GRUB_CMDLINE_LINUX_DEFAULT=&amp;#34;quiet intel_iommu=on&amp;#34;&#xD;&#xA;&#xD;&#xA;编辑完成后，使用快捷键 Ctrl + O 回车保存文件，Ctrl + X 退出编辑器。&#xD;&#xA;&#xD;&#xA;3、使用命令 update-grub 保存更改并更新grub&#xD;&#xA;&#xD;&#xA;root@pve:~# update-grub&#xD;&#xA;&#xD;&#xA;4、更新完成后，使用命令 reboot 重启PVE系统&#xD;&#xA;&#xD;&#xA;root@pve:~# reboot&#xD;&#xA;&#xD;&#xA;从命令行运行 dmesg | grep -e DMAR -e IOMMU 如果没有输出，则说明有问题。&#xD;&#xA;&#xD;&#xA;如果有,可基本确认这个过程顺利完成! 接下来就可以为虚拟机正常的添加硬件直通了。&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;-&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

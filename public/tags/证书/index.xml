@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>证书 on 慕阳博客</title>
     <link>http://localhost:1313/tags/%E8%AF%81%E4%B9%A6/</link>
     <description>Recent content in 证书 on 慕阳博客</description>
-    <generator>Hugo -- 0.145.0</generator>
+    <generator>Hugo</generator>
     <language>zh-CN</language>
     <lastBuildDate>Thu, 27 Feb 2025 17:37:05 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/%E8%AF%81%E4%B9%A6/index.xml" rel="self" type="application/rss+xml" />
@@ -13,46 +13,7 @@
       <link>http://localhost:1313/posts/esxi/</link>
       <pubDate>Thu, 27 Feb 2025 17:37:05 +0800</pubDate>
       <guid>http://localhost:1313/posts/esxi/</guid>
-      <description>&lt;h2 id=&#34;vmware-ovf-tool导出虚拟机&#34;&gt;VMware OVF Tool导出虚拟机&lt;/h2&gt;
-&lt;p&gt;1安装VMware-ovftool-4.3.0-12320924-win.x86_64.msi&lt;/p&gt;
-&lt;p&gt;2进入安装目录 C:\Program Files\VMware\VMware OVF Tool\ 输入cmd进入命令提示符&lt;/p&gt;
-&lt;p&gt;&lt;img alt=&#34;image.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250312134601037.png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;`&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;ovftool vi://root:@192.168.1.10/RockyLinuxServer E:\ovf\RockyLinuxServer.ova
-
-ovftool vi://root:@192.168.1.10/WindowsServer2022 E:\ovf\WindowsServer2022.ova
-
-ovftool vi://root:@192.168.1.10/DSM920 E:\ovf\DSM920.ova
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;`&lt;/p&gt;
-&lt;h2 id=&#34;esxi直通板载sata控制器&#34;&gt;ESXI直通板载SATA控制器&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;image.png&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/20250312134702011.png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;1查看”设备ID“和“供应商ID”&lt;/p&gt;
-&lt;p&gt;2SSH，不细表&lt;/p&gt;
-&lt;p&gt;3打开直通映射文件：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;vi /etc/vmware/passthru.map
-&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;4&#34;&gt;
-&lt;li&gt;编辑如下内容：&lt;/li&gt;
-&lt;/ol&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;\# Union Point-H AHCI Controller
-
-\# &amp;lt;供应商ID&amp;gt; &amp;lt;设备ID&amp;gt; d3d0 default
-
-8086 a282 d3d0 default
-&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;5&#34;&gt;
-&lt;li&gt;
-&lt;p&gt;重启ESXi&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;选中 Union Point-H AHCI Controller，点击“切换直通”，大功告成&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;修改esxi的证书&#34;&gt;修改ESXI的证书&lt;/h2&gt;
-&lt;p&gt;连接SSH 进入 /etc/vmware/ssl 目录，找到 rui.key,rui.crt (注意备份原证书)选中删除，将之前修改好的ssl证书复制到该目录&lt;/p&gt;
-&lt;p&gt;如果不想重启esxi主机，可以在SSH下输入：&lt;/p&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;/etc/init.d/hostd restart
-
-/etc/init.d/vpxa restart
-&lt;/code&gt;&lt;/pre&gt;</description>
+      <description>&lt;h2 id=&#34;vmware-ovf-tool导出虚拟机&#34;&gt;VMware OVF Tool导出虚拟机&lt;/h2&gt;&#xA;&lt;p&gt;1安装VMware-ovftool-4.3.0-12320924-win.x86_64.msi&lt;/p&gt;&#xA;&lt;p&gt;2进入安装目录 C:\Program Files\VMware\VMware OVF Tool\ 输入cmd进入命令提示符&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://r.muyoung.com/blogimg/20250312134601037.png&#34; alt=&#34;image.png&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;`&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;ovftool vi://root:@192.168.1.10/RockyLinuxServer E:\ovf\RockyLinuxServer.ova&#xD;&#xA;&#xD;&#xA;ovftool vi://root:@192.168.1.10/WindowsServer2022 E:\ovf\WindowsServer2022.ova&#xD;&#xA;&#xD;&#xA;ovftool vi://root:@192.168.1.10/DSM920 E:\ovf\DSM920.ova&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;`&lt;/p&gt;&#xA;&lt;h2 id=&#34;esxi直通板载sata控制器&#34;&gt;ESXI直通板载SATA控制器&lt;/h2&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://r.muyoung.com/blogimg/20250312134702011.png&#34; alt=&#34;image.png&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;1查看”设备ID“和“供应商ID”&lt;/p&gt;&#xA;&lt;p&gt;2SSH，不细表&lt;/p&gt;&#xA;&lt;p&gt;3打开直通映射文件：&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;vi /etc/vmware/passthru.map&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;4&#34;&gt;&#xA;&lt;li&gt;编辑如下内容：&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;\# Union Point-H AHCI Controller&#xD;&#xA;&#xD;&#xA;\# &amp;lt;供应商ID&amp;gt; &amp;lt;设备ID&amp;gt; d3d0 default&#xD;&#xA;&#xD;&#xA;8086 a282 d3d0 default&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;5&#34;&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;重启ESXi&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;选中 Union Point-H AHCI Controller，点击“切换直通”，大功告成&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;修改esxi的证书&#34;&gt;修改ESXI的证书&lt;/h2&gt;&#xA;&lt;p&gt;连接SSH 进入 /etc/vmware/ssl 目录，找到 rui.key,rui.crt (注意备份原证书)选中删除，将之前修改好的ssl证书复制到该目录&lt;/p&gt;&#xA;&lt;p&gt;如果不想重启esxi主机，可以在SSH下输入：&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;/etc/init.d/hostd restart&#xD;&#xA;&#xD;&#xA;/etc/init.d/vpxa restart&#xA;&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
   </channel>
 </rss>

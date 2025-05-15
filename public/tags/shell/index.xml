@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Shell on 慕阳博客</title>
     <link>http://localhost:1313/tags/shell/</link>
     <description>Recent content in Shell on 慕阳博客</description>
-    <generator>Hugo -- 0.145.0</generator>
+    <generator>Hugo</generator>
     <language>zh-CN</language>
     <lastBuildDate>Thu, 27 Feb 2025 17:38:22 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/shell/index.xml" rel="self" type="application/rss+xml" />
@@ -13,129 +13,7 @@
       <link>http://localhost:1313/posts/shellkeywords/</link>
       <pubDate>Thu, 27 Feb 2025 17:38:22 +0800</pubDate>
       <guid>http://localhost:1313/posts/shellkeywords/</guid>
-      <description>&lt;p&gt;Shell 脚本中关键字很多，常见的包括：&lt;/p&gt;
-&lt;table&gt;
-  &lt;thead&gt;
-      &lt;tr&gt;
-          &lt;th&gt;语句/命令&lt;/th&gt;
-          &lt;th&gt;描述&lt;/th&gt;
-      &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-      &lt;tr&gt;
-          &lt;td&gt;if&lt;/td&gt;
-          &lt;td&gt;条件语句，用于根据条件执行不同的命令。&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;else&lt;/td&gt;
-          &lt;td&gt;条件语句的补充，当if语句中的条件不满足时执行。&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;elif&lt;/td&gt;
-          &lt;td&gt;条件语句的补充，用于添加多个条件判断。&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;then&lt;/td&gt;
-          &lt;td&gt;条件语句的结束符号，表示条件判断结束。&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;for&lt;/td&gt;
-          &lt;td&gt;循环语句，用于对一组数据进行迭代操作。&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;while&lt;/td&gt;
-          &lt;td&gt;循环语句，根据条件执行循环体内的命令。&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;until&lt;/td&gt;
-          &lt;td&gt;循环语句，根据条件不满足时执行循环体内的命令。&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;case&lt;/td&gt;
-          &lt;td&gt;条件语句，用于根据不同的值执行不同的命令。&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;in&lt;/td&gt;
-          &lt;td&gt;用于在case语句中指定多个值。&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;do&lt;/td&gt;
-          &lt;td&gt;循环语句的开始符号，表示循环体的开始。&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;done&lt;/td&gt;
-          &lt;td&gt;循环语句的结束符号，表示循环体的结束。&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;function&lt;/td&gt;
-          &lt;td&gt;定义函数，用于封装一段代码并在脚本中多次调用。&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;select&lt;/td&gt;
-          &lt;td&gt;菜单语句，用于生成一个菜单供用户选择。&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;time&lt;/td&gt;
-          &lt;td&gt;用于计算命令执行的时间。&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;exit&lt;/td&gt;
-          &lt;td&gt;用于退出脚本或函数。&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;export&lt;/td&gt;
-          &lt;td&gt;用于将环境变量导出到子进程中。&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;readonly&lt;/td&gt;
-          &lt;td&gt;用于将变量设置为只读，不能被修改。&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;unset&lt;/td&gt;
-          &lt;td&gt;用于删除变量或函数。&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;source&lt;/td&gt;
-          &lt;td&gt;用于在当前Shell中执行脚本文件，类似于./命令。&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;return&lt;/td&gt;
-          &lt;td&gt;用于从函数中返回一个值。&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;trap&lt;/td&gt;
-          &lt;td&gt;用于捕获信号或错误，并在捕获到时执行相应的命令。&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;wait&lt;/td&gt;
-          &lt;td&gt;用于等待后台运行的进程结束。&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;exec&lt;/td&gt;
-          &lt;td&gt;用于替换当前Shell进程为指定的命令。&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;alias&lt;/td&gt;
-          &lt;td&gt;用于创建命令别名。&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;set&lt;/td&gt;
-          &lt;td&gt;用于设置Shell选项和环境变量。&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;unset&lt;/td&gt;
-          &lt;td&gt;用于删除Shell选项和环境变量。&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;shift&lt;/td&gt;
-          &lt;td&gt;用于在命令行参数中向左移动一个位置。&lt;/td&gt;
-      &lt;/tr&gt;
-      &lt;tr&gt;
-          &lt;td&gt;test&lt;/td&gt;
-          &lt;td&gt;用于条件测试，类似于if语句中的条件判断。&lt;/td&gt;
-      &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;</description>
+      <description>&lt;p&gt;Shell 脚本中关键字很多，常见的包括：&lt;/p&gt;&#xA;&lt;table&gt;&#xA;  &lt;thead&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;th&gt;语句/命令&lt;/th&gt;&#xA;          &lt;th&gt;描述&lt;/th&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/thead&gt;&#xA;  &lt;tbody&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;if&lt;/td&gt;&#xA;          &lt;td&gt;条件语句，用于根据条件执行不同的命令。&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;else&lt;/td&gt;&#xA;          &lt;td&gt;条件语句的补充，当if语句中的条件不满足时执行。&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;elif&lt;/td&gt;&#xA;          &lt;td&gt;条件语句的补充，用于添加多个条件判断。&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;then&lt;/td&gt;&#xA;          &lt;td&gt;条件语句的结束符号，表示条件判断结束。&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;for&lt;/td&gt;&#xA;          &lt;td&gt;循环语句，用于对一组数据进行迭代操作。&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;while&lt;/td&gt;&#xA;          &lt;td&gt;循环语句，根据条件执行循环体内的命令。&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;until&lt;/td&gt;&#xA;          &lt;td&gt;循环语句，根据条件不满足时执行循环体内的命令。&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;case&lt;/td&gt;&#xA;          &lt;td&gt;条件语句，用于根据不同的值执行不同的命令。&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;in&lt;/td&gt;&#xA;          &lt;td&gt;用于在case语句中指定多个值。&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;do&lt;/td&gt;&#xA;          &lt;td&gt;循环语句的开始符号，表示循环体的开始。&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;done&lt;/td&gt;&#xA;          &lt;td&gt;循环语句的结束符号，表示循环体的结束。&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;function&lt;/td&gt;&#xA;          &lt;td&gt;定义函数，用于封装一段代码并在脚本中多次调用。&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;select&lt;/td&gt;&#xA;          &lt;td&gt;菜单语句，用于生成一个菜单供用户选择。&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;time&lt;/td&gt;&#xA;          &lt;td&gt;用于计算命令执行的时间。&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;exit&lt;/td&gt;&#xA;          &lt;td&gt;用于退出脚本或函数。&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;export&lt;/td&gt;&#xA;          &lt;td&gt;用于将环境变量导出到子进程中。&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;readonly&lt;/td&gt;&#xA;          &lt;td&gt;用于将变量设置为只读，不能被修改。&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;unset&lt;/td&gt;&#xA;          &lt;td&gt;用于删除变量或函数。&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;source&lt;/td&gt;&#xA;          &lt;td&gt;用于在当前Shell中执行脚本文件，类似于./命令。&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;return&lt;/td&gt;&#xA;          &lt;td&gt;用于从函数中返回一个值。&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;trap&lt;/td&gt;&#xA;          &lt;td&gt;用于捕获信号或错误，并在捕获到时执行相应的命令。&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;wait&lt;/td&gt;&#xA;          &lt;td&gt;用于等待后台运行的进程结束。&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;exec&lt;/td&gt;&#xA;          &lt;td&gt;用于替换当前Shell进程为指定的命令。&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;alias&lt;/td&gt;&#xA;          &lt;td&gt;用于创建命令别名。&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;set&lt;/td&gt;&#xA;          &lt;td&gt;用于设置Shell选项和环境变量。&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;unset&lt;/td&gt;&#xA;          &lt;td&gt;用于删除Shell选项和环境变量。&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;shift&lt;/td&gt;&#xA;          &lt;td&gt;用于在命令行参数中向左移动一个位置。&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;      &lt;tr&gt;&#xA;          &lt;td&gt;test&lt;/td&gt;&#xA;          &lt;td&gt;用于条件测试，类似于if语句中的条件判断。&lt;/td&gt;&#xA;      &lt;/tr&gt;&#xA;  &lt;/tbody&gt;&#xA;&lt;/table&gt;</description>
     </item>
   </channel>
 </rss>

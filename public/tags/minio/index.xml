@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Minio on 慕阳博客</title>
     <link>http://localhost:1313/tags/minio/</link>
     <description>Recent content in Minio on 慕阳博客</description>
-    <generator>Hugo -- 0.145.0</generator>
+    <generator>Hugo</generator>
     <language>zh-CN</language>
     <lastBuildDate>Tue, 04 Mar 2025 12:31:57 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/minio/index.xml" rel="self" type="application/rss+xml" />
@@ -13,31 +13,7 @@
       <link>http://localhost:1313/posts/buildingagraphbedwithminio/</link>
       <pubDate>Tue, 04 Mar 2025 12:31:57 +0800</pubDate>
       <guid>http://localhost:1313/posts/buildingagraphbedwithminio/</guid>
-      <description>&lt;h1 id=&#34;安装docker&#34;&gt;安装Docker&lt;/h1&gt;
-&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-auto&#34; data-lang=&#34;auto&#34;&gt;#更新系统索引以及安装必备组件
-sudo apt-get update
-sudo apt-get install \
-    apt-transport-https \
-    ca-certificates \
-    curl \
-    gnupg \
-    lsb-release
-添加docker源GPG
-curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-#添加docker源
-#官方源
-echo \
-&amp;#34;deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \
-$(lsb_release -cs) stable&amp;#34; | sudo tee /etc/apt/sources.list.d/docker.list &amp;gt; /dev/null
-
-#阿里源
-echo \
-&amp;#34;deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://mirrors.aliyun.com/docker-ce/linux/debian \
-$(lsb_release -cs) stable&amp;#34; | sudo tee /etc/apt/sources.list.d/docker.list &amp;gt; /dev/null
-#更新源索引以及安装docker
-sudo apt update
-sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img alt=&#34;img&#34; loading=&#34;lazy&#34; src=&#34;https://r.muyoung.com/blogimg/202503041209211.png&#34;&gt;&lt;/p&gt;</description>
+      <description>&lt;h1 id=&#34;安装docker&#34;&gt;安装Docker&lt;/h1&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-auto&#34; data-lang=&#34;auto&#34;&gt;#更新系统索引以及安装必备组件&#xD;&#xA;sudo apt-get update&#xD;&#xA;sudo apt-get install \&#xD;&#xA;    apt-transport-https \&#xD;&#xA;    ca-certificates \&#xD;&#xA;    curl \&#xD;&#xA;    gnupg \&#xD;&#xA;    lsb-release&#xD;&#xA;添加docker源GPG&#xD;&#xA;curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg&#xD;&#xA;#添加docker源&#xD;&#xA;#官方源&#xD;&#xA;echo \&#xD;&#xA;&amp;#34;deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \&#xD;&#xA;$(lsb_release -cs) stable&amp;#34; | sudo tee /etc/apt/sources.list.d/docker.list &amp;gt; /dev/null&#xD;&#xA;&#xD;&#xA;#阿里源&#xD;&#xA;echo \&#xD;&#xA;&amp;#34;deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://mirrors.aliyun.com/docker-ce/linux/debian \&#xD;&#xA;$(lsb_release -cs) stable&amp;#34; | sudo tee /etc/apt/sources.list.d/docker.list &amp;gt; /dev/null&#xD;&#xA;#更新源索引以及安装docker&#xD;&#xA;sudo apt update&#xD;&#xA;sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://r.muyoung.com/blogimg/202503041209211.png&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
