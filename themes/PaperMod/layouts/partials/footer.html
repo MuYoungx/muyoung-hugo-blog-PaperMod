@@ -8,7 +8,38 @@
 <div class="SiteTime">
     <p id="site-age"></p>
 </div>
+
+    <p id="site-age"></p>
+</div>
+
+<div class="current-datetime">
+    <p id="current-time" style="font-size: 1.2em;"></p>
+</div>
+
 <script>
+    function getCurrentDateTime() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    }
+
+    function updateCurrentDateTime() {
+        document.getElementById('current-time').innerText = `当前的日期和时间：${getCurrentDateTime()}`;
+    }
+
+    // 页面加载时调用函数并设置定时器
+    window.onload = function() {
+        updateCurrentDateTime(); // 初始调用
+        setInterval(updateCurrentDateTime, 1000); // 每秒钟更新一次
+    };
+</script>
+
+{{/*  <script>
     function getSiteAge() {
         const startDate = new Date('2024-03-29T00:00:00Z'); // 建站日期
         const now = new Date();
@@ -25,7 +56,7 @@
         getSiteAge(); // 初始调用
         setInterval(getSiteAge, 1000); // 每秒钟更新一次
     };
-</script>
+</script>  */}}
 
      
 <div class="admin">

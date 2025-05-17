@@ -291,24 +291,38 @@ docker run -d -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.
 <div class="SiteTime">
     <p id="site-age"></p>
 </div>
+
+    <p id="site-age"></p>
+</div>
+
+<div class="current-datetime">
+    <p id="current-time" style="font-size: 1.2em;"></p>
+</div>
+
 <script>
-    function getSiteAge() {
-        const startDate = new Date('2024-03-29T00:00:00Z'); 
+    function getCurrentDateTime() {
         const now = new Date();
-        const diffTime = now - startDate;
-        const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diffTime % (1000 * 60)) / 1000);
-        document.getElementById('site-age').innerText = `网站正常运行了 ${days} 天 ${hours} 小时 ${minutes} 分钟 ${seconds} 秒`;
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    }
+
+    function updateCurrentDateTime() {
+        document.getElementById('current-time').innerText = `当前的日期和时间：${getCurrentDateTime()}`;
     }
 
     
     window.onload = function() {
-        getSiteAge(); 
-        setInterval(getSiteAge, 1000); 
+        updateCurrentDateTime(); 
+        setInterval(updateCurrentDateTime, 1000); 
     };
 </script>
+
+
 
      
 <div class="admin">
