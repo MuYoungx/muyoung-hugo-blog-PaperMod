@@ -3,7 +3,7 @@ title: Centos基础语法
 published: 2025-02-28T14:56:11+08:00
 summary: ""
 cover:
-  image: "https://r.muyoung.com/blogimg/202502281457211.png"
+  image: "https://obj.muyoung.com/blogimg/202502281457211.png"
 tags: [linux, centos]
 categories: 'Linux'
 draft: false 
@@ -417,17 +417,17 @@ crontab[选项]
 
 参数细节说明
 
-![](https://r.muyoung.com/blogimg/202502281453916.png)
+![](https://obj.muyoung.com/blogimg/202502281453916.png)
 
 ```bash
 如*/1****ls-l /etc/ > /tmp/to.txt 意思说每小时的每分钟执行ls -l /etc/ > /tmp/to.txt
 ```
 
 <h4 id="pAEFW">特殊符号的说明</h4>
-![](https://r.muyoung.com/blogimg/202502281454113.png)
+![](https://obj.muyoung.com/blogimg/202502281454113.png)
 
 <h4 id="LBFiX">at定时任务</h4>
-![](https://r.muyoung.com/blogimg/202502281454775.png)
+![](https://obj.muyoung.com/blogimg/202502281454775.png)
 
 ps -ef查看当前运行的所有进程
 
@@ -435,7 +435,7 @@ ps -ef |grep atd 检查atd是否在运行
 
 at命令选项
 
-![](https://r.muyoung.com/blogimg/202502281454727.png)
+![](https://obj.muyoung.com/blogimg/202502281454727.png)
 
 Ctrl+D结束at命令的输入，输入两次才能退出
 
@@ -506,21 +506,21 @@ du -h /目录
 
 -c列出明细的同时，增加汇总值
 
-![](https://r.muyoung.com/blogimg/202502281454547.png)
+![](https://obj.muyoung.com/blogimg/202502281454547.png)
 
 <h1 id="C8RWX">网络配置</h1>
 <h2 id="u2SQ1">查看网络ip和网关</h2>
 + 查看windows系统中的VMnet8网络配置(ipconfig指令)
 
-![](https://r.muyoung.com/blogimg/202502281454265.png)
+![](https://obj.muyoung.com/blogimg/202502281454265.png)
 
 + 查看linux的网络配置(ifconfig指令)
 
-![](https://r.muyoung.com/blogimg/202502281455582.png)
+![](https://obj.muyoung.com/blogimg/202502281455582.png)
 
 + 使用ping指令来判断网络连通性
 
-![](https://r.muyoung.com/blogimg/202502281455213.png)
+![](https://obj.muyoung.com/blogimg/202502281455213.png)
 
 <h2 id="XB0d2">linux网络环境配置</h2>
 + 第一种方式自动获取ip地址以及dns地址(DHCP)
@@ -622,7 +622,7 @@ ps详解
 + TIME CPU时间，即进程使用CPU的总时间
 + COMMAND 启动进程所用的命令和参数，如果过长会被截断显示
 
-![](https://r.muyoung.com/blogimg/202502281455363.png)
+![](https://obj.muyoung.com/blogimg/202502281455363.png)
 
 <h2 id="bwYK1">终止进程 kill和killall</h2>
 常用选项
@@ -654,7 +654,7 @@ pstree[选项]，可以更加直观的来看进程信息
 2. 在Centos7.0后很多服务不再使用service，而是systemctl
 3. service指令管理的服务在/etc/init.d查看
 
-![](https://r.muyoung.com/blogimg/202502281455987.png)
+![](https://obj.muyoung.com/blogimg/202502281455987.png)
 
 + 服务的运行级别(runlevel)
 + Linux系统有7种运行级别(runlevel)：常用的是3跟5
@@ -675,7 +675,7 @@ pstree[选项]，可以更加直观的来看进程信息
 
 + 开机的流程说明:
 
-![](https://r.muyoung.com/blogimg/202502281455446.png)
+![](https://obj.muyoung.com/blogimg/202502281455446.png)
 
 l 设置运行级别
 
@@ -726,15 +726,15 @@ top[选项]
 
 + 选项说明
 
-![](https://r.muyoung.com/blogimg/202502281455441.png)
+![](https://obj.muyoung.com/blogimg/202502281455441.png)
 
-![](https://r.muyoung.com/blogimg/202502281455210.png)
+![](https://obj.muyoung.com/blogimg/202502281455210.png)
 
 + 交互操作说明：
 
-![](https://r.muyoung.com/blogimg/202502281456346.png)
+![](https://obj.muyoung.com/blogimg/202502281456346.png)
 
-![](https://r.muyoung.com/blogimg/202502281456645.png)
+![](https://obj.muyoung.com/blogimg/202502281456645.png)
 
 + 查看系统网络情况netstat
 + 基本语法

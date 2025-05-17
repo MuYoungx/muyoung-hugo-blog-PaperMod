@@ -3,7 +3,7 @@ title: vSphere Hypervisor(ESXI)
 published: 2025-02-27T17:37:05+08:00
 summary: ""
 cover:
-  image: "https://r.muyoung.com/blogimg/202502271737317.png"
+  image: "https://obj.muyoung.com/blogimg/202502271737317.png"
 tags: [vmware, 证书, 硬件直通,esxi]
 categories: '经验分享'
 draft: false 
@@ -16,7 +16,7 @@ lang: ''
 
 2进入安装目录 C:\Program Files\VMware\VMware OVF Tool\ 输入cmd进入命令提示符
 
-![image.png](https://r.muyoung.com/blogimg/20250312134601037.png)
+![image.png](https://obj.muyoung.com/blogimg/20250312134601037.png)
 
 `
 
@@ -32,7 +32,7 @@ ovftool vi://root:@192.168.1.10/DSM920 E:\ovf\DSM920.ova
 
 ## ESXI直通板载SATA控制器 
 
-![image.png](https://r.muyoung.com/blogimg/20250312134702011.png)
+![image.png](https://obj.muyoung.com/blogimg/20250312134702011.png)
 
 
 

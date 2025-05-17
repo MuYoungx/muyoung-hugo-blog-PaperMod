@@ -34,24 +34,24 @@ wget https://cloud.debian.org/images/cloud/bullseye/latest/debian-11-nocloud-amd
 # 安装
 
 创建一个虚拟机，注意 SCSI 控制器必须是 `VirtIO SCSI`，无需创建硬盘，如果创建了自行分离删除
-![h7t3.png](https://www.truenasscale.com/usr/uploads/2022/05/1960894046.png)
+![h7t3.png](https://obj.muyoung.com/blogimg/20250517145101172.png)
 
 
 
 
-![htCD.png](https://www.truenasscale.com/usr/uploads/2022/05/564683641.png)
+![htCD.png](https://obj.muyoung.com/blogimg/20250517145105629.png)
 
 
 
 
 
-![hEWm.png](https://www.truenasscale.com/usr/uploads/2022/05/3638516927.png)
+![hEWm.png](https://obj.muyoung.com/blogimg/20250517145111437.png)
 
 
 
 在创建的虚拟机硬件设置里添加 CloudInit 设备
 
-![hLwA.md.png](https://www.truenasscale.com/usr/uploads/2022/05/3367534873.png)
+![hLwA.md.png](https://obj.muyoung.com/blogimg/20250517145108493.png)
 
 
 使用 SSH 或者 Xftp 工具将镜像文件上传到 PVE 服务器（`wget` 下载的跳过此步），使用下面的命令将磁盘镜像导入到虚拟机，成功后 PVE 面板的 VM 硬件里会出现未使用的磁盘。
@@ -61,28 +61,28 @@ wget https://cloud.debian.org/images/cloud/bullseye/latest/debian-11-nocloud-amd
 qm importdisk 100 debian-11-nocloud-amd64.qcow2 local-lvm
 ```
 
-![图片.png](https://www.truenasscale.com/usr/uploads/2022/05/508923776.png)
+![图片.png](https://obj.muyoung.com/blogimg/20250517145121040.png)
 
 
 
 双击这个未使用磁盘启用它，总线/设置选择 `SCSI`，然后在 选项-引导顺序 中，将此磁盘设置为第一项
 
-![图片.png](https://www.truenasscale.com/usr/uploads/2022/05/1272233665.png)
+![图片.png](https://obj.muyoung.com/blogimg/20250517145125923.png)
 
 
-![图片.png](https://www.truenasscale.com/usr/uploads/2022/05/488918232.png)
+![图片.png](https://obj.muyoung.com/blogimg/20250517145129348.png)
 
 
 
 修改 Cloud-Init，填入你需要设置的信息，Cloud-Init 会将 VM 的名字作为主机名
 
-![图片.png](https://www.truenasscale.com/usr/uploads/2022/05/494586860.png)
+![图片.png](https://obj.muyoung.com/blogimg/20250517145132381.png)
 
 
 
 扩容硬盘，启动 VM 即可，初次启动可能比较慢，如果卡了尝试重启试试。
 
-![图片.png](https://www.truenasscale.com/usr/uploads/2022/05/2178628645.png)
+![图片.png](https://obj.muyoung.com/blogimg/20250517145146274.png)
 
 
 如果 Cloud-Init 配置没有生效，使用 PVE 的控制台登录虚拟机，使用 `cloud-init -v` 命令查看是否安装了 Cloud-Init。如果没有返回值，则使用下方的安装命令安装即可：
@@ -101,7 +101,7 @@ apt install cloud-init -y
 
 # 排错
 
-![图片.png](https://www.truenasscale.com/usr/uploads/2022/05/2501758491.png)
+![图片.png](https://obj.muyoung.com/blogimg/20250517145136294.png)
 
 
 

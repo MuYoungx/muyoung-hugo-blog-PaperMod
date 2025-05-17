@@ -1,18 +1,6 @@
----
-title: 使用MinIO搭建图床
-published: 2025-03-04T12:31:57+08:00
-summary: ""
-cover:
-  image: "https://r.muyoung.com/blogimg/202503041232888.png"
-tags: [minio,图床,反向代理,nginx]
-categories: '经验分享'
-draft: false 
-lang: ''
----
-
 # 安装Docker
 
-```auto
+```bash
 #更新系统索引以及安装必备组件
 sudo apt-get update
 sudo apt-get install \
@@ -38,11 +26,11 @@ sudo apt update
 sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 ```
 
-![img](https://r.muyoung.com/blogimg/202503041209211.png)
+![img](https://obj.muyoung.com/blogimg/202503041209211.png)
 
 # 使用Docker安装MinIO
 
-```
+```bash
 docker run -d--name minio
 -p 9000:9000 \
 -p 9001:9001 \
@@ -52,7 +40,7 @@ docker run -d--name minio
 minio/minio server /data --console-address":9001"
 ```
 
-![img](https://r.muyoung.com/blogimg/202503041213465.png)
+![img](https://obj.muyoung.com/blogimg/202503041213465.png)
 
 # 放行防火墙端口
 
@@ -60,7 +48,7 @@ minio/minio server /data --console-address":9001"
 
 ## 访问9001端口测试
 
-![img](https://r.muyoung.com/blogimg/202503041231538.png)
+![img](https://obj.muyoung.com/blogimg/202503041231538.png)
 
 默认用户名密码为之前的docker参数 建议在docker参数定义时就定义要使用的管理员用户名密码
 
@@ -74,7 +62,7 @@ minio/minio server /data --console-address":9001"
 
 ## 反向代理web页面
 
-```
+```yaml
  server {
          listen    80;
          listen    443 ssl http2;
@@ -103,7 +91,7 @@ location / {
 
 ## 反向代理api端口
 
-```
+```yaml
  server {
          listen    80;
          listen    443 ssl http2;
@@ -134,8 +122,50 @@ location / {
 
 ## 创建bucket并设置公共权限
 
-![img](https://r.muyoung.com/blogimg/202503041227934.png)
+![img](https://obj.muyoung.com/blogimg/202503041227934.png)
 
 上传一张图片到bucket进行访问测试
 
 输入刚刚设置的api访问域名/bucket名称/文件名称 例如https://obj.minio.com/data/test.png进行测试
+
+# Picgo联动
+
+## Access Keys创建
+
+![](https://obj.muyoung.com/blogimg/20250517123335634.png)
+
+![image-20250517123358126](https://obj.muyoung.com/blogimg/20250517123400497.png)
+
+## 记录生成的AK密钥
+
+![image-20250517123430576](https://obj.muyoung.com/blogimg/20250517123433644.png)
+
+## Picgo安装Minio支持插件
+
+点击插件输入minio安装箭头指向的插件
+
+![image-20250517123614570](https://obj.muyoung.com/blogimg/20250517123617365.png)
+
+## 新增配置
+
+![image-20250517123712122](https://obj.muyoung.com/blogimg/20250517123715053.png)
+
+![image-20250517123752156](https://obj.muyoung.com/blogimg/20250517123755029.png)
+
+![image-20250517123953191](https://obj.muyoung.com/blogimg/20250517123954438.png)
+
+- 图床配置名：随意填写
+- endPoint：填写服务器ip地址
+- port：填写API端口一般默认是9000
+- useSSL：默认不开启 按自身情况决定是否开启
+- ak密钥：输入之前记录的ak密钥
+- bucket：输入你的bucket名称
+- 自定义域名：可以输入已经反代的api端口域名比如 https://obj.test.com 这样上传后Picgo自动复制的url就是拼接后的地址
+
+## 最后确定设置默认图床
+
+![image-20250517124202613](https://obj.muyoung.com/blogimg/20250517124204207.png)
+
+## 上传图片测试
+
+![image-20250517124235250](https://obj.muyoung.com/blogimg/20250517124237253.png)

@@ -2,7 +2,7 @@
 <html lang="en" dir="auto">
 
 <head>
-	<meta name="generator" content="Hugo 0.145.0"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+	<meta name="generator" content="Hugo 0.147.3"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="noindex, nofollow">
@@ -137,39 +137,7 @@
 
 <article class="post-entry"> 
 <figure class="entry-cover">
-        <img loading="lazy" src="https://r.muyoung.com/blogimg/202503041350331.png" alt="">
-</figure>
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">Pve开源虚拟化常见配置
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>删除local-lvm lvremove pve/datalvextend -l &#43;100%FREE -r pve/root 挂载swap文件 删除pve自带swap分区
-swapoff -alvremove /dev/pve/swaplvresize -l &#43;100%FREE /dev/pve/root以文件形式#创建一个16G的swap，bs * count =16Gdd if=/dev/zero of=/swapfile bs=1G count=16#配置安全的权限chmod 0600 /swapfile#格式化成swapmkswap /swapfile#挂载swapswapon /swapfile#验证free -hnano /etc/fstab 开机自动挂载/swapfile swap swap defaults 0 0调整swap阈值vi /etc/sysctl.conf sysctl -p 硬件直通 Intel CPU对于Intel CPU，添加 intel_iommu=on，操作如下：1、Shell 里面输入命令：nano /etc/default/grubroot@pve:~# nano /etc/default/grub2、在里面找到：GRUB_CMDLINE_LINUX_DEFAULT=&#34;quiet&#34;然后修改为GRUB_CMDLINE_LINUX_DEFAULT=&#34;quiet intel_iommu=on&#34;编辑完成后，使用快捷键 Ctrl &#43; O 回车保存文件，Ctrl &#43; X 退出编辑器。3、使用命令 update-grub 保存更改并更新grubroot@pve:~# update-grub4、更新完成后，使用命令 reboot 重启PVE系统root@pve:~# reboot从命令行运行 dmesg | grep -e DMAR -e IOMMU 如果没有输出，则说明有问题。如果有,可基本确认这个过程顺利完成! 接下来就可以为虚拟机正常的添加硬件直通了。 -———————————————————————————————-
-...</p>
-  </div>
-  <footer class="entry-footer"><span title='2025-03-04 13:50:14 +0800 CST'>March 4, 2025</span>&nbsp;·&nbsp;1 min</footer>
-  <a class="entry-link" aria-label="post link to Pve开源虚拟化常见配置" href="http://localhost:1313/posts/pveconfig/"></a>
-</article>
-
-<article class="post-entry"> 
-<figure class="entry-cover">
-        <img loading="lazy" src="https://r.muyoung.com/blogimg/202503041232888.png" alt="">
-</figure>
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">使用MinIO搭建图床
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>安装Docker #更新系统索引以及安装必备组件sudo apt-get updatesudo apt-get install \apt-transport-https \ca-certificates \curl \gnupg \lsb-release添加docker源GPGcurl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg#添加docker源#官方源echo \&#34;deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \$(lsb_release -cs) stable&#34; | sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null#阿里源echo \&#34;deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://mirrors.aliyun.com/docker-ce/linux/debian \$(lsb_release -cs) stable&#34; | sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null#更新源索引以及安装dockersudo apt updatesudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin ...</p>
-  </div>
-  <footer class="entry-footer"><span title='2025-03-04 12:31:57 +0800 CST'>March 4, 2025</span>&nbsp;·&nbsp;2 min</footer>
-  <a class="entry-link" aria-label="post link to 使用MinIO搭建图床" href="http://localhost:1313/posts/buildingagraphbedwithminio/"></a>
-</article>
-
-<article class="post-entry"> 
-<figure class="entry-cover">
-        <img loading="lazy" src="https://r.muyoung.com/blogimg/202502281457211.png" alt="">
+        <img loading="lazy" src="https://obj.muyoung.com/blogimg/202502281457211.png" alt="">
 </figure>
   <header class="entry-header">
     <h2 class="entry-hint-parent">Centos基础语法
@@ -202,7 +170,7 @@ rmdir删除的是空目录，如果目录下有内容时无法删除的
 
 <article class="post-entry"> 
 <figure class="entry-cover">
-        <img loading="lazy" src="https://r.muyoung.com/blogimg/202502280947818.gif" alt="">
+        <img loading="lazy" src="https://obj.muyoung.com/blogimg/202502280947818.gif" alt="">
 </figure>
   <header class="entry-header">
     <h2 class="entry-hint-parent">收藏几个动态懒加载图片
@@ -235,7 +203,7 @@ rmdir删除的是空目录，如果目录下有内容时无法删除的
 
 <article class="post-entry"> 
 <figure class="entry-cover">
-        <img loading="lazy" src="https://r.muyoung.com/blogimg/202502271737317.png" alt="">
+        <img loading="lazy" src="https://obj.muyoung.com/blogimg/202502271737317.png" alt="">
 </figure>
   <header class="entry-header">
     <h2 class="entry-hint-parent">vSphere Hypervisor(ESXI)
@@ -261,7 +229,7 @@ vi /etc/vmware/passthru.map 编辑如下内容： \# Union Point-H AHCI Controll
 
 <article class="post-entry"> 
 <figure class="entry-cover">
-        <img loading="lazy" src="https://r.muyoung.com/blogimg/202502280936178.png" alt="">
+        <img loading="lazy" src="https://obj.muyoung.com/blogimg/202502280936178.png" alt="">
 </figure>
   <header class="entry-header">
     <h2 class="entry-hint-parent">TrueNAS24.10docker开机自动替换源
@@ -274,6 +242,51 @@ vi /etc/vmware/passthru.map 编辑如下内容： \# Union Point-H AHCI Controll
   <footer class="entry-footer"><span title='2025-02-27 17:34:36 +0800 CST'>February 27, 2025</span>&nbsp;·&nbsp;1 min</footer>
   <a class="entry-link" aria-label="post link to TrueNAS24.10docker开机自动替换源" href="http://localhost:1313/posts/truenasdaemondocker/"></a>
 </article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>安装Docker #更新系统索引以及安装必备组件 sudo apt-get update sudo apt-get install \ apt-transport-https \ ca-certificates \ curl \ gnupg \ lsb-release 添加docker源GPG curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg #添加docker源 #官方源 echo \ &#34;deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \ $(lsb_release -cs) stable&#34; | sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null #阿里源 echo \ &#34;deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://mirrors.aliyun.com/docker-ce/linux/debian \ $(lsb_release -cs) stable&#34; | sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null #更新源索引以及安装docker sudo apt update sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin ...</p>
+  </div>
+  <footer class="entry-footer">2 min</footer>
+  <a class="entry-link" aria-label="post link to " href="http://localhost:1313/posts/buildingagraphbedwithminio/"></a>
+</article>
+
+<article class="post-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>安装 点击 i agree进行下一步
+选择自己要安装pve操作系统的硬盘(pve宿主机的位置不是虚拟机哦)
+这一步如果当前网络环境有网络并且dhcp获取到ip地址会默认获取国家跟时区直接下一步，如果没有网络环境这一步需要手动输入时区以及国家
+设置管理员密码以及管理员邮箱如果有事件会发邮件通知的哦！！
+这一步默认会选择已经连接的管理口网卡设置想要的域名以及静态ip地址
+最终确定然后点击install安装
+耐心等待即可
+安装完毕后请拔出u盘这时屏幕会显示管理的地址如果提示不是私密连接点击高级，继续访问即可
+输入用户名root 密码为安装界面设置的密码
+移除pve里的local-lvm分区 在我们安装好pve后我们会发现有一个local分区以及local-lvm分区吧我们的硬盘分开来，这样很不利于我们的空间使用所以我们要把local-lvm分区删除然后把空间全部合在local分区里让空间利用率最大化
+点击节点然后点击shll输入如下命令
+lvremove pve/data lvextend -l &#43;100%FREE -r pve/root 提示是否移除卷输入y
+点击数据中心-存储
+选中local-lvm点击移除然后选中local点击编辑
+选上所有内容然后点击ok
+这时我们会发现空间利用率最大化了
+调整swap分区 如果有想要调整swap分区的小伙伴可以看如下操作默认系统安装好会有一部分的swap分区如果你不想使用或者觉得swap分区的空间不够可以跟着操作来调整
+删除pve自带的swap分区(如果内存够大并且不想时常读写硬盘想保护硬盘的小伙伴可以按照以下部分设置) 进入Shell输入如下命令
+swapoff -a lvremove /dev/pve/swap lvresize -l &#43;100%FREE /dev/pve/root 这样swap分区就被移除了并且空间集合到了主空间里面去
+创建swap分区 想自定义swap分区大小的小伙伴可以按照以下步骤操作
+打开Shell输入如下命令
+#创建一个16G的swap，bs * count =16G count代表你想创建的swap分区的大小单位为g dd if=/dev/zero of=/swapfile bs=1G count=16 #配置安全的权限 chmod 0600 /swapfile #格式化成swap mkswap /swapfile #挂载swap swapon /swapfile #验证 free -h ...</p>
+  </div>
+  <footer class="entry-footer">2 min</footer>
+  <a class="entry-link" aria-label="post link to " href="http://localhost:1313/posts/pveconfig/"></a>
+</article>
 <footer class="page-footer">
   <nav class="pagination">
     <a class="prev" href="http://localhost:1313/">
@@ -285,9 +298,9 @@ vi /etc/vmware/passthru.map 编辑如下内容： \# Union Point-H AHCI Controll
     
 <footer class="footer">
 
-备案号：<a href="https://beian.miit.gov.cn/">蜀ICP备2024095579号</a>
+
     <div class="cloud-vps">
-        <a href="https://www.cloudflare.com" class="inline-content">本站由<img height="20px" src="https://r.muyoung.com/cf-logo.ico" alt="cloud-logo"/>Cloudflare提供CDN加速/防御支持</a>
+        <a href="https://www.cloudflare.com" class="inline-content">本站由<img height="20px" src="https://obj.muyoung.com/cf-logo.ico" alt="cloud-logo"/>Cloudflare提供安全防护支持</a>
       </div>
 <div class="SiteTime">
     <p id="site-age"></p>

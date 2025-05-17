@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>R2 on 慕阳博客</title>
     <link>http://localhost:1313/tags/r2/</link>
     <description>Recent content in R2 on 慕阳博客</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- 0.147.3</generator>
     <language>zh-CN</language>
     <lastBuildDate>Wed, 12 Mar 2025 09:51:40 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/r2/index.xml" rel="self" type="application/rss+xml" />
@@ -13,7 +13,61 @@
       <link>http://localhost:1313/posts/picgo-r2/</link>
       <pubDate>Wed, 12 Mar 2025 09:51:40 +0800</pubDate>
       <guid>http://localhost:1313/posts/picgo-r2/</guid>
-      <description>&lt;h2 id=&#34;什么叫图床&#34;&gt;什么叫图床&lt;/h2&gt;&#xA;&lt;p&gt;图床就是将图片上传到相关服务商或者个人服务器，通过上传文件的网络地址进行远程访问。可以方便快速的将图片插入到文章中，方便后续图片二次使用、迁移、分享。&lt;/p&gt;&#xA;&lt;h2 id=&#34;常用图床的几种方式&#34;&gt;常用图床的几种方式&lt;/h2&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;VPS自建：通过购买服务器搭建图床程序，比如easyimage，lsky-pro等。&#xA;优点：方便，快捷，空间大&#xA;缺点：速度取决于vps的线路，迁移服务时大量数据需要迁移。&lt;/li&gt;&#xA;&lt;li&gt;云端oss储存+cdn&#xA;优点：稳定，速度快&#xA;缺点：付费（腾讯cos/阿里oss+cdn(cdn需备案)）。免费的额度有限（Backblaze B2 + Cloudflare）。&lt;/li&gt;&#xA;&lt;li&gt;Github + JsDelivr(cdn)&#xA;优点：github绝对稳定，jsdelivr充当github的cdn加速&#xA;缺点：虽然有加速，速度也算不上快，属中等。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;本篇介绍CLoudFlare R2+Picgo 方案&lt;/p&gt;&#xA;&lt;p&gt;CLoudFlare R2 免费用户有10GB/月的存储额度（30天内每天储存峰值的平均值），对于小网站基本足够，超额的存储是$0.015/GB/月，&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;标准储存：日常存储容量前10GB/月免费（30天内每天储存峰值的平均值）&lt;/li&gt;&#xA;&lt;li&gt;Daily Class A Transactions Caps：日常B类事务前100万次免费（A类事务包括下载、获取文件）&lt;/li&gt;&#xA;&lt;li&gt;Daily Class B Transactions Caps：日常A类事务前1000万次免费（B类事务包括创建存储桶、列举存储桶、列举文件版本、列举Keys）&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://r.muyoung.com/blogimg/20250312095541236.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;实现目的&#34;&gt;实现目的&lt;/h2&gt;&#xA;&lt;p&gt;1.自由在MD，网站中引用图片（picgo上传）&#xA;2.防止恶意被刷流量（虽然CloudFlare只收取额外的储存费用，但被刷流量多了容易被封号）&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;自定义域名代替原域名（出现问题直接断开和原域名之间的跳转）&lt;/li&gt;&#xA;&lt;li&gt;设定缓存规则（有人盗刷也是刷缓存）&lt;/li&gt;&#xA;&lt;li&gt;防盗链（只在规定的网站使用）&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;cloudflare-r2&#34;&gt;CloudFlare R2&lt;/h2&gt;&#xA;&lt;h3 id=&#34;注册账号&#34;&gt;注册账号&lt;/h3&gt;&#xA;&lt;p&gt;注册账号需要绑定一种支付方式（不扣费，只是用来选择支付方式），可以用信用卡，visa，paypal。&lt;/p&gt;&#xA;&lt;p&gt;注册地址：https://dash.cloudflare.com/sign-up，验证过邮箱后即可使用。&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://r.muyoung.com/blogimg/20250312095823613.webp&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;&#xA;&lt;h3 id=&#34;开通-cloudflare-r2&#34;&gt;开通 CloudFlare R2&lt;/h3&gt;&#xA;&lt;p&gt;点击右侧的R2对象储存。&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://r.muyoung.com/blogimg/20250312100708757.webp&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;在弹出的界面输入付款方式（信用卡，paypal都可以）&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://r.muyoung.com/blogimg/20250312100834522.webp&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;对于中小网站来说，一般超不了。&#xA;确认后就可以开通R2对象储存了。&lt;/p&gt;&#xA;&lt;h3 id=&#34;创建储存桶及桶设置&#34;&gt;创建储存桶及桶设置&lt;/h3&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://r.muyoung.com/blogimg/20250312100935006.webp&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://r.muyoung.com/blogimg/20250312101123620.webp&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;&#xA;&lt;h3 id=&#34;自定义图床域名&#34;&gt;自定义图床域名&lt;/h3&gt;&#xA;&lt;p&gt;进入桶设置界面&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://r.muyoung.com/blogimg/20250312101353230.webp&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;设定访问桶的域名，有两种方法，一种是有一个私有域名（&lt;strong&gt;需托管在Cloudflare上&lt;/strong&gt;），另一个是用R2.dev子域名&lt;/p&gt;&#xA;&lt;h4 id=&#34;私有域名二选一&#34;&gt;私有域名（二选一）&lt;/h4&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://r.muyoung.com/blogimg/20250312101130807.webp&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;继续之后，点连接域，会自动生成dns记录。&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://r.muyoung.com/blogimg/20250312101511888.webp&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;之后就能浏览器 &lt;code&gt;https://&amp;lt;自定义域名&amp;gt;/&amp;lt;文件名&amp;gt;&lt;/code&gt;访问存储桶里的文件了。&lt;/p&gt;&#xA;&lt;p&gt;PS：如果域名不托管在CloudFlare，可以单独托管二级\三级域名，只需要给二级域名添加一条NS记录指向原托管即可。&lt;/p&gt;</description>
+      <description>&lt;h2 id=&#34;什么叫图床&#34;&gt;什么叫图床&lt;/h2&gt;
+&lt;p&gt;图床就是将图片上传到相关服务商或者个人服务器，通过上传文件的网络地址进行远程访问。可以方便快速的将图片插入到文章中，方便后续图片二次使用、迁移、分享。&lt;/p&gt;
+&lt;h2 id=&#34;常用图床的几种方式&#34;&gt;常用图床的几种方式&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;VPS自建：通过购买服务器搭建图床程序，比如easyimage，lsky-pro等。
+优点：方便，快捷，空间大
+缺点：速度取决于vps的线路，迁移服务时大量数据需要迁移。&lt;/li&gt;
+&lt;li&gt;云端oss储存+cdn
+优点：稳定，速度快
+缺点：付费（腾讯cos/阿里oss+cdn(cdn需备案)）。免费的额度有限（Backblaze B2 + Cloudflare）。&lt;/li&gt;
+&lt;li&gt;Github + JsDelivr(cdn)
+优点：github绝对稳定，jsdelivr充当github的cdn加速
+缺点：虽然有加速，速度也算不上快，属中等。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;本篇介绍CLoudFlare R2+Picgo 方案&lt;/p&gt;
+&lt;p&gt;CLoudFlare R2 免费用户有10GB/月的存储额度（30天内每天储存峰值的平均值），对于小网站基本足够，超额的存储是$0.015/GB/月，&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;标准储存：日常存储容量前10GB/月免费（30天内每天储存峰值的平均值）&lt;/li&gt;
+&lt;li&gt;Daily Class A Transactions Caps：日常B类事务前100万次免费（A类事务包括下载、获取文件）&lt;/li&gt;
+&lt;li&gt;Daily Class B Transactions Caps：日常A类事务前1000万次免费（B类事务包括创建存储桶、列举存储桶、列举文件版本、列举Keys）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://obj.muyoung.com/blogimg/20250312095541236.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;实现目的&#34;&gt;实现目的&lt;/h2&gt;
+&lt;p&gt;1.自由在MD，网站中引用图片（picgo上传）
+2.防止恶意被刷流量（虽然CloudFlare只收取额外的储存费用，但被刷流量多了容易被封号）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;自定义域名代替原域名（出现问题直接断开和原域名之间的跳转）&lt;/li&gt;
+&lt;li&gt;设定缓存规则（有人盗刷也是刷缓存）&lt;/li&gt;
+&lt;li&gt;防盗链（只在规定的网站使用）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;cloudflare-r2&#34;&gt;CloudFlare R2&lt;/h2&gt;
+&lt;h3 id=&#34;注册账号&#34;&gt;注册账号&lt;/h3&gt;
+&lt;p&gt;注册账号需要绑定一种支付方式（不扣费，只是用来选择支付方式），可以用信用卡，visa，paypal。&lt;/p&gt;
+&lt;p&gt;注册地址：https://dash.cloudflare.com/sign-up，验证过邮箱后即可使用。&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;img&#34; loading=&#34;lazy&#34; src=&#34;https://obj.muyoung.com/blogimg/20250312095823613.webp&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;开通-cloudflare-r2&#34;&gt;开通 CloudFlare R2&lt;/h3&gt;
+&lt;p&gt;点击右侧的R2对象储存。&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;img&#34; loading=&#34;lazy&#34; src=&#34;https://obj.muyoung.com/blogimg/20250312100708757.webp&#34;&gt;&lt;/p&gt;
+&lt;p&gt;在弹出的界面输入付款方式（信用卡，paypal都可以）&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;img&#34; loading=&#34;lazy&#34; src=&#34;https://obj.muyoung.com/blogimg/20250312100834522.webp&#34;&gt;&lt;/p&gt;
+&lt;p&gt;对于中小网站来说，一般超不了。
+确认后就可以开通R2对象储存了。&lt;/p&gt;
+&lt;h3 id=&#34;创建储存桶及桶设置&#34;&gt;创建储存桶及桶设置&lt;/h3&gt;
+&lt;p&gt;&lt;img alt=&#34;img&#34; loading=&#34;lazy&#34; src=&#34;https://obj.muyoung.com/blogimg/20250312100935006.webp&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;img&#34; loading=&#34;lazy&#34; src=&#34;https://obj.muyoung.com/blogimg/20250312101123620.webp&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;自定义图床域名&#34;&gt;自定义图床域名&lt;/h3&gt;
+&lt;p&gt;进入桶设置界面&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;img&#34; loading=&#34;lazy&#34; src=&#34;https://obj.muyoung.com/blogimg/20250312101353230.webp&#34;&gt;&lt;/p&gt;
+&lt;p&gt;设定访问桶的域名，有两种方法，一种是有一个私有域名（&lt;strong&gt;需托管在Cloudflare上&lt;/strong&gt;），另一个是用R2.dev子域名&lt;/p&gt;
+&lt;h4 id=&#34;私有域名二选一&#34;&gt;私有域名（二选一）&lt;/h4&gt;
+&lt;p&gt;&lt;img alt=&#34;img&#34; loading=&#34;lazy&#34; src=&#34;https://obj.muyoung.com/blogimg/20250312101130807.webp&#34;&gt;&lt;/p&gt;
+&lt;p&gt;继续之后，点连接域，会自动生成dns记录。&lt;/p&gt;
+&lt;p&gt;&lt;img alt=&#34;img&#34; loading=&#34;lazy&#34; src=&#34;https://obj.muyoung.com/blogimg/20250312101511888.webp&#34;&gt;&lt;/p&gt;
+&lt;p&gt;之后就能浏览器 &lt;code&gt;https://&amp;lt;自定义域名&amp;gt;/&amp;lt;文件名&amp;gt;&lt;/code&gt;访问存储桶里的文件了。&lt;/p&gt;
+&lt;p&gt;PS：如果域名不托管在CloudFlare，可以单独托管二级\三级域名，只需要给二级域名添加一条NS记录指向原托管即可。&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

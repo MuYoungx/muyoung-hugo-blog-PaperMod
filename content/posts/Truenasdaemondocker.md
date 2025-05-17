@@ -3,7 +3,7 @@ title: TrueNAS24.10docker开机自动替换源
 published: 2025-02-27T17:34:36+08:00
 summary: ""
 cover:
-  image: "https://r.muyoung.com/blogimg/202502280936178.png"
+  image: "https://obj.muyoung.com/blogimg/202502280936178.png"
 tags: [truenas, docker]
 categories: 'TrueNAS'
 draft: false 
@@ -12,7 +12,7 @@ lang: ''
 
 存放于/root目录下
 
-![img](https://r.muyoung.com/blogimg/202502271732370.png)  
+![img](https://obj.muyoung.com/blogimg/202502271732370.png)  
 
 ```bash
 #!/bin/bash

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Docker on 慕阳博客</title>
     <link>http://localhost:1313/categories/docker/</link>
     <description>Recent content in Docker on 慕阳博客</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- 0.147.3</generator>
     <language>zh-CN</language>
     <lastBuildDate>Fri, 14 Mar 2025 10:07:40 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/categories/docker/index.xml" rel="self" type="application/rss+xml" />
@@ -13,14 +13,103 @@
       <link>http://localhost:1313/posts/dockercompose/</link>
       <pubDate>Fri, 14 Mar 2025 10:07:40 +0800</pubDate>
       <guid>http://localhost:1313/posts/dockercompose/</guid>
-      <description>&lt;h1 id=&#34;介绍&#34;&gt;介绍&lt;/h1&gt;&#xA;&lt;p&gt;Docker Compose 是一个用于定义和运行多容器 Docker 应用的工具。通过使用一个 YAML 文件，您可以配置应用程序需要的所有服务。然后，只需一个命令，就可以创建并启动所有服务。&lt;/p&gt;&#xA;&lt;p&gt;TrueNAS SCALE 24.10 开始使用docker和docker compose部署应用，所以写这一篇简单的介绍一下如何编写docker compose文件（即TrueNAS SCALE 的自定义应用）&lt;/p&gt;&#xA;&lt;h1 id=&#34;编写docker-composeyaml-文件&#34;&gt;编写&lt;code&gt;docker-compose.yaml&lt;/code&gt; 文件&lt;/h1&gt;&#xA;&lt;p&gt;&lt;code&gt;docker-compose.yaml&lt;/code&gt; 文件使用 YAML 格式定义服务、网络和卷。以下是文件的基本结构：&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;services&lt;/span&gt;:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;service_name&lt;/span&gt;:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;image&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;image_name:tag&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;build&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;.&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;ports&lt;/span&gt;:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;host_port:container_port&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;volumes&lt;/span&gt;:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;host_path:container_path&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;environment&lt;/span&gt;:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;ENV_VAR=value&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;depends_on&lt;/span&gt;:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;other_service&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;有过docker-compose经验的同学可能已经发现了不对劲的地方，为什么第一行少了&lt;code&gt;version:&#39;3&#39;&lt;/code&gt;，因为新版已经去掉了这个版本信息，直接写service就行&lt;/p&gt;&#xA;&lt;h2 id=&#34;示例部署一个简单的-web-应用&#34;&gt;示例：部署一个简单的 Web 应用&lt;/h2&gt;&#xA;&lt;p&gt;我们以nginx举例&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;services&lt;/span&gt;:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;web&lt;/span&gt;:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;image&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;nginx:latest&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;ports&lt;/span&gt;:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;8080:80&amp;#34;&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;volumes&lt;/span&gt;:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;/mnt/SSD/apps/nginx:/usr/share/nginx/html&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;解释：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;services&lt;/strong&gt;：定义服务列表，这里定义了一个名为&lt;code&gt;web&lt;/code&gt; 的服务。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;image&lt;/strong&gt;：指定使用的镜像，这里使用官方的 Nginx 镜像。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;ports&lt;/strong&gt;：将主机的 8080 端口映射到容器的 80 端口。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;volumes&lt;/strong&gt;：将本地的&lt;code&gt;/mnt/SSD/app/nginx&lt;/code&gt; 目录挂载到容器内的&lt;code&gt;/usr/share/nginx/html&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;注意：主机端口不要与其他应用冲突，&lt;code&gt;/mnt/SSD/app/nginx&lt;/code&gt; 这个路径需要提前创建，你可以创建数据集或者直接命令行里创建目录，数据集的路径按下图示例：&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://www.truenasscale.com/usr/uploads/2024/10/3231654518.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;在图片显示的路径前面要加上&lt;code&gt;/mnt&lt;/code&gt;，也就是&lt;code&gt;/mnt/SSD/apps/nginx&lt;/code&gt; 这样&lt;/p&gt;</description>
+      <description>&lt;h1 id=&#34;介绍&#34;&gt;介绍&lt;/h1&gt;
+&lt;p&gt;Docker Compose 是一个用于定义和运行多容器 Docker 应用的工具。通过使用一个 YAML 文件，您可以配置应用程序需要的所有服务。然后，只需一个命令，就可以创建并启动所有服务。&lt;/p&gt;
+&lt;p&gt;TrueNAS SCALE 24.10 开始使用docker和docker compose部署应用，所以写这一篇简单的介绍一下如何编写docker compose文件（即TrueNAS SCALE 的自定义应用）&lt;/p&gt;
+&lt;h1 id=&#34;编写docker-composeyaml-文件&#34;&gt;编写&lt;code&gt;docker-compose.yaml&lt;/code&gt; 文件&lt;/h1&gt;
+&lt;p&gt;&lt;code&gt;docker-compose.yaml&lt;/code&gt; 文件使用 YAML 格式定义服务、网络和卷。以下是文件的基本结构：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;services&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;service_name&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;image&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;image_name:tag&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;build&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;ports&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;host_port:container_port&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;volumes&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;host_path:container_path&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;environment&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;ENV_VAR=value&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;depends_on&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;other_service&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;有过docker-compose经验的同学可能已经发现了不对劲的地方，为什么第一行少了&lt;code&gt;version:&#39;3&#39;&lt;/code&gt;，因为新版已经去掉了这个版本信息，直接写service就行&lt;/p&gt;
+&lt;h2 id=&#34;示例部署一个简单的-web-应用&#34;&gt;示例：部署一个简单的 Web 应用&lt;/h2&gt;
+&lt;p&gt;我们以nginx举例&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;services&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;web&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;image&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;nginx:latest&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;ports&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;8080:80&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;volumes&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      - &lt;span style=&#34;color:#ae81ff&#34;&gt;/mnt/SSD/apps/nginx:/usr/share/nginx/html&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;解释：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;services&lt;/strong&gt;：定义服务列表，这里定义了一个名为&lt;code&gt;web&lt;/code&gt; 的服务。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;image&lt;/strong&gt;：指定使用的镜像，这里使用官方的 Nginx 镜像。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;ports&lt;/strong&gt;：将主机的 8080 端口映射到容器的 80 端口。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;volumes&lt;/strong&gt;：将本地的&lt;code&gt;/mnt/SSD/app/nginx&lt;/code&gt; 目录挂载到容器内的&lt;code&gt;/usr/share/nginx/html&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;注意：主机端口不要与其他应用冲突，&lt;code&gt;/mnt/SSD/app/nginx&lt;/code&gt; 这个路径需要提前创建，你可以创建数据集或者直接命令行里创建目录，数据集的路径按下图示例：&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; src=&#34;https://www.truenasscale.com/usr/uploads/2024/10/3231654518.png&#34;&gt;&lt;/p&gt;
+&lt;p&gt;在图片显示的路径前面要加上&lt;code&gt;/mnt&lt;/code&gt;，也就是&lt;code&gt;/mnt/SSD/apps/nginx&lt;/code&gt; 这样&lt;/p&gt;</description>
     </item>
     <item>
       <title>安装Docker以及其他容器</title>
       <link>http://localhost:1313/posts/installdocker/</link>
       <pubDate>Wed, 12 Mar 2025 14:58:23 +0800</pubDate>
       <guid>http://localhost:1313/posts/installdocker/</guid>
-      <description>&lt;h2 id=&#34;一键安装脚本&#34;&gt;一键安装脚本&lt;/h2&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;curl -fsSL https://get.docker.com -o get-docker.sh &#xD;&#xA;sudo sh get-docker.sh&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;redhat系安装docker&#34;&gt;Redhat系安装docker&lt;/h2&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;安装依赖&#xD;&#xA;dnf -y install yum-utils device-mapper-persistent-datalvm2&#xD;&#xA;&#xD;&#xA;导入docker源&#xD;&#xA;wget -O /etc/yum.repos.d/docker-ce.repo https://download.docker.com/linux/centos/docker-ce.repo&#xD;&#xA;官方源&#xD;&#xA;&#xD;&#xA;yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo&#xD;&#xA;阿里源&#xD;&#xA;&#xD;&#xA;dnf makecache&#xD;&#xA;更新索引&#xD;&#xA;&#xD;&#xA;dnf install docker-ce docker-ce-cli containerd.io&#xD;&#xA;安装docker组件&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;debian系安装docker&#34;&gt;Debian系安装docker&lt;/h2&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;安装依赖&#xD;&#xA;sudo apt-get install \&#xD;&#xA;    apt-transport-https \&#xD;&#xA;    ca-certificates \&#xD;&#xA;    curl \&#xD;&#xA;    gnupg \&#xD;&#xA;    lsb-release&#xD;&#xA;&#xD;&#xA;导入gpg公钥&#xD;&#xA;curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg&#xD;&#xA;&#xD;&#xA;添加docker源 官方源&#xD;&#xA;echo \&#xD;&#xA;&amp;#34;deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \&#xD;&#xA;$(lsb_release -cs) stable&amp;#34; | sudo tee /etc/apt/sources.list.d/docker.list &amp;gt; /dev/null&#xD;&#xA;&#xD;&#xA;阿里源&#xD;&#xA;echo \&#xD;&#xA;&amp;#34;deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://mirrors.aliyun.com/docker-ce/linux/debian \&#xD;&#xA;$(lsb_release -cs) stable&amp;#34; | sudo tee /etc/apt/sources.list.d/docker.list &amp;gt; /dev/null&#xD;&#xA;&#xD;&#xA;更新索引&#xD;&#xA;sudo apt update&#xD;&#xA;&#xD;&#xA;安装docker组件&#xD;&#xA;sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;常规docker组件&#34;&gt;常规Docker组件&lt;/h2&gt;&#xA;&lt;h3 id=&#34;portainer&#34;&gt;Portainer&lt;/h3&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;拉取映像&#xD;&#xA;docker pull portainer/portainer&#xD;&#xA;&#xD;&#xA;创建并运行docker&#xD;&#xA;docker run -d -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /root/portainer:/data portainer/portainer&#xA;&lt;/code&gt;&lt;/pre&gt;</description>
+      <description>&lt;h2 id=&#34;一键安装脚本&#34;&gt;一键安装脚本&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;curl -fsSL https://get.docker.com -o get-docker.sh 
+sudo sh get-docker.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;redhat系安装docker&#34;&gt;Redhat系安装docker&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;安装依赖
+dnf -y install yum-utils device-mapper-persistent-datalvm2
+
+导入docker源
+wget -O /etc/yum.repos.d/docker-ce.repo https://download.docker.com/linux/centos/docker-ce.repo
+官方源
+
+yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+阿里源
+
+dnf makecache
+更新索引
+
+dnf install docker-ce docker-ce-cli containerd.io
+安装docker组件
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;debian系安装docker&#34;&gt;Debian系安装docker&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;安装依赖
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+
+导入gpg公钥
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+
+添加docker源 官方源
+echo \
+&amp;#34;deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \
+$(lsb_release -cs) stable&amp;#34; | sudo tee /etc/apt/sources.list.d/docker.list &amp;gt; /dev/null
+
+阿里源
+echo \
+&amp;#34;deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://mirrors.aliyun.com/docker-ce/linux/debian \
+$(lsb_release -cs) stable&amp;#34; | sudo tee /etc/apt/sources.list.d/docker.list &amp;gt; /dev/null
+
+更新索引
+sudo apt update
+
+安装docker组件
+sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;常规docker组件&#34;&gt;常规Docker组件&lt;/h2&gt;
+&lt;h3 id=&#34;portainer&#34;&gt;Portainer&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;拉取映像
+docker pull portainer/portainer
+
+创建并运行docker
+docker run -d -p 9000:9000 --name=portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v /root/portainer:/data portainer/portainer
+&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
   </channel>
 </rss>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Nginx on 慕阳博客</title>
     <link>http://localhost:1313/tags/nginx/</link>
     <description>Recent content in Nginx on 慕阳博客</description>
-    <generator>Hugo</generator>
+    <generator>Hugo -- 0.147.3</generator>
     <language>zh-CN</language>
     <lastBuildDate>Fri, 14 Mar 2025 09:39:18 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/nginx/index.xml" rel="self" type="application/rss+xml" />
@@ -13,14 +13,272 @@
       <link>http://localhost:1313/posts/nginxdemo/</link>
       <pubDate>Fri, 14 Mar 2025 09:39:18 +0800</pubDate>
       <guid>http://localhost:1313/posts/nginxdemo/</guid>
-      <description>&lt;h2 id=&#34;官方模板&#34;&gt;官方模板&lt;/h2&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-#&#34; data-lang=&#34;#&#34;&gt;user nginx;              # Nginx进程运行用户&#xD;&#xA;worker_processes auto;   # Nginx工作进程数，通常设置为CPU核数&#xD;&#xA;error_log /var/log/nginx/error.log warn;    # 错误日志路径和日志级别&#xD;&#xA;pid /run/nginx.pid;      # 进程PID保存路径&#xD;&#xA;&#xD;&#xA;# 定义事件模块&#xD;&#xA;events {&#xD;&#xA;worker_connections 1024;    # 每个工作进程最大并发连接数&#xD;&#xA;use epoll;                  # 使用epoll网络模型，提高性能&#xD;&#xA;multi_accept on;            # 开启支持多个连接同时建立&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;# 定义HTTP服务器模块&#xD;&#xA;http {&#xD;&#xA;# 缓存文件目录&#xD;&#xA;client_body_temp_path /var/cache/nginx/client_temp;&#xD;&#xA;proxy_temp_path /var/cache/nginx/proxy_temp;&#xD;&#xA;fastcgi_temp_path /var/cache/nginx/fastcgi_temp;&#xD;&#xA;&#xD;&#xA;# 定义日志格式，main是默认的日志格式&#xD;&#xA;log_format main &amp;#39;$remote_addr - $remote_user [$time_local] &amp;#34;$request&amp;#34; &amp;#39;&#xD;&#xA;&amp;#39;$status $body_bytes_sent &amp;#34;$http_referer&amp;#34; &amp;#39;&#xD;&#xA;&amp;#39;&amp;#34;$http_user_agent&amp;#34; &amp;#34;$http_x_forwarded_for&amp;#34;&amp;#39;;&#xD;&#xA;&#xD;&#xA;# 默认访问日志保存路径和格式&#xD;&#xA;access_log /var/log/nginx/access.log main;&#xD;&#xA;&#xD;&#xA;# 定义MIME类型&#xD;&#xA;include /etc/nginx/mime.types;&#xD;&#xA;default_type application/octet-stream;&#xD;&#xA;&#xD;&#xA;# 代理参数&#xD;&#xA;proxy_connect_timeout 6s;       # 连接超时时间&#xD;&#xA;proxy_send_timeout 10s;         # 发送超时时间&#xD;&#xA;proxy_read_timeout 10s;         # 接收超时时间&#xD;&#xA;proxy_buffer_size 16k;          # 缓冲区大小&#xD;&#xA;proxy_buffers 4 32k;            # 缓冲区个数和大小&#xD;&#xA;proxy_busy_buffers_size 64k;    # 忙碌缓冲区大小&#xD;&#xA;proxy_temp_file_write_size 64k; # 代理临时文件写入大小&#xD;&#xA;&#xD;&#xA;# 启用压缩，可以提高网站访问速度&#xD;&#xA;gzip on;&#xD;&#xA;gzip_min_length 1k;                    # 最小压缩文件大小&#xD;&#xA;gzip_types text/plain text/css application/json application/javascript application/xml;&#xD;&#xA;&#xD;&#xA;# 定义HTTP服务器&#xD;&#xA;server {&#xD;&#xA;listen 80;              # 监听端口&#xD;&#xA;&#xD;&#xA;server_name example.com;    # 域名&#xD;&#xA;&#xD;&#xA;# 重定向到HTTPS，强制使用HTTPS访问&#xD;&#xA;if ($scheme != &amp;#34;https&amp;#34;) {&#xD;&#xA;  return 301 https://$server_name$request_uri;&#xD;&#xA;  }&#xD;&#xA;&#xD;&#xA;  # HTTPS服务器配置&#xD;&#xA;  ssl_certificate      /etc/nginx/ssl/server.crt;    # SSL证书路径&#xD;&#xA;  ssl_certificate_key  /etc/nginx/ssl/server.key;    # SSL私钥路径&#xD;&#xA;&#xD;&#xA;  # SSL会话缓存参数&#xD;&#xA;  ssl_session_cache shared:SSL:10m;&#xD;&#xA;  ssl_session_timeout 10m;&#xD;&#xA;  ssl_protocols TLSv1 TLSv1.1 TLSv1.2;&#xD;&#xA;  ssl_prefer_server_ciphers on;&#xD;&#xA;  ssl_ciphers ECDH+AESGCM:ECDH+AES256:ECDH+AES128:DH+3DES:!ADH:!AECDH:!MD5;&#xD;&#xA;&#xD;&#xA;  # 配置代理路径&#xD;&#xA;  location / {&#xD;&#xA;  proxy_pass http://localhost:8080;        # 转发请求的目标地址&#xD;&#xA;  proxy_set_header Host $host;             # 设置请求头中的Host字段&#xD;&#xA;  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;&#xD;&#xA;    # 设置HTTP头中的X-Forwarded-For字段，表示客户端真实IP，多个IP用逗号隔开&#xD;&#xA;      proxy_set_header X-Real-IP $remote_addr; # 设置请求头中的X-Real-IP字段，表示客户端真实IP&#xD;&#xA;      }&#xD;&#xA;&#xD;&#xA;      # 配置静态文件访问路径&#xD;&#xA;      location /static/ {&#xD;&#xA;      alias /path/to/static/files/;   # 静态文件的目录&#xD;&#xA;      expires 7d;                     # 静态文件缓存时间&#xD;&#xA;      add_header Pragma public;       # 添加HTTP响应头&#xD;&#xA;      add_header Cache-Control &amp;#34;public, must-revalidate, proxy-revalidate&amp;#34;;&#xD;&#xA;      }&#xD;&#xA;&#xD;&#xA;      # 配置错误页面&#xD;&#xA;      error_page 404 /404.html;           # 404错误页&#xD;&#xA;      location = /404.html {&#xD;&#xA;      internal;                       # 不接受外部访问&#xD;&#xA;      root /usr/share/nginx/html;     # 404错误页文件所在目录&#xD;&#xA;      }&#xD;&#xA;&#xD;&#xA;      # 配置重定向&#xD;&#xA;      location /old/ {&#xD;&#xA;      rewrite ^/old/([^/]+) /new/$1 permanent;   # 将/old/xxx路径重定向为/new/xxx，返回301状态码&#xD;&#xA;      }&#xD;&#xA;      }&#xD;&#xA;&#xD;&#xA;      # 其他服务配置&#xD;&#xA;      # server {&#xD;&#xA;      #     ...&#xD;&#xA;      # }&#xD;&#xA;&#xD;&#xA;      # 配置TCP负载均衡&#xD;&#xA;      upstream backends {&#xD;&#xA;      server backend1.example.com:8080 weight=5;  # 后端服务器地址和权重&#xD;&#xA;      server backend2.example.com:8080;&#xD;&#xA;      server backend3.example.com:8080 backup;   # 备用服务器&#xD;&#xA;      keepalive 16;                               # 连接池大小&#xD;&#xA;      }&#xD;&#xA;&#xD;&#xA;      server {&#xD;&#xA;      listen 80;&#xD;&#xA;      server_name example.com;&#xD;&#xA;&#xD;&#xA;      location / {&#xD;&#xA;      proxy_pass http://backends;             # 负载均衡转发请求的目标地址&#xD;&#xA;      proxy_set_header Host $host;            # 设置请求头中的Host字段&#xD;&#xA;      proxy_set_header X-Real-IP $remote_addr; # 设置请求头中的X-Real-IP字段，表示客户端真实IP&#xD;&#xA;      }&#xD;&#xA;      }&#xD;&#xA;      }&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# For more information on configuration, see:&#xD;&#xA;#   * Official English Documentation: http://nginx.org/en/docs/&#xD;&#xA;#   * Official Russian Documentation: http://nginx.org/ru/docs/&#xD;&#xA;&#xD;&#xA;user root;&#xD;&#xA;worker_processes 2;&#xD;&#xA;#error_log /var/log/nginx/error.log;&#xD;&#xA;&#xD;&#xA;# Load dynamic modules. See /usr/share/doc/nginx/README.dynamic.&#xD;&#xA;#include /usr/share/nginx/modules/*.conf;&#xD;&#xA;&#xD;&#xA;events {&#xD;&#xA;  worker_connections 1024;&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;http {&#xD;&#xA;  log_format  main  &amp;#39;$remote_addr - $remote_user [$time_local] &amp;#34;$request&amp;#34; &amp;#39;&#xD;&#xA;    &amp;#39;$status $body_bytes_sent &amp;#34;$http_referer&amp;#34; &amp;#39;&#xD;&#xA;    &amp;#39;&amp;#34;$http_user_agent&amp;#34; &amp;#34;$http_x_forwarded_for&amp;#34;&amp;#39;&#xD;&#xA;    access_log  /var/log/nginx/access.log  main;&#xD;&#xA;&#xD;&#xA;  sendfile            on;&#xD;&#xA;  tcp_nopush          on;&#xD;&#xA;  tcp_nodelay         on;&#xD;&#xA;  keepalive_timeout   65;&#xD;&#xA;  types_hash_max_size 2048;&#xD;&#xA;&#xD;&#xA;  include             /etc/nginx/mime.types;&#xD;&#xA;  default_type        application/octet-stream;&#xD;&#xA;&#xD;&#xA;  # Load modular configuration files from the /etc/nginx/conf.d directory.&#xD;&#xA;  # See http://nginx.org/en/docs/ngx_core_module.html#include&#xD;&#xA;  # for more information.&#xD;&#xA;  include /etc/nginx/conf.d/*.conf;&#xD;&#xA;&#xD;&#xA;    server {&#xD;&#xA;    listen       80 default_server;&#xD;&#xA;    listen       [::]:80 default_server;&#xD;&#xA;    server_name  _;&#xD;&#xA;    rewrite ^(.*)$   https://$host$1 permanent;&#xD;&#xA;    root         /usr/share/nginx/html;&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;    # Load configuration files for the default server block.&#xD;&#xA;    include /etc/nginx/default.d/*.conf;&#xD;&#xA;&#xD;&#xA;    location / {&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;    error_page 404 /404.html;&#xD;&#xA;    location = /40x.html {&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;    error_page 500 502 503 504 /50x.html;&#xD;&#xA;    location = /50x.html {&#xD;&#xA;}&#xD;&#xA;}&#xD;&#xA;    #主页&#xD;&#xA;    server {&#xD;&#xA;    listen  443 ssl;&#xD;&#xA;    listen [::]:443 default_server;&#xD;&#xA;    #server_name muyangx.top;&#xD;&#xA;    root /myservices/web/bangong;&#xD;&#xA;    ssl_certificate &amp;#34;/myservices/cert/muyangx.topcert.pem&amp;#34;;  &#xD;&#xA;    ssl_certificate_key &amp;#34;/myservices/cert/muyangx.topkey.pem&amp;#34;;  &#xD;&#xA;    index index.html;&#xD;&#xA;    ssl_session_cache shared:SSL:1m;&#xD;&#xA;    ssl_session_timeout  10m;&#xD;&#xA;    ssl_ciphers PROFILE=SYSTEM;&#xD;&#xA;    ssl_prefer_server_ciphers on;&#xD;&#xA;    location / {&#xD;&#xA;&#xD;&#xA;}&#xD;&#xA;}&#xD;&#xA;    #docker面板&#xD;&#xA;    server {&#xD;&#xA;    listen  443 ssl;&#xD;&#xA;    server_name docker.muyangx.top;&#xD;&#xA;    ssl_certificate &amp;#34;/myservices/cert/*.muyangx.topcert.pem&amp;#34;;  &#xD;&#xA;    ssl_certificate_key &amp;#34;/myservices/cert/*.muyangx.topkey.pem&amp;#34;;  &#xD;&#xA;    ssl_session_cache shared:SSL:1m;&#xD;&#xA;    ssl_session_timeout  10m;&#xD;&#xA;    ssl_ciphers PROFILE=SYSTEM;&#xD;&#xA;    ssl_prefer_server_ciphers on;&#xD;&#xA;&#xD;&#xA;    location / {&#xD;&#xA;    proxy_pass http://127.0.0.1:9000;&#xD;&#xA;}&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;    #Settings for a TLS enabled server.&#xD;&#xA;&#xD;&#xA;    #  server {&#xD;&#xA;    #     listen       443 ssl http2 default_server;&#xD;&#xA;    #     listen       [::]:443 ssl http2 default_server;&#xD;&#xA;    #     server_name  _;&#xD;&#xA;    #     root         /usr/share/nginx/html;&#xD;&#xA;&#xD;&#xA;    #     ssl_certificate &amp;#34;/etc/pki/nginx/server.crt&amp;#34;;&#xD;&#xA;    #     ssl_certificate_key &amp;#34;/etc/pki/nginx/private/server.key&amp;#34;;&#xD;&#xA;    #     ssl_session_cache shared:SSL:1m;&#xD;&#xA;    #     ssl_session_timeout  10m;&#xD;&#xA;    #     ssl_ciphers PROFILE=SYSTEM;&#xD;&#xA;    #     ssl_prefer_server_ciphers on;&#xD;&#xA;&#xD;&#xA;    #     # Load configuration files for the default server block.&#xD;&#xA;    #     include /etc/nginx/default.d/*.conf;&#xD;&#xA;&#xD;&#xA;    #     location / {&#xD;&#xA;    #     }&#xD;&#xA;&#xD;&#xA;    #     error_page 404 /404.html;&#xD;&#xA;    #         location = /40x.html {&#xD;&#xA;    #     }&#xD;&#xA;&#xD;&#xA;    #     error_page 500 502 503 504 /50x.html;&#xD;&#xA;    #         location = /50x.html {&#xD;&#xA;    #     }  &#xD;&#xA;&#xD;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;nginx强制https&#34;&gt;nginx强制https&lt;/h2&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1、使用nginx的rewrite方法&#xD;&#xA;&#xD;&#xA;server {&#xD;&#xA;            listen 80;&#xD;&#xA;            server_name  xxx.com;&#xD;&#xA;            rewrite ^(.*)$   https://$host$1 permanent;&#xD;&#xA;}&#xD;&#xA;2、使用nginx的301状态码&#xD;&#xA;&#xD;&#xA;server {&#xD;&#xA;            listen 80;&#xD;&#xA;            listen 443;&#xD;&#xA;            server_name xxx.com;&#xD;&#xA;            ssl   on;&#xD;&#xA;            ssl_certificate    /data/www-key/xxx.pem;&#xD;&#xA;            ssl_certificate_key    /data/www-key/xxx.key;&#xD;&#xA;            if ($scheme = http) {&#xD;&#xA;            return 301 https://$server_name$request_uri;&#xD;&#xA;            }&#xD;&#xA;&#xD;&#xA;}&#xA;&lt;/code&gt;&lt;/pre&gt;</description>
-    </item>
-    <item>
-      <title>使用MinIO搭建图床</title>
-      <link>http://localhost:1313/posts/buildingagraphbedwithminio/</link>
-      <pubDate>Tue, 04 Mar 2025 12:31:57 +0800</pubDate>
-      <guid>http://localhost:1313/posts/buildingagraphbedwithminio/</guid>
-      <description>&lt;h1 id=&#34;安装docker&#34;&gt;安装Docker&lt;/h1&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-auto&#34; data-lang=&#34;auto&#34;&gt;#更新系统索引以及安装必备组件&#xD;&#xA;sudo apt-get update&#xD;&#xA;sudo apt-get install \&#xD;&#xA;    apt-transport-https \&#xD;&#xA;    ca-certificates \&#xD;&#xA;    curl \&#xD;&#xA;    gnupg \&#xD;&#xA;    lsb-release&#xD;&#xA;添加docker源GPG&#xD;&#xA;curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg&#xD;&#xA;#添加docker源&#xD;&#xA;#官方源&#xD;&#xA;echo \&#xD;&#xA;&amp;#34;deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \&#xD;&#xA;$(lsb_release -cs) stable&amp;#34; | sudo tee /etc/apt/sources.list.d/docker.list &amp;gt; /dev/null&#xD;&#xA;&#xD;&#xA;#阿里源&#xD;&#xA;echo \&#xD;&#xA;&amp;#34;deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://mirrors.aliyun.com/docker-ce/linux/debian \&#xD;&#xA;$(lsb_release -cs) stable&amp;#34; | sudo tee /etc/apt/sources.list.d/docker.list &amp;gt; /dev/null&#xD;&#xA;#更新源索引以及安装docker&#xD;&#xA;sudo apt update&#xD;&#xA;sudo apt install docker-ce docker-ce-cli containerd.io docker-compose-plugin&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;img src=&#34;https://r.muyoung.com/blogimg/202503041209211.png&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;</description>
+      <description>&lt;h2 id=&#34;官方模板&#34;&gt;官方模板&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code class=&#34;language-#&#34; data-lang=&#34;#&#34;&gt;user nginx;              # Nginx进程运行用户
+worker_processes auto;   # Nginx工作进程数，通常设置为CPU核数
+error_log /var/log/nginx/error.log warn;    # 错误日志路径和日志级别
+pid /run/nginx.pid;      # 进程PID保存路径
+
+# 定义事件模块
+events {
+worker_connections 1024;    # 每个工作进程最大并发连接数
+use epoll;                  # 使用epoll网络模型，提高性能
+multi_accept on;            # 开启支持多个连接同时建立
+}
+
+# 定义HTTP服务器模块
+http {
+# 缓存文件目录
+client_body_temp_path /var/cache/nginx/client_temp;
+proxy_temp_path /var/cache/nginx/proxy_temp;
+fastcgi_temp_path /var/cache/nginx/fastcgi_temp;
+
+# 定义日志格式，main是默认的日志格式
+log_format main &amp;#39;$remote_addr - $remote_user [$time_local] &amp;#34;$request&amp;#34; &amp;#39;
+&amp;#39;$status $body_bytes_sent &amp;#34;$http_referer&amp;#34; &amp;#39;
+&amp;#39;&amp;#34;$http_user_agent&amp;#34; &amp;#34;$http_x_forwarded_for&amp;#34;&amp;#39;;
+
+# 默认访问日志保存路径和格式
+access_log /var/log/nginx/access.log main;
+
+# 定义MIME类型
+include /etc/nginx/mime.types;
+default_type application/octet-stream;
+
+# 代理参数
+proxy_connect_timeout 6s;       # 连接超时时间
+proxy_send_timeout 10s;         # 发送超时时间
+proxy_read_timeout 10s;         # 接收超时时间
+proxy_buffer_size 16k;          # 缓冲区大小
+proxy_buffers 4 32k;            # 缓冲区个数和大小
+proxy_busy_buffers_size 64k;    # 忙碌缓冲区大小
+proxy_temp_file_write_size 64k; # 代理临时文件写入大小
+
+# 启用压缩，可以提高网站访问速度
+gzip on;
+gzip_min_length 1k;                    # 最小压缩文件大小
+gzip_types text/plain text/css application/json application/javascript application/xml;
+
+# 定义HTTP服务器
+server {
+listen 80;              # 监听端口
+
+server_name example.com;    # 域名
+
+# 重定向到HTTPS，强制使用HTTPS访问
+if ($scheme != &amp;#34;https&amp;#34;) {
+  return 301 https://$server_name$request_uri;
+  }
+
+  # HTTPS服务器配置
+  ssl_certificate      /etc/nginx/ssl/server.crt;    # SSL证书路径
+  ssl_certificate_key  /etc/nginx/ssl/server.key;    # SSL私钥路径
+
+  # SSL会话缓存参数
+  ssl_session_cache shared:SSL:10m;
+  ssl_session_timeout 10m;
+  ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+  ssl_prefer_server_ciphers on;
+  ssl_ciphers ECDH+AESGCM:ECDH+AES256:ECDH+AES128:DH+3DES:!ADH:!AECDH:!MD5;
+
+  # 配置代理路径
+  location / {
+  proxy_pass http://localhost:8080;        # 转发请求的目标地址
+  proxy_set_header Host $host;             # 设置请求头中的Host字段
+  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    # 设置HTTP头中的X-Forwarded-For字段，表示客户端真实IP，多个IP用逗号隔开
+      proxy_set_header X-Real-IP $remote_addr; # 设置请求头中的X-Real-IP字段，表示客户端真实IP
+      }
+
+      # 配置静态文件访问路径
+      location /static/ {
+      alias /path/to/static/files/;   # 静态文件的目录
+      expires 7d;                     # 静态文件缓存时间
+      add_header Pragma public;       # 添加HTTP响应头
+      add_header Cache-Control &amp;#34;public, must-revalidate, proxy-revalidate&amp;#34;;
+      }
+
+      # 配置错误页面
+      error_page 404 /404.html;           # 404错误页
+      location = /404.html {
+      internal;                       # 不接受外部访问
+      root /usr/share/nginx/html;     # 404错误页文件所在目录
+      }
+
+      # 配置重定向
+      location /old/ {
+      rewrite ^/old/([^/]+) /new/$1 permanent;   # 将/old/xxx路径重定向为/new/xxx，返回301状态码
+      }
+      }
+
+      # 其他服务配置
+      # server {
+      #     ...
+      # }
+
+      # 配置TCP负载均衡
+      upstream backends {
+      server backend1.example.com:8080 weight=5;  # 后端服务器地址和权重
+      server backend2.example.com:8080;
+      server backend3.example.com:8080 backup;   # 备用服务器
+      keepalive 16;                               # 连接池大小
+      }
+
+      server {
+      listen 80;
+      server_name example.com;
+
+      location / {
+      proxy_pass http://backends;             # 负载均衡转发请求的目标地址
+      proxy_set_header Host $host;            # 设置请求头中的Host字段
+      proxy_set_header X-Real-IP $remote_addr; # 设置请求头中的X-Real-IP字段，表示客户端真实IP
+      }
+      }
+      }
+&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;# For more information on configuration, see:
+#   * Official English Documentation: http://nginx.org/en/docs/
+#   * Official Russian Documentation: http://nginx.org/ru/docs/
+
+user root;
+worker_processes 2;
+#error_log /var/log/nginx/error.log;
+
+# Load dynamic modules. See /usr/share/doc/nginx/README.dynamic.
+#include /usr/share/nginx/modules/*.conf;
+
+events {
+  worker_connections 1024;
+}
+
+http {
+  log_format  main  &amp;#39;$remote_addr - $remote_user [$time_local] &amp;#34;$request&amp;#34; &amp;#39;
+    &amp;#39;$status $body_bytes_sent &amp;#34;$http_referer&amp;#34; &amp;#39;
+    &amp;#39;&amp;#34;$http_user_agent&amp;#34; &amp;#34;$http_x_forwarded_for&amp;#34;&amp;#39;
+    access_log  /var/log/nginx/access.log  main;
+
+  sendfile            on;
+  tcp_nopush          on;
+  tcp_nodelay         on;
+  keepalive_timeout   65;
+  types_hash_max_size 2048;
+
+  include             /etc/nginx/mime.types;
+  default_type        application/octet-stream;
+
+  # Load modular configuration files from the /etc/nginx/conf.d directory.
+  # See http://nginx.org/en/docs/ngx_core_module.html#include
+  # for more information.
+  include /etc/nginx/conf.d/*.conf;
+
+    server {
+    listen       80 default_server;
+    listen       [::]:80 default_server;
+    server_name  _;
+    rewrite ^(.*)$   https://$host$1 permanent;
+    root         /usr/share/nginx/html;
+
+
+    # Load configuration files for the default server block.
+    include /etc/nginx/default.d/*.conf;
+
+    location / {
+}
+
+    error_page 404 /404.html;
+    location = /40x.html {
+}
+
+    error_page 500 502 503 504 /50x.html;
+    location = /50x.html {
+}
+}
+    #主页
+    server {
+    listen  443 ssl;
+    listen [::]:443 default_server;
+    #server_name muyangx.top;
+    root /myservices/web/bangong;
+    ssl_certificate &amp;#34;/myservices/cert/muyangx.topcert.pem&amp;#34;;  
+    ssl_certificate_key &amp;#34;/myservices/cert/muyangx.topkey.pem&amp;#34;;  
+    index index.html;
+    ssl_session_cache shared:SSL:1m;
+    ssl_session_timeout  10m;
+    ssl_ciphers PROFILE=SYSTEM;
+    ssl_prefer_server_ciphers on;
+    location / {
+
+}
+}
+    #docker面板
+    server {
+    listen  443 ssl;
+    server_name docker.muyangx.top;
+    ssl_certificate &amp;#34;/myservices/cert/*.muyangx.topcert.pem&amp;#34;;  
+    ssl_certificate_key &amp;#34;/myservices/cert/*.muyangx.topkey.pem&amp;#34;;  
+    ssl_session_cache shared:SSL:1m;
+    ssl_session_timeout  10m;
+    ssl_ciphers PROFILE=SYSTEM;
+    ssl_prefer_server_ciphers on;
+
+    location / {
+    proxy_pass http://127.0.0.1:9000;
+}
+}
+
+
+    #Settings for a TLS enabled server.
+
+    #  server {
+    #     listen       443 ssl http2 default_server;
+    #     listen       [::]:443 ssl http2 default_server;
+    #     server_name  _;
+    #     root         /usr/share/nginx/html;
+
+    #     ssl_certificate &amp;#34;/etc/pki/nginx/server.crt&amp;#34;;
+    #     ssl_certificate_key &amp;#34;/etc/pki/nginx/private/server.key&amp;#34;;
+    #     ssl_session_cache shared:SSL:1m;
+    #     ssl_session_timeout  10m;
+    #     ssl_ciphers PROFILE=SYSTEM;
+    #     ssl_prefer_server_ciphers on;
+
+    #     # Load configuration files for the default server block.
+    #     include /etc/nginx/default.d/*.conf;
+
+    #     location / {
+    #     }
+
+    #     error_page 404 /404.html;
+    #         location = /40x.html {
+    #     }
+
+    #     error_page 500 502 503 504 /50x.html;
+    #         location = /50x.html {
+    #     }  
+
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;nginx强制https&#34;&gt;nginx强制https&lt;/h2&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;1、使用nginx的rewrite方法
+
+server {
+            listen 80;
+            server_name  xxx.com;
+            rewrite ^(.*)$   https://$host$1 permanent;
+}
+2、使用nginx的301状态码
+
+server {
+            listen 80;
+            listen 443;
+            server_name xxx.com;
+            ssl   on;
+            ssl_certificate    /data/www-key/xxx.pem;
+            ssl_certificate_key    /data/www-key/xxx.key;
+            if ($scheme = http) {
+            return 301 https://$server_name$request_uri;
+            }
+
+}
+&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
   </channel>
 </rss>

@@ -3,7 +3,7 @@ title: Hugo博客搭建教程以及配置调优
 published: 2025-03-11T23:55:20+08:00
 summary: ""
 cover:
-  image: "https://r.muyoung.com/blogimg/3d1b097d-7e31-4312-b3e5-d213e2903f4d.webp"
+  image: "https://obj.muyoung.com/blogimg/3d1b097d-7e31-4312-b3e5-d213e2903f4d.webp"
 tags: [hugo]
 categories: '经验分享'
 draft: false 

@@ -187,7 +187,7 @@
 </div>
   </header> 
 <figure class="entry-cover">
-        <img loading="eager" src="https://r.muyoung.com/blogimg/202502280936178.png" alt="">
+        <img loading="eager" src="https://obj.muyoung.com/blogimg/202502280936178.png" alt="">
         
 </figure>
   <div class="post-content"><h1 id="序">序<a hidden class="anchor" aria-hidden="true" href="#序">#</a></h1>
@@ -196,44 +196,44 @@
 <h1 id="安装">安装<a hidden class="anchor" aria-hidden="true" href="#安装">#</a></h1>
 <p>首先去下载镜像，可以去<a href="https://www.proxmox.com/en/downloads">官网</a>下载，该教程使用的版本为7.2-1</p>
 <p>然后像安装普通的镜像一样安装</p>
-<p><img alt="图片.png" loading="lazy" src="https://r.muyoung.com/blogimg/20250314103120382.png"></p>
-<p><img alt="图片.png" loading="lazy" src="https://r.muyoung.com/blogimg/20250314103124162.png"></p>
+<p><img alt="图片.png" loading="lazy" src="https://obj.muyoung.com/blogimg/20250314103120382.png"></p>
+<p><img alt="图片.png" loading="lazy" src="https://obj.muyoung.com/blogimg/20250314103124162.png"></p>
 <p>我这里直接给了24核心，这里根据自己的需求设置</p>
-<p><img alt="图片.png" loading="lazy" src="https://r.muyoung.com/blogimg/20250314103125381.png"></p>
+<p><img alt="图片.png" loading="lazy" src="https://obj.muyoung.com/blogimg/20250314103125381.png"></p>
 <p>大小自己随意设置，后面我们可以挂载NFS的</p>
-<p><img alt="图片.png" loading="lazy" src="https://r.muyoung.com/blogimg/20250314103134173.png"></p>
+<p><img alt="图片.png" loading="lazy" src="https://obj.muyoung.com/blogimg/20250314103134173.png"></p>
 <p>这里选择桥接网卡</p>
-<p><img alt="图片.png" loading="lazy" src="https://r.muyoung.com/blogimg/20250314103138143.png"></p>
+<p><img alt="图片.png" loading="lazy" src="https://obj.muyoung.com/blogimg/20250314103138143.png"></p>
 <p>这里找到我们的ISO镜像</p>
 <p>下面全部默认保存即可</p>
 <p>开机，点击展示</p>
-<p><img alt="图片.png" loading="lazy" src="https://r.muyoung.com/blogimg/20250314103139936.png"></p>
+<p><img alt="图片.png" loading="lazy" src="https://obj.muyoung.com/blogimg/20250314103139936.png"></p>
 <p>直接回车</p>
-<p><img alt="图片.png" loading="lazy" src="https://r.muyoung.com/blogimg/20250314103146717.png"></p>
+<p><img alt="图片.png" loading="lazy" src="https://obj.muyoung.com/blogimg/20250314103146717.png"></p>
 <p>一路下一步，设置好密码</p>
-<p><img alt="图片.png" loading="lazy" src="https://r.muyoung.com/blogimg/20250314103151762.png"></p>
+<p><img alt="图片.png" loading="lazy" src="https://obj.muyoung.com/blogimg/20250314103151762.png"></p>
 <p>这里的主机名要带<code>.local</code>，最后点击install等待安装</p>
 <p>安装好之后我们直接点PowerOff</p>
-<p><img alt="图片.png" loading="lazy" src="https://r.muyoung.com/blogimg/20250314103156991.png"></p>
-<p><img alt="图片.png" loading="lazy" src="https://r.muyoung.com/blogimg/20250314103200510.png"></p>
+<p><img alt="图片.png" loading="lazy" src="https://obj.muyoung.com/blogimg/20250314103156991.png"></p>
+<p><img alt="图片.png" loading="lazy" src="https://obj.muyoung.com/blogimg/20250314103200510.png"></p>
 <p>点击设备把CD删除，然后再开机</p>
 <p>然后看vnc显示的地址，浏览器打开，输入账户密码即可登录</p>
-<p><img alt="图片.png" loading="lazy" src="https://r.muyoung.com/blogimg/20250314103202032.png"></p>
+<p><img alt="图片.png" loading="lazy" src="https://obj.muyoung.com/blogimg/20250314103202032.png"></p>
 <h1 id="挂载nfs">挂载NFS<a hidden class="anchor" aria-hidden="true" href="#挂载nfs">#</a></h1>
 <p>先创建一个数据集，点击共享，添加NFS</p>
-<p><img alt="图片.png" loading="lazy" src="https://r.muyoung.com/blogimg/20250314103204378.png"></p>
+<p><img alt="图片.png" loading="lazy" src="https://obj.muyoung.com/blogimg/20250314103204378.png"></p>
 <h2 id="设置数据集权限">设置数据集权限<a hidden class="anchor" aria-hidden="true" href="#设置数据集权限">#</a></h2>
 <p>因为PVE的nfs不支持填写账号密码，所以我们需要设置一下权限</p>
-<p><img alt="图片.png" loading="lazy" src="https://r.muyoung.com/blogimg/20250314103214047.png"></p>
-<p><img alt="图片.png" loading="lazy" src="https://r.muyoung.com/blogimg/20250314103209915.png"></p>
+<p><img alt="图片.png" loading="lazy" src="https://obj.muyoung.com/blogimg/20250314103214047.png"></p>
+<p><img alt="图片.png" loading="lazy" src="https://obj.muyoung.com/blogimg/20250314103209915.png"></p>
 <p>确保这里是NFSV4</p>
-<p><img alt="图片.png" loading="lazy" src="https://r.muyoung.com/blogimg/20250314103207329.png"></p>
+<p><img alt="图片.png" loading="lazy" src="https://obj.muyoung.com/blogimg/20250314103207329.png"></p>
 <p><img alt="图片.png" loading="lazy" src="https://www.truenasscale.com/usr/uploads/2022/05/2235625831.png"></p>
-<p><img alt="图片.png" loading="lazy" src="https://r.muyoung.com/blogimg/20250314103219064.png"></p>
+<p><img alt="图片.png" loading="lazy" src="https://obj.muyoung.com/blogimg/20250314103219064.png"></p>
 <p>需要添加一条everyone的权限</p>
-<p><img alt="图片.png" loading="lazy" src="https://r.muyoung.com/blogimg/20250314103221157.png"></p>
+<p><img alt="图片.png" loading="lazy" src="https://obj.muyoung.com/blogimg/20250314103221157.png"></p>
 <p>点击nfs</p>
-<p><img alt="图片.png" loading="lazy" src="https://r.muyoung.com/blogimg/20250314103222951.png"></p>
+<p><img alt="图片.png" loading="lazy" src="https://obj.muyoung.com/blogimg/20250314103222951.png"></p>
 <p>内容有很多种，可以自己创建多个nfs都挂载</p>
 
 
@@ -269,9 +269,9 @@
     
 <footer class="footer">
 
-备案号：<a href="https://beian.miit.gov.cn/">蜀ICP备2024095579号</a>
+
     <div class="cloud-vps">
-        <a href="https://www.cloudflare.com" class="inline-content">本站由<img height="20px" src="https://r.muyoung.com/cf-logo.ico" alt="cloud-logo"/>阿里云提供云服务支持</a>
+        <a href="https://www.cloudflare.com" class="inline-content">本站由<img height="20px" src="https://obj.muyoung.com/cf-logo.ico" alt="cloud-logo"/>Cloudflare提供安全防护支持</a>
       </div>
 <div class="SiteTime">
     <p id="site-age"></p>

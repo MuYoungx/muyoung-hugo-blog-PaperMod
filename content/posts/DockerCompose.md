@@ -3,7 +3,7 @@ title: Docker Compose 从入门到实践
 published: 2025-03-14T10:07:40+08:00
 summary: ""
 cover:
-  image: "https://r.muyoung.com/blogimg/20250312145937578.png"
+  image: "https://obj.muyoung.com/blogimg/20250312145937578.png"
 tags: [docker,docker-compose]
 categories: 'Docker'
 draft: false 
